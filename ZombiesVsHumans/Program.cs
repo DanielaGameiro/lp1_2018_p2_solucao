@@ -12,7 +12,8 @@ namespace ZombiesVsHumans
             Options options = Options.ParseArgs(args);
             if (options.Error)
             {
-                Console.WriteLine("ERROR: " + options.ErrorMessage);
+                foreach (string error in options.ErrorMessages)
+                    Console.Error.WriteLine("ERROR: " + error);
             }
             else
             {

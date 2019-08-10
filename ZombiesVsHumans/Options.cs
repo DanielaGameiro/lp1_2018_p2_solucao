@@ -15,7 +15,9 @@ namespace ZombiesVsHumans
         public uint PlayerHumans { get; }
         public uint Turns { get; }
         public bool Error { get; private set; }
-        public string ErrorMessage { get; private set; }
+        public IEnumerable<string> ErrorMessages => errorMessages;
+
+        private IList<string> errorMessages;
 
         private static IList<string> validOptions;
 
@@ -36,7 +38,7 @@ namespace ZombiesVsHumans
             PlayerHumans = playerHumans;
             Turns = turns;
             Error = false;
-            ErrorMessage = null;
+            errorMessages = new List<string>();
         }
 
         private Options(string error)
@@ -49,7 +51,7 @@ namespace ZombiesVsHumans
             PlayerHumans = 0;
             Turns = 0;
             Error = true;
-            ErrorMessage = error;
+            errorMessages = new List<string>() { error };
         }
 
         public static Options ParseArgs(string[] args)
@@ -115,26 +117,33 @@ namespace ZombiesVsHumans
         {
             if (XDim == 0)
             {
-                Error = true;
-                ErrorMessage = "Horizontal dimension (x) must be > 0";
+                SetError("Horizontal dimension (x) must be > 0");
             }
             if (YDim == 0)
             {
-                Error = true;
-                ErrorMessage = "Vertical dimension (y) must be > 0";
+                SetError("Vertical dimension (y) must be > 0");
             }
             if (Zombies < PlayerZombies)
             {
-                Error = true;
-                ErrorMessage =
-                    "There are more player-controlled zombies than zombies";
+                SetError("There are more player-controlled zombies "
+                    + $"({PlayerZombies}) than total zombies ({Zombies})");
             }
             if (Humans < PlayerHumans)
             {
-                Error = true;
-                ErrorMessage =
-                    "There are more player-controller humans than humans";
+                SetError("There are more player-controlled humans "
+                    + $"({PlayerHumans}) than total humans ({Humans})");
             }
+            if (Zombies + Humans > XDim * YDim)
+            {
+                SetError($"Too many agents ({Zombies + Humans}) for the "
+                    + $"game world (which contains {XDim * YDim} cells)");
+            }
+        }
+
+        private void SetError(string msg)
+        {
+            Error = true;
+            errorMessages.Add(msg);
         }
     }
 }
