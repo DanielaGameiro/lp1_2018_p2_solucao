@@ -2,6 +2,7 @@
 // Author: Nuno Fachada
 
 using System;
+using System.ComponentModel;
 
 namespace ZombiesVsHumans
 {
@@ -79,5 +80,49 @@ namespace ZombiesVsHumans
             // minimum horizontal and vertical distances
             return Math.Max(minXDist, minYDist);
         }
+
+        public Coord GetNeighbor(Coord pos, Direction direction)
+        {
+            int x, y;
+            switch (direction)
+            {
+                case Direction.Up:
+                    x = pos.X;
+                    y = pos.Y > 0 ? pos.Y - 1 : YDim - 1;
+                    break;
+                case Direction.UpLeft:
+                    x = pos.X > 0 ? pos.X - 1 : XDim - 1;
+                    y = pos.Y > 0 ? pos.Y - 1 : YDim - 1;
+                    break;
+                case Direction.Left:
+                    x = pos.X > 0 ? pos.X - 1 : XDim - 1;
+                    y = pos.Y;
+                    break;
+                case Direction.DownLeft:
+                    x = pos.X > 0 ? pos.X - 1 : XDim - 1;
+                    y = pos.Y < YDim - 1 ? pos.Y + 1 : 0;
+                    break;
+                case Direction.Down:
+                    x = pos.X;
+                    y = pos.Y < YDim - 1 ? pos.Y + 1 : 0;
+                    break;
+                case Direction.DownRight:
+                    x = pos.X < XDim - 1 ? pos.X - 1 : 0;
+                    y = pos.Y < YDim - 1 ? pos.Y + 1 : 0;
+                    break;
+                case Direction.Right:
+                    x = pos.X < XDim - 1 ? pos.X - 1 : 0;
+                    y = pos.Y;
+                    break;
+                case Direction.UpRight:
+                    x = pos.X < XDim - 1 ? pos.X - 1 : 0;
+                    y = pos.Y > 0 ? pos.Y - 1 : YDim - 1;
+                    break;
+                default:
+                    throw new InvalidEnumArgumentException("Unknown direction");
+            }
+            return new Coord(x, y);
+        }
+
     }
 }

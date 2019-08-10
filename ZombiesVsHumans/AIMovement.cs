@@ -3,19 +3,18 @@
 
 namespace ZombiesVsHumans
 {
-    public class AIMovement : IMovement
+    public class AIMovement : AbstractMovement
     {
         private AgentKind target;
         private bool runAway;
-        private IReadOnlyWorld world;
         public AIMovement(AgentKind target, bool runAway, IReadOnlyWorld world)
+            : base(world)
         {
             this.target = target;
             this.runAway = runAway;
-            this.world = world;
         }
 
-        public void Move(Agent agent)
+        public override void Move(Agent agent)
         {
 
         }

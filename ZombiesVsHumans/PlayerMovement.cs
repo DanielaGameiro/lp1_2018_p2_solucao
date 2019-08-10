@@ -3,24 +3,22 @@
 
 namespace ZombiesVsHumans
 {
-    public class PlayerMovement : IMovement
+    public class PlayerMovement : AbstractMovement
     {
-        private IReadOnlyWorld world;
+        public PlayerMovement(IReadOnlyWorld world) : base(world) {}
 
-        public PlayerMovement(IReadOnlyWorld world)
+        public override void Move(Agent agent)
         {
-            this.world = world;
-        }
-        public void Move(Agent agent)
-        {
-            //Coord dest;
+            Coord dest;
             do
             {
                 Direction direction = Program.UI.InputDirection();
-                //dest = agent.Pos.GetNeighbor(direction);
-                //if (world.IsOccupied(dest))
+                dest = world.GetNeighbor(agent.Pos, direction);
+                if (world.IsOccupied(dest))
                 {
-                    Program.UI.RenderMessage($"Can't move {direction}");
+                    Program.UI.RenderMessage(
+                        $"Can't move to {direction} because it's occupied " +
+                        $"with {agent}");
                 }
             } while (true); // Check if position available
         }

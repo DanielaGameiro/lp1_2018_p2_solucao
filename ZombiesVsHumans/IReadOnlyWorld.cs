@@ -10,5 +10,6 @@ namespace ZombiesVsHumans
         bool IsOccupied(Coord coord);
         Agent GetAgentAt(Coord coord);
         int DistanceBetween(Coord c1, Coord c2);
+        Coord GetNeighbor(Coord pos, Direction direction);
     }
 }
