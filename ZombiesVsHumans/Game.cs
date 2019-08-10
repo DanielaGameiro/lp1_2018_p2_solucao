@@ -55,6 +55,28 @@ namespace ZombiesVsHumans
             }
         }
 
+        public void Play()
+        {
+            // First render
+            ui.RenderWorld(world);
+
+            // Game loop
+            for (int i = 0; i < options.Turns; i++)
+            {
+                // Shuffle agent list
+                Shuffle();
+
+                // Cycle through agents and make them play
+                foreach (Agent agent in agents)
+                {
+                    agent.Play();
+                }
+
+                // Render at end of turn
+                ui.RenderWorld(world);
+            }
+        }
+
         private void NewAgent(AgentKind kind, AgentMovement movement, uint i)
         {
             int x, y;
@@ -72,25 +94,19 @@ namespace ZombiesVsHumans
             agents[i] = agent;
         }
 
-        public void Play()
+        /// <summary>
+        /// Shuffle agent list using Fisher–Yates shuffle.
+        /// </summary>
+        private void Shuffle()
         {
-            // First render
-            ui.RenderWorld(world);
-
-            // Game loop
-            for (int i = 0; i < options.Turns; i++)
-            {
-                // Shuffle agent list
-
-                // Cycle through agents and make them play
-                foreach (Agent agent in agents)
-                {
-                    agent.Play();
-                }
-
-                // Render
-                ui.RenderWorld(world);
-            }
+             for (int i = agents.Length - 1; i >= 1; i--)
+             {
+                Agent aux;
+                int j = rand.Next(i + 1);
+                aux = agents[j];
+                agents[j] = agents[i];
+                agents[i] = aux;
+             }
         }
     }
 }
