@@ -10,12 +10,22 @@ namespace ZombiesVsHumans
 
         private int x, y;
 
-        public Agent(int x, int y, AgentKind kind, AgentMovement movement)
+        private Agent[,] world;
+
+        public Agent(
+            int x, int y, AgentKind kind, AgentMovement movement, Agent[,] world)
         {
             this.x = x;
             this.y = y;
             Kind = kind;
             Movement = movement;
+            this.world = world;
+            world[x, y] = this;
+        }
+
+        public void Play()
+        {
+
         }
 
     }

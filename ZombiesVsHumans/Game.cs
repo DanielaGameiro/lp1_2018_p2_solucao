@@ -9,13 +9,15 @@ namespace ZombiesVsHumans
     {
 
         private Options options;
+        private IUserInterface ui;
         private Agent[,] world;
         private Agent[] agents;
         private Random rand;
 
-        public Game(Options options)
+        public Game(Options options, IUserInterface ui)
         {
             this.options = options;
+            this.ui = ui;
             world = new Agent[options.XDim, options.YDim];
             agents = new Agent[options.Zombies + options.Humans];
             rand = new Random();
@@ -66,16 +68,28 @@ namespace ZombiesVsHumans
                 if (world[x, y] == null) hasPlace = true;
             } while (!hasPlace);
 
-            agent = new Agent(x, y, kind, movement);
+            agent = new Agent(x, y, kind, movement, world);
             agents[i] = agent;
-            world[x, y] = agent;
         }
 
-        public void Start()
+        public void Play()
         {
+            // First render
+            ui.RenderWorld(world);
+
+            // Game loop
             for (int i = 0; i < options.Turns; i++)
             {
-                Console.WriteLine("Turn " + i);
+                // Shuffle agent list
+
+                // Cycle through agents and make them play
+                foreach (Agent agent in agents)
+                {
+                    agent.Play();
+                }
+
+                // Render
+                ui.RenderWorld(world);
             }
         }
     }
