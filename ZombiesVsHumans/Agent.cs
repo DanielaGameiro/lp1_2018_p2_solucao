@@ -1,9 +1,9 @@
 // License: GPLv3
 // Author: Nuno Fachada
 
-namespace zombies
+namespace ZombiesVsHumans
 {
-    public class Game
+    public class Agent
     {
 
     }

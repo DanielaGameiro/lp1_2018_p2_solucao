@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace zombies
+namespace ZombiesVsHumans
 {
     public struct Options
     {
