@@ -5,9 +5,11 @@ namespace ZombiesVsHumans
 {
     public interface IUserInterface
     {
-         void ShowError(string msg);
+         void RenderError(string msg);
 
          void RenderWorld(IReadOnlyWorld world);
+
+         void RenderMessage(string msg);
 
          Direction InputDirection();
     }

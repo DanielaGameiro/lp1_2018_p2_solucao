@@ -7,9 +7,14 @@ namespace ZombiesVsHumans
 {
     public class ConsoleUserInterface : IUserInterface
     {
-        public void ShowError(string msg)
+        public void RenderError(string msg)
         {
             Console.Error.WriteLine(msg);
+        }
+
+        public void RenderMessage(string msg)
+        {
+            Console.WriteLine(msg);
         }
 
         public void RenderWorld(IReadOnlyWorld world)
@@ -22,16 +27,12 @@ namespace ZombiesVsHumans
 
                     if (!world.IsOccupied(coord))
                     {
-                        Console.Write('.');
+                        Console.Write(".... ");
                     }
                     else
                     {
                         Agent agent = world.GetAgentAt(coord);
-                        Console.Write(agent.ID);
-                        /*if (agent.Kind == AgentKind.Human)
-                            Console.Write('h');
-                        else
-                            Console.Write('z'); */
+                        Console.Write($"{agent} ");
 
                     }
                 }

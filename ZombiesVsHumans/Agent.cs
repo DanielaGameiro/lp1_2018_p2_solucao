@@ -28,5 +28,12 @@ namespace ZombiesVsHumans
 
         }
 
+        public override string ToString()
+        {
+            string type = (Kind == AgentKind.Zombie) ? "z" : "h";
+            if (Movement == AgentMovement.Player)
+                type = type.ToUpper();
+            return $"{type}{ID,3:x3}";
+        }
     }
 }

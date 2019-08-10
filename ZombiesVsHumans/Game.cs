@@ -64,7 +64,7 @@ namespace ZombiesVsHumans
                 {
 
                     Console.WriteLine(
-                        $"Distance between {agents[i].ID} and {agents[j].ID} is {world.DistanceBetween(agents[i].Pos, agents[j].Pos)}");
+                        $"Distance between {agents[i]} and {agents[j]} is {world.DistanceBetween(agents[i].Pos, agents[j].Pos)}");
                 }
             }
 

@@ -14,7 +14,7 @@ namespace ZombiesVsHumans
             if (options.Error)
             {
                 foreach (string error in options.ErrorMessages)
-                    UI.ShowError("ERROR: " + error);
+                    UI.RenderError("ERROR: " + error);
             }
             else
             {
