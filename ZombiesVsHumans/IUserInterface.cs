@@ -4,6 +4,6 @@ namespace ZombiesVsHumans
     {
          void ShowError(string msg);
 
-         void RenderWorld(Agent[,] world);
+         void RenderWorld(IReadOnlyWorld world);
     }
 }

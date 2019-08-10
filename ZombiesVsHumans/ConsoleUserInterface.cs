@@ -9,18 +9,26 @@ namespace ZombiesVsHumans
             Console.Error.WriteLine(msg);
         }
 
-        public void RenderWorld(Agent[,] world)
+        public void RenderWorld(IReadOnlyWorld world)
         {
-            for (int y = 0; y < world.GetLength(1); y++)
+            for (int y = 0; y < world.YDim; y++)
             {
-                for (int x = 0; x < world.GetLength(0); x++)
+                for (int x = 0; x < world.XDim; x++)
                 {
-                    if (world[x, y] == null)
+
+                    if (!world.IsOccupied(x, y))
+                    {
                         Console.Write('.');
-                    else if (world[x, y].Kind == AgentKind.Human)
-                        Console.Write('h');
+                    }
                     else
-                        Console.Write('z');
+                    {
+                        Agent agent = world.GetAgentAt(x, y);
+                        if (agent.Kind == AgentKind.Human)
+                            Console.Write('h');
+                        else
+                            Console.Write('z');
+
+                    }
                 }
                 Console.WriteLine();
             }

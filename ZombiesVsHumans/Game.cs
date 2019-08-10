@@ -10,7 +10,7 @@ namespace ZombiesVsHumans
 
         private Options options;
         private IUserInterface ui;
-        private Agent[,] world;
+        private IReadOnlyWorld world;
         private Agent[] agents;
         private Random rand;
 
@@ -18,7 +18,7 @@ namespace ZombiesVsHumans
         {
             this.options = options;
             this.ui = ui;
-            world = new Agent[options.XDim, options.YDim];
+            world = new World((int)options.XDim, (int)options.YDim);
             agents = new Agent[options.Zombies + options.Humans];
             rand = new Random();
 
@@ -28,12 +28,12 @@ namespace ZombiesVsHumans
                 if (i < options.PlayerZombies)
                 {
                     // Create player-controlled zombie
-                    NewAgent(AgentKind.Zombie, AgentMovement.Player, i);
+                    NewAgent(AgentKind.Zombie, AgentMovement.Player, (int)i);
                 }
                 else
                 {
                     // Create AI zombie
-                    NewAgent(AgentKind.Zombie, AgentMovement.AI, i);
+                    NewAgent(AgentKind.Zombie, AgentMovement.AI, (int)i);
                 }
             }
 
@@ -44,13 +44,13 @@ namespace ZombiesVsHumans
                 {
                     // Create player-controlled human
                     NewAgent(AgentKind.Human, AgentMovement.Player,
-                        options.Zombies + i);
+                        (int)(options.Zombies + i));
                 }
                 else
                 {
                     // Create AI human
                     NewAgent(AgentKind.Human, AgentMovement.AI,
-                        options.Zombies + i);
+                        (int)(options.Zombies + i));
                 }
             }
         }
@@ -77,21 +77,19 @@ namespace ZombiesVsHumans
             }
         }
 
-        private void NewAgent(AgentKind kind, AgentMovement movement, uint i)
+        private void NewAgent(AgentKind kind, AgentMovement movement, int id)
         {
             int x, y;
-            bool hasPlace = false;
             Agent agent;
 
             do
             {
                 x = rand.Next((int)options.XDim);
                 y = rand.Next((int)options.YDim);
-                if (world[x, y] == null) hasPlace = true;
-            } while (!hasPlace);
+            } while (world.IsOccupied(x, y));
 
-            agent = new Agent(x, y, kind, movement, world);
-            agents[i] = agent;
+            agent = new Agent(id, x, y, kind, movement, (World)world);
+            agents[id] = agent;
         }
 
         /// <summary>

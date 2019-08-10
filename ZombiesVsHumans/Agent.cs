@@ -5,22 +5,24 @@ namespace ZombiesVsHumans
 {
     public class Agent
     {
+        public int ID { get; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
         public AgentKind Kind { get; }
         public AgentMovement Movement { get; }
 
-        private int x, y;
+        private World world;
 
-        private Agent[,] world;
-
-        public Agent(
-            int x, int y, AgentKind kind, AgentMovement movement, Agent[,] world)
+        public Agent(int id, int x, int y,
+            AgentKind kind, AgentMovement movement, World world)
         {
-            this.x = x;
-            this.y = y;
+            ID = id;
+            X = x;
+            Y = y;
             Kind = kind;
             Movement = movement;
             this.world = world;
-            world[x, y] = this;
+            world.AddAgent(this);
         }
 
         public void Play()
