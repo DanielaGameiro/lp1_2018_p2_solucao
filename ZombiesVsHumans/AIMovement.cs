@@ -4,13 +4,15 @@ namespace ZombiesVsHumans
     {
         private AgentKind target;
         private bool runAway;
-        public AIMovement(AgentKind target, bool runAway)
+        private IReadOnlyWorld world;
+        public AIMovement(AgentKind target, bool runAway, IReadOnlyWorld world)
         {
             this.target = target;
             this.runAway = runAway;
+            this.world = world;
         }
 
-        public void Move()
+        public void Move(Agent agent)
         {
 
         }

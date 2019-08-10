@@ -2,6 +2,6 @@ namespace ZombiesVsHumans
 {
     public interface IMovement
     {
-         void Move();
+         void Move(Agent agent);
     }
 }

@@ -9,15 +9,13 @@ namespace ZombiesVsHumans
     {
 
         private Options options;
-        private IUserInterface ui;
         private IReadOnlyWorld world;
         private Agent[] agents;
         private Random rand;
 
-        public Game(Options options, IUserInterface ui)
+        public Game(Options options)
         {
             this.options = options;
-            this.ui = ui;
             world = new World((int)options.XDim, (int)options.YDim);
             agents = new Agent[options.Zombies + options.Humans];
             rand = new Random();
@@ -58,7 +56,7 @@ namespace ZombiesVsHumans
         public void Play()
         {
             // First render
-            ui.RenderWorld(world);
+            Program.UI.RenderWorld(world);
 
             // Game loop
             for (int i = 0; i < options.Turns; i++)
@@ -73,7 +71,7 @@ namespace ZombiesVsHumans
                 }
 
                 // Render at end of turn
-                ui.RenderWorld(world);
+                Program.UI.RenderWorld(world);
             }
         }
 

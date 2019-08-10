@@ -2,7 +2,7 @@ namespace ZombiesVsHumans
 {
     public class PlayerMovement : IMovement
     {
-        public void Move()
+        public void Move(Agent agent)
         {
 
         }
