@@ -58,6 +58,16 @@ namespace ZombiesVsHumans
             // First render
             Program.UI.RenderWorld(world);
 
+            for (int i = 0; i < agents.Length; i++)
+            {
+                for (int j = i + 1; j < agents.Length; j++)
+                {
+
+                    Console.WriteLine(
+                        $"Distance between {agents[i].ID} and {agents[j].ID} is {world.DistanceBetween(agents[i].Pos, agents[j].Pos)}");
+                }
+            }
+
             // Game loop
             for (int i = 0; i < options.Turns; i++)
             {
@@ -77,16 +87,17 @@ namespace ZombiesVsHumans
 
         private void NewAgent(AgentKind kind, AgentMovement movement, int id)
         {
-            int x, y;
+            Coord pos;
             Agent agent;
 
             do
             {
-                x = rand.Next((int)options.XDim);
-                y = rand.Next((int)options.YDim);
-            } while (world.IsOccupied(x, y));
+                pos = new Coord(
+                    rand.Next((int)options.XDim),
+                    rand.Next((int)options.YDim));
+            } while (world.IsOccupied(pos));
 
-            agent = new Agent(id, x, y, kind, movement, (World)world);
+            agent = new Agent(id, pos, kind, movement, (World)world);
             agents[id] = agent;
         }
 

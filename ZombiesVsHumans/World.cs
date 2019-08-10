@@ -1,3 +1,6 @@
+// License: GPLv3
+// Author: Nuno Fachada
+
 using System;
 
 namespace ZombiesVsHumans
@@ -13,45 +16,68 @@ namespace ZombiesVsHumans
             world = new Agent[xDim, yDim];
         }
 
-        public bool IsOccupied(int x, int y)
+        public bool IsOccupied(Coord coord)
         {
-            return world[x, y] != null;
+            return world[coord.X, coord.Y] != null;
         }
-        public Agent GetAgentAt(int x, int y)
+        public Agent GetAgentAt(Coord coord)
         {
-            return world[x, y];
+            return world[coord.X, coord.Y];
         }
 
-        public void MoveAgent(Agent agent, int xDest, int yDest)
+        public void MoveAgent(Agent agent, Coord dest)
         {
-            if (world[agent.X, agent.Y] != agent)
+            if (world[agent.Pos.X, agent.Pos.Y] != agent)
                 throw new InvalidOperationException(
                     $"Tried to move agent {agent.ID} from " +
-                    $"({agent.X},{agent.Y}) to ({xDest},{yDest}), " +
+                    $"{agent.Pos} to {dest}, " +
                     $"but source location is occupied with " +
-                    world[agent.X, agent.Y] == null
-                        ? "no agent"
-                        : "$agent {world[agent.X, agent.Y].ID}");
+                    (!IsOccupied(agent.Pos)
+                        ? "no agent" : $"agent {GetAgentAt(agent.Pos).ID}"));
 
-            if (world[xDest, yDest] != null)
+            if (IsOccupied(dest))
                 throw new InvalidOperationException(
                     $"Tried to move agent {agent.ID} to position " +
-                    $"({xDest},{yDest}) which was already occupied by agent " +
-                    world[xDest, yDest].ID);
+                    $"{dest} which was already occupied by agent " +
+                    GetAgentAt(dest).ID);
 
-            world[xDest, yDest] = agent;
-            world[agent.X, agent.Y] = null;
+            world[dest.X, dest.Y] = agent;
+            world[agent.Pos.X, agent.Pos.Y] = null;
         }
 
         public void AddAgent(Agent agent)
         {
-            if (world[agent.X, agent.Y] != null)
+            if (IsOccupied(agent.Pos))
                 throw new InvalidOperationException(
                     $"Tried to place agent {agent.ID} at position " +
-                    $"({agent.X},{agent.Y}) which was already occupied by " +
-                    $"agent {world[agent.X, agent.Y].ID}");
+                    $"{agent.Pos} which was already occupied by " +
+                    $"agent {GetAgentAt(agent.Pos).ID}");
 
-            world[agent.X, agent.Y] = agent;
+            world[agent.Pos.X, agent.Pos.Y] = agent;
+        }
+
+        public int DistanceBetween(Coord c1, Coord c2)
+        {
+
+            // Determine minimum horizontal distance
+            int minXDist = Math.Min(
+                // Is it direct?
+                Math.Abs(c1.X - c2.X),
+                // Or wrap around?
+                Math.Min(c1.X, c2.X) + XDim - Math.Max(c1.X, c2.X)
+            );
+
+            // Determine minimum vertical distance
+            int minYDist = Math.Min(
+                // Is is direct?
+                Math.Abs(c1.Y - c2.Y),
+                // Or wrap around?
+                Math.Min(c1.Y, c2.Y) + YDim - Math.Max(c1.Y, c2.Y)
+            );
+
+            // The distance between coordinates is the largest between the
+            // minimum horizontal and vertical distances
+            return Math.Max(minXDist, minYDist);
         }
     }
 }

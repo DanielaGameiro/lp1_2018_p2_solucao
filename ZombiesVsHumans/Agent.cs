@@ -6,19 +6,17 @@ namespace ZombiesVsHumans
     public class Agent
     {
         public int ID { get; }
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public Coord Pos { get; private set; }
         public AgentKind Kind { get; }
         public AgentMovement Movement { get; }
 
         private World world;
 
-        public Agent(int id, int x, int y,
+        public Agent(int id, Coord pos,
             AgentKind kind, AgentMovement movement, World world)
         {
             ID = id;
-            X = x;
-            Y = y;
+            Pos = pos;
             Kind = kind;
             Movement = movement;
             this.world = world;
