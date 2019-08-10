@@ -7,20 +7,26 @@ namespace ZombiesVsHumans
     {
         public PlayerMovement(IReadOnlyWorld world) : base(world) {}
 
-        public override void Move(Agent agent)
+        public override bool WhereToMove(Agent agent, out Coord dest)
         {
-            Coord dest;
+            // TODO: Check if there is any place to move and return false if
+            // that's not the case
             do
             {
-                Direction direction = Program.UI.InputDirection();
+                Direction direction = Program.UI.InputDirection(agent.ToString());
                 dest = world.GetNeighbor(agent.Pos, direction);
                 if (world.IsOccupied(dest))
                 {
                     Program.UI.RenderMessage(
                         $"Can't move to {direction} because it's occupied " +
-                        $"with {agent}");
+                        $"with {world.GetAgentAt(dest)}");
                 }
-            } while (true); // Check if position available
+                else
+                {
+                    break;
+                }
+            } while (true);
+            return true;
         }
     }
 }

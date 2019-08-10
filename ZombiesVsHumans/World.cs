@@ -30,17 +30,17 @@ namespace ZombiesVsHumans
         {
             if (world[agent.Pos.X, agent.Pos.Y] != agent)
                 throw new InvalidOperationException(
-                    $"Tried to move agent {agent.ID} from " +
+                    $"Tried to move agent {agent} from " +
                     $"{agent.Pos} to {dest}, " +
                     $"but source location is occupied with " +
                     (!IsOccupied(agent.Pos)
-                        ? "no agent" : $"agent {GetAgentAt(agent.Pos).ID}"));
+                        ? "no agent" : $"agent {GetAgentAt(agent.Pos)}"));
 
             if (IsOccupied(dest))
                 throw new InvalidOperationException(
-                    $"Tried to move agent {agent.ID} to position " +
+                    $"Tried to move agent {agent} to position " +
                     $"{dest} which was already occupied by agent " +
-                    GetAgentAt(dest).ID);
+                    GetAgentAt(dest));
 
             world[dest.X, dest.Y] = agent;
             world[agent.Pos.X, agent.Pos.Y] = null;
@@ -50,9 +50,9 @@ namespace ZombiesVsHumans
         {
             if (IsOccupied(agent.Pos))
                 throw new InvalidOperationException(
-                    $"Tried to place agent {agent.ID} at position " +
+                    $"Tried to place agent {agent} at position " +
                     $"{agent.Pos} which was already occupied by " +
-                    $"agent {GetAgentAt(agent.Pos).ID}");
+                    $"agent {GetAgentAt(agent.Pos)}");
 
             world[agent.Pos.X, agent.Pos.Y] = agent;
         }
@@ -107,15 +107,15 @@ namespace ZombiesVsHumans
                     y = pos.Y < YDim - 1 ? pos.Y + 1 : 0;
                     break;
                 case Direction.DownRight:
-                    x = pos.X < XDim - 1 ? pos.X - 1 : 0;
+                    x = pos.X < XDim - 1 ? pos.X + 1 : 0;
                     y = pos.Y < YDim - 1 ? pos.Y + 1 : 0;
                     break;
                 case Direction.Right:
-                    x = pos.X < XDim - 1 ? pos.X - 1 : 0;
+                    x = pos.X < XDim - 1 ? pos.X + 1 : 0;
                     y = pos.Y;
                     break;
                 case Direction.UpRight:
-                    x = pos.X < XDim - 1 ? pos.X - 1 : 0;
+                    x = pos.X < XDim - 1 ? pos.X + 1 : 0;
                     y = pos.Y > 0 ? pos.Y - 1 : YDim - 1;
                     break;
                 default:
@@ -123,6 +123,5 @@ namespace ZombiesVsHumans
             }
             return new Coord(x, y);
         }
-
     }
 }

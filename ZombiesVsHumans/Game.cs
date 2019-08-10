@@ -55,10 +55,12 @@ namespace ZombiesVsHumans
 
         public void Play()
         {
+            Program.UI.RenderMessage($"******** Turn 0 *********");
+
             // First render
             Program.UI.RenderWorld(world);
 
-            for (int i = 0; i < agents.Length; i++)
+            /*for (int i = 0; i < agents.Length; i++)
             {
                 for (int j = i + 1; j < agents.Length; j++)
                 {
@@ -66,22 +68,28 @@ namespace ZombiesVsHumans
                     Console.WriteLine(
                         $"Distance between {agents[i]} and {agents[j]} is {world.DistanceBetween(agents[i].Pos, agents[j].Pos)}");
                 }
-            }
+            } */
 
             // Game loop
             for (int i = 0; i < options.Turns; i++)
             {
+                Program.UI.RenderMessage($"******** Turn {i + 1} *********");
+
                 // Shuffle agent list
                 Shuffle();
 
                 // Cycle through agents and make them play
                 foreach (Agent agent in agents)
                 {
-                    agent.Play();
+                    Program.UI.RenderMessage($"Moving {agent.ToString()}...");
+                    agent.Move();
+
+                    // Render after agent movement
+                    Program.UI.RenderWorld(world);
                 }
 
                 // Render at end of turn
-                Program.UI.RenderWorld(world);
+                //Program.UI.RenderWorld(world);
             }
         }
 

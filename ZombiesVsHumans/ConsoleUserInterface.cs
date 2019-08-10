@@ -41,9 +41,9 @@ namespace ZombiesVsHumans
             Console.WriteLine();
         }
 
-        public Direction InputDirection()
+        public Direction InputDirection(string id)
         {
-            Console.WriteLine("Insert direction: ");
+            Console.WriteLine($"Where to move {id}? ");
             Console.WriteLine("   Q W E          ↖ ↑ ↗");
             Console.WriteLine("   A   D    or    ←   →");
             Console.WriteLine("   Z X C          ↙ ↓ ↘");

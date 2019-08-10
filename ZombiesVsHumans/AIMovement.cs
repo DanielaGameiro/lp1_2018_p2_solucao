@@ -14,9 +14,10 @@ namespace ZombiesVsHumans
             this.runAway = runAway;
         }
 
-        public override void Move(Agent agent)
+        public override bool WhereToMove(Agent agent, out Coord dest)
         {
-
+            dest = new Coord(-1, -1);
+            return false;
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace ZombiesVsHumans
 {
-    public abstract class AbstractMovement : IMovement
+    public abstract class AbstractMovement
     {
         protected readonly IReadOnlyWorld world;
 
@@ -8,6 +8,6 @@ namespace ZombiesVsHumans
         {
             this.world = world;
         }
-        public abstract void Move(Agent agent);
+        public abstract bool WhereToMove(Agent agent, out Coord dest);
     }
 }
