@@ -86,7 +86,7 @@ namespace ZombiesVsHumans
                 foreach (Agent agent in agents)
                 {
                     //Program.UI.RenderMessage($"Moving {agent.ToString()}...");
-                    agent.Move();
+                    agent.PlayTurn();
 
                     // Render after agent movement
                     //Program.UI.RenderWorld(world);

@@ -8,8 +8,8 @@ namespace ZombiesVsHumans
     {
         public int ID { get; }
         public Coord Pos { get; private set; }
-        public AgentKind Kind { get; }
-        public AgentMovement Movement { get; }
+        public AgentKind Kind { get; private set; }
+        public AgentMovement Movement { get; private set; }
 
         private World world;
         private AbstractMovement moveBehavior;
@@ -57,12 +57,30 @@ namespace ZombiesVsHumans
 
         }
 
-        public void Move()
+        public void PlayTurn()
         {
-            if (moveBehavior.WhereToMove(this, out Coord dest))
+            Coord dest = moveBehavior.WhereToMove(this);
+
+            if (!world.IsOccupied(dest))
             {
                 world.MoveAgent(this, dest);
                 Pos = dest;
+            }
+            else
+            {
+                if (Kind == AgentKind.Zombie)
+                {
+                    world.GetAgentAt(dest).TryInfect();
+                }
+            }
+        }
+
+        private void TryInfect()
+        {
+            if (Kind == AgentKind.Human)
+            {
+                Kind = AgentKind.Zombie;
+                moveBehavior = new AIMovement(AgentKind.Human, false, world);
             }
         }
 
