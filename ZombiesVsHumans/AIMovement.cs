@@ -18,10 +18,13 @@ namespace ZombiesVsHumans
         public override bool WhereToMove(Agent agent, out Coord dest)
         {
             bool foundEnemy = false;
+            bool willMove = false;
             int maxRadius = Math.Max(world.XDim, world.YDim) / 2;
-            Direction direction = default(Direction);
+            Coord vector = default(Coord);
 
-            for (int r = 1; r < maxRadius && !foundEnemy; r++)
+            dest = agent.Pos;
+
+            for (int r = 1; r <= maxRadius && !foundEnemy; r++)
             {
                 for (int x = -r; x <= r && !foundEnemy; x++)
                 {
@@ -34,20 +37,54 @@ namespace ZombiesVsHumans
                         if (world.IsOccupied(currentPos)
                             && world.GetAgentAt(currentPos).Kind == enemy)
                         {
-                            direction = runAway
-                                ? world.DirectionFromTo(currentPos, agent.Pos)
-                                : world.DirectionFromTo(agent.Pos, currentPos);
+
+                            vector = runAway
+                                ? world.VectorBetween(currentPos, agent.Pos)
+                                : world.VectorBetween(agent.Pos, currentPos);
+
                             foundEnemy = true;
                         }
                     }
                 }
             }
 
-            dest = foundEnemy
-                ? world.GetNeighbor(agent.Pos, direction)
-                : agent.Pos;
+            if (foundEnemy)
+            {
+                dest = world.GetNeighbor(agent.Pos, vector);
+                if (!world.IsOccupied(dest))
+                {
+                    willMove = true;
+                }
+                else
+                {
+                    // If vector is diagonal, try to move just Up, Down, Right
+                    // or left
+                    if (vector.X != 0 && vector.Y != 0)
+                    {
+                        // Try to move right or left
+                        Coord xVector = new Coord(vector.X, 0);
+                        dest = world.GetNeighbor(agent.Pos, xVector);
 
-            return foundEnemy & !world.IsOccupied(dest);
+                        if (!world.IsOccupied(dest))
+                        {
+                            willMove = true;
+                        }
+                        else
+                        {
+                            // Try to move up or down
+                            Coord yVector = new Coord(0, vector.Y);
+                            dest = world.GetNeighbor(agent.Pos, yVector);
+
+                            if (!world.IsOccupied(dest))
+                            {
+                                willMove = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return willMove;
         }
     }
 }

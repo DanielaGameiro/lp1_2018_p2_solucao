@@ -5,6 +5,7 @@ namespace ZombiesVsHumans
 {
     public enum Direction
     {
+        None,
         Up,
         UpLeft,
         Left,

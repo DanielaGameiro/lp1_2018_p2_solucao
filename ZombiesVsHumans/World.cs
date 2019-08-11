@@ -19,15 +19,19 @@ namespace ZombiesVsHumans
 
         public bool IsOccupied(Coord coord)
         {
+            coord = Normalize(coord);
             return world[coord.X, coord.Y] != null;
         }
         public Agent GetAgentAt(Coord coord)
         {
+            coord = Normalize(coord);
             return world[coord.X, coord.Y];
         }
 
         public void MoveAgent(Agent agent, Coord dest)
         {
+            dest = Normalize(dest);
+
             if (world[agent.Pos.X, agent.Pos.Y] != agent)
                 throw new InvalidOperationException(
                     $"Tried to move agent {agent} from " +
@@ -57,91 +61,109 @@ namespace ZombiesVsHumans
             world[agent.Pos.X, agent.Pos.Y] = agent;
         }
 
-        public int DistanceBetween(Coord c1, Coord c2)
+        public Coord VectorBetween(Coord c1, Coord c2)
         {
+            int x, y, xDistDirect, xDistWrapAround, yDistDirect, yDistWrapAround;
 
-            // Determine minimum horizontal distance
-            int minXDist = Math.Min(
-                // Is it direct?
-                Math.Abs(c1.X - c2.X),
-                // Or wrap around?
-                Math.Min(c1.X, c2.X) + XDim - Math.Max(c1.X, c2.X)
-            );
+            c1 = Normalize(c1);
+            c2 = Normalize(c2);
 
-            // Determine minimum vertical distance
-            int minYDist = Math.Min(
-                // Is is direct?
-                Math.Abs(c1.Y - c2.Y),
-                // Or wrap around?
-                Math.Min(c1.Y, c2.Y) + YDim - Math.Max(c1.Y, c2.Y)
-            );
+            xDistDirect = Math.Abs(c2.X - c1.X);
+            xDistWrapAround = Math.Min(c2.X, c1.X) + XDim - Math.Max(c2.X, c1.X);
 
-            // The distance between coordinates is the largest between the
-            // minimum horizontal and vertical distances
-            return Math.Max(minXDist, minYDist);
+            x = c2.X - c1.X;
+            if (xDistWrapAround < xDistDirect)
+                x += -Math.Sign(x) * XDim;
+
+            yDistDirect = Math.Abs(c2.Y - c1.Y);
+            yDistWrapAround = Math.Min(c2.Y, c1.Y) + YDim - Math.Max(c2.Y, c1.Y);
+
+            y = c2.Y - c1.Y;
+            if (yDistWrapAround < yDistDirect)
+                y += -Math.Sign(y) * YDim;
+
+            return new Coord(x, y);
         }
 
         public Coord GetNeighbor(Coord pos, Direction direction)
         {
-            int x, y;
+            int x = pos.X, y = pos.Y;
             switch (direction)
             {
                 case Direction.Up:
-                    x = pos.X;
-                    y = pos.Y > 0 ? pos.Y - 1 : YDim - 1;
+                    y -= 1;
                     break;
                 case Direction.UpLeft:
-                    x = pos.X > 0 ? pos.X - 1 : XDim - 1;
-                    y = pos.Y > 0 ? pos.Y - 1 : YDim - 1;
+                    x -= 1;
+                    y -= 1;
                     break;
                 case Direction.Left:
-                    x = pos.X > 0 ? pos.X - 1 : XDim - 1;
-                    y = pos.Y;
+                    x -= 1;
                     break;
                 case Direction.DownLeft:
-                    x = pos.X > 0 ? pos.X - 1 : XDim - 1;
-                    y = pos.Y < YDim - 1 ? pos.Y + 1 : 0;
+                    x -= 1;
+                    y += 1;
                     break;
                 case Direction.Down:
-                    x = pos.X;
-                    y = pos.Y < YDim - 1 ? pos.Y + 1 : 0;
+                    y += 1;
                     break;
                 case Direction.DownRight:
-                    x = pos.X < XDim - 1 ? pos.X + 1 : 0;
-                    y = pos.Y < YDim - 1 ? pos.Y + 1 : 0;
+                    x += 1;
+                    y += 1;
                     break;
                 case Direction.Right:
-                    x = pos.X < XDim - 1 ? pos.X + 1 : 0;
-                    y = pos.Y;
+                    x += 1;
                     break;
                 case Direction.UpRight:
-                    x = pos.X < XDim - 1 ? pos.X + 1 : 0;
-                    y = pos.Y > 0 ? pos.Y - 1 : YDim - 1;
+                    x += 1;
+                    y -= 1;
+                    break;
+                case Direction.None:
                     break;
                 default:
                     throw new InvalidEnumArgumentException("Unknown direction");
             }
-            return new Coord(x, y);
+            return Normalize(new Coord(x, y));
         }
 
-        public Direction DirectionFromTo(Coord c1, Coord c2)
+        public Coord GetNeighbor(Coord pos, Coord directionVector)
         {
-            double vectorX = c2.X - c1.X;
-            double vectorY = c2.Y - c1.Y;
-            double angle = Math.Atan2(vectorY, vectorX) * 180 / Math.PI;
+            Direction direction = default(Direction);
 
-            if (angle >= -22.5 && angle < 22.5) return Direction.Right;
-            if (angle >= 22.5 && angle < 67.5) return Direction.UpRight;
-            if (angle >= 67.5 && angle < 112.5) return Direction.Up;
-            if (angle >= 112.5 && angle < 157.5) return Direction.UpLeft;
-            if (Math.Abs(angle) >= 157.5) return Direction.Left;
-            if (angle >= -157.5 && angle < -112.5) return Direction.DownLeft;
-            if (angle >= -112.5 && angle < -67.5) return Direction.Down;
-            if (angle >= -67.5 && angle < -22.5) return Direction.DownRight;
+            directionVector = new Coord(
+                Math.Sign(directionVector.X), Math.Sign(directionVector.Y));
 
-            // We should never get here
-            throw new InvalidOperationException(
-                "Universal paradox: an angle is not between 0 and 360 degrees!");
+            if (directionVector.X == 1 && directionVector.Y == 1)
+                direction = Direction.DownRight;
+            else if (directionVector.X == 1 && directionVector.Y == 0)
+                direction = Direction.Right;
+            else if (directionVector.X == 1 && directionVector.Y == -1)
+                direction = Direction.UpRight;
+            else if (directionVector.X == 0 && directionVector.Y == 1)
+                direction = Direction.Down;
+            else if (directionVector.X == 0 && directionVector.Y == 0)
+                direction = Direction.None;
+            else if (directionVector.X == 0 && directionVector.Y == -1)
+                direction = Direction.Up;
+            else if (directionVector.X == -1 && directionVector.Y == 1)
+                direction = Direction.DownLeft;
+            else if (directionVector.X == -1 && directionVector.Y == 0)
+                direction = Direction.Left;
+            else if (directionVector.X == -1 && directionVector.Y == -1)
+                direction = Direction.UpLeft;
+
+            return GetNeighbor(pos, direction);
+        }
+
+        private Coord Normalize(Coord coord)
+        {
+            int x = coord.X >= XDim
+                ? coord.X - XDim
+                : coord.X < 0 ? coord.X + XDim : coord.X;
+            int y = coord.Y >= YDim
+                ? coord.Y - YDim
+                : coord.Y < 0 ? coord.Y + YDim : coord.Y;
+            return new Coord(x, y);
         }
     }
 }

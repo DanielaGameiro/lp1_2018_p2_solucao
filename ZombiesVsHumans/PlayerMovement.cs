@@ -13,7 +13,8 @@ namespace ZombiesVsHumans
             // that's not the case
             do
             {
-                Direction direction = Program.UI.InputDirection(agent.ToString());
+                Direction direction =
+                    Program.UI.InputDirection(agent.ToString());
                 dest = world.GetNeighbor(agent.Pos, direction);
                 if (world.IsOccupied(dest))
                 {

@@ -9,8 +9,8 @@ namespace ZombiesVsHumans
         int YDim { get; }
         bool IsOccupied(Coord coord);
         Agent GetAgentAt(Coord coord);
-        int DistanceBetween(Coord c1, Coord c2);
+        Coord VectorBetween(Coord c1, Coord c2);
         Coord GetNeighbor(Coord pos, Direction direction);
-        Direction DirectionFromTo(Coord c1, Coord c2);
+        Coord GetNeighbor(Coord pos, Coord directionVector);
     }
 }

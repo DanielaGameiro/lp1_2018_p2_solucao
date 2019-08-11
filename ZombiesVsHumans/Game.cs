@@ -55,6 +55,7 @@ namespace ZombiesVsHumans
 
         public void Play()
         {
+            Console.Clear();
             Program.UI.RenderMessage($"******** Turn 0 *********");
 
             // First render
@@ -62,15 +63,18 @@ namespace ZombiesVsHumans
 
             /*for (int i = 0; i < agents.Length; i++)
             {
-                for (int j = i + 1; j < agents.Length; j++)
+                for (int j = 0; j < agents.Length; j++)
                 {
-
+                    if (j == i) continue;
                     Console.WriteLine(
-                        $"Distance between {agents[i]} and {agents[j]} is {world.DistanceBetween(agents[i].Pos, agents[j].Pos)}");
+                        $"Vector between {agents[i]} and {agents[j]} is {world.VectorBetween(agents[i].Pos, agents[j].Pos)}");
                 }
             } */
 
             // Game loop
+            Console.WriteLine("Press any key");
+            Console.Read();
+            Console.Clear();
             for (int i = 0; i < options.Turns; i++)
             {
                 Program.UI.RenderMessage($"******** Turn {i + 1} *********");
@@ -81,15 +85,18 @@ namespace ZombiesVsHumans
                 // Cycle through agents and make them play
                 foreach (Agent agent in agents)
                 {
-                    Program.UI.RenderMessage($"Moving {agent.ToString()}...");
+                    //Program.UI.RenderMessage($"Moving {agent.ToString()}...");
                     agent.Move();
 
                     // Render after agent movement
-                    Program.UI.RenderWorld(world);
+                    //Program.UI.RenderWorld(world);
                 }
 
                 // Render at end of turn
-                //Program.UI.RenderWorld(world);
+                Program.UI.RenderWorld(world);
+                Console.WriteLine("Press any key");
+                Console.Read();
+                Console.Clear();
             }
         }
 
@@ -114,14 +121,14 @@ namespace ZombiesVsHumans
         /// </summary>
         private void Shuffle()
         {
-             for (int i = agents.Length - 1; i >= 1; i--)
-             {
+            for (int i = agents.Length - 1; i >= 1; i--)
+            {
                 Agent aux;
                 int j = rand.Next(i + 1);
                 aux = agents[j];
                 agents[j] = agents[i];
                 agents[i] = aux;
-             }
+            }
         }
     }
 }
