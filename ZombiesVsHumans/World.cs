@@ -123,5 +123,25 @@ namespace ZombiesVsHumans
             }
             return new Coord(x, y);
         }
+
+        public Direction DirectionFromTo(Coord c1, Coord c2)
+        {
+            double vectorX = c2.X - c1.X;
+            double vectorY = c2.Y - c1.Y;
+            double angle = Math.Atan2(vectorY, vectorX) * 180 / Math.PI;
+
+            if (angle >= -22.5 && angle < 22.5) return Direction.Right;
+            if (angle >= 22.5 && angle < 67.5) return Direction.UpRight;
+            if (angle >= 67.5 && angle < 112.5) return Direction.Up;
+            if (angle >= 112.5 && angle < 157.5) return Direction.UpLeft;
+            if (Math.Abs(angle) >= 157.5) return Direction.Left;
+            if (angle >= -157.5 && angle < -112.5) return Direction.DownLeft;
+            if (angle >= -112.5 && angle < -67.5) return Direction.Down;
+            if (angle >= -67.5 && angle < -22.5) return Direction.DownRight;
+
+            // We should never get here
+            throw new InvalidOperationException(
+                "Universal paradox: an angle is not between 0 and 360 degrees!");
+        }
     }
 }

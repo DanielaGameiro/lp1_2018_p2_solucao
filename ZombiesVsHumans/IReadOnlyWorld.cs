@@ -11,5 +11,6 @@ namespace ZombiesVsHumans
         Agent GetAgentAt(Coord coord);
         int DistanceBetween(Coord c1, Coord c2);
         Coord GetNeighbor(Coord pos, Direction direction);
+        Direction DirectionFromTo(Coord c1, Coord c2);
     }
 }
