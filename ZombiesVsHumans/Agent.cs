@@ -89,7 +89,7 @@ namespace ZombiesVsHumans
             string type = (Kind == AgentKind.Zombie) ? "z" : "h";
             if (Movement == AgentMovement.Player)
                 type = type.ToUpper();
-            return $"{type}{ID,3:x3}";
+            return $"{type}{ID,2:x2}";
         }
     }
 }
