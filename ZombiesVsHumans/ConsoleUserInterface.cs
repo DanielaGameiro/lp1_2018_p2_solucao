@@ -2,11 +2,30 @@
 // Author: Nuno Fachada
 
 using System;
+using System.Text;
 
 namespace ZombiesVsHumans
 {
     public class ConsoleUserInterface : IUserInterface
     {
+        public const int MaxXRenderDim = 30;
+        public const int MaxYRenderDim = 30;
+
+        private int xDim;
+        private int yDim;
+
+        public ConsoleUserInterface()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+        }
+
+        public void Initialize(int xDim, int yDim)
+        {
+            this.xDim = xDim;
+            this.yDim = yDim;
+            Console.Clear();
+        }
+
         public void RenderError(string msg)
         {
             Console.Error.WriteLine(msg);
@@ -17,11 +36,26 @@ namespace ZombiesVsHumans
             Console.WriteLine(msg);
         }
 
+        public void RenderTurn(int i)
+        {
+            Console.CursorTop = 0;
+            Console.CursorLeft = 0;
+            Console.Write($"******** Turn {i} *********");
+        }
+
         public void RenderWorld(IReadOnlyWorld world)
         {
-            for (int y = 0; y < world.YDim; y++)
+            int xRenderDim = Math.Min(world.XDim, MaxXRenderDim);
+            int yRenderDim = Math.Min(world.YDim, MaxYRenderDim);
+            bool renderXFog = world.XDim > MaxXRenderDim;
+            bool renderYFog = world.YDim > MaxYRenderDim;
+
+            Console.CursorTop = 1;
+            Console.CursorLeft = 0;
+
+            for (int y = 0; y < yRenderDim; y++)
             {
-                for (int x = 0; x < world.XDim; x++)
+                for (int x = 0; x < xRenderDim; x++)
                 {
                     Coord coord = new Coord(x, y);
 
@@ -36,7 +70,16 @@ namespace ZombiesVsHumans
 
                     }
                 }
+
+                if (renderXFog) Console.Write("~~~ ");
                 Console.WriteLine();
+            }
+            if (renderYFog)
+            {
+                for (int x = 0; x < xRenderDim + (renderXFog ? 1 : 0); x++)
+                {
+                    Console.Write("~~~ ");
+                }
             }
             Console.WriteLine();
         }

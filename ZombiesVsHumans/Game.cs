@@ -1,11 +1,14 @@
 // License: GPLv3
 // Author: Nuno Fachada
 using System;
+using System.Threading;
 
 namespace ZombiesVsHumans
 {
     public class Game
     {
+        public const int agentActionDelay = 100;
+        public const int turnActionDelay = 250;
 
         private Options options;
         private IReadOnlyWorld world;
@@ -54,19 +57,16 @@ namespace ZombiesVsHumans
 
         public void Play()
         {
-            Console.Clear();
-            Program.UI.RenderMessage($"******** Turn 0 *********");
+            Program.UI.Initialize(world.XDim, world.YDim);
+            Program.UI.RenderTurn(0);
 
             // First render
             Program.UI.RenderWorld(world);
 
             // Game loop
-            Console.WriteLine("Press any key");
-            Console.Read();
-            Console.Clear();
             for (int i = 0; i < options.Turns; i++)
             {
-                Program.UI.RenderMessage($"******** Turn {i + 1} *********");
+                Program.UI.RenderTurn(i + 1);
 
                 // Shuffle agent list
                 Shuffle();
@@ -74,18 +74,18 @@ namespace ZombiesVsHumans
                 // Cycle through agents and make them play
                 foreach (Agent agent in agents)
                 {
+                    Thread.Sleep(agentActionDelay);
+
                     //Program.UI.RenderMessage($"Moving {agent.ToString()}...");
                     agent.PlayTurn();
 
                     // Render after agent movement
-                    //Program.UI.RenderWorld(world);
+                    Program.UI.RenderWorld(world);
                 }
 
                 // Render at end of turn
                 Program.UI.RenderWorld(world);
-                Console.WriteLine("Press any key");
-                Console.Read();
-                Console.Clear();
+                Thread.Sleep(turnActionDelay);
             }
         }
 
