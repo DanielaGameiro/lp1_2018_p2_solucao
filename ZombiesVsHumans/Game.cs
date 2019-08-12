@@ -60,16 +60,6 @@ namespace ZombiesVsHumans
             // First render
             Program.UI.RenderWorld(world);
 
-            /*for (int i = 0; i < agents.Length; i++)
-            {
-                for (int j = 0; j < agents.Length; j++)
-                {
-                    if (j == i) continue;
-                    Console.WriteLine(
-                        $"Vector between {agents[i]} and {agents[j]} is {world.VectorBetween(agents[i].Pos, agents[j].Pos)}");
-                }
-            } */
-
             // Game loop
             Console.WriteLine("Press any key");
             Console.Read();
