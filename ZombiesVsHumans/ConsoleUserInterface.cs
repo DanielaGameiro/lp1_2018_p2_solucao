@@ -8,21 +8,46 @@ namespace ZombiesVsHumans
 {
     public class ConsoleUserInterface : IUserInterface
     {
-        public readonly int MaxXRenderDim = 30;
-        public readonly int MaxYRenderDim = 30;
-        public readonly ConsoleColor defaultColorBg = Console.BackgroundColor;
-        public readonly ConsoleColor defaultColorFg = Console.ForegroundColor;
-        public readonly ConsoleColor zombieColorBg = ConsoleColor.Black;
-        public readonly ConsoleColor zombieColorFg = ConsoleColor.Red;
-        public readonly ConsoleColor playerZombieColorBg = ConsoleColor.DarkMagenta;
-        public readonly ConsoleColor playerZombieColorFg = ConsoleColor.DarkRed;
-        public readonly ConsoleColor humanColorBg = ConsoleColor.Black;
-        public readonly ConsoleColor humanColorFg = ConsoleColor.Green;
-        public readonly ConsoleColor playerHumanColorBg = ConsoleColor.DarkMagenta;
-        public readonly ConsoleColor playerHumanColorFg = ConsoleColor.DarkGreen;
+        private int posLegendLeft;
+        private int posAgentInfoLeft;
+        private int posDialogTop;
+        private int posMessagesLeft;
+        private int posMessagesTop;
+        private int worldXRenderNCells;
+        private int worldYRenderNCells;
+        private int worldXRenderLength;
+        private int worldYRenderLength;
+        private bool worldXRenderFog;
+        private bool worldYRenderFog;
 
-        private int xDim;
-        private int yDim;
+        private readonly ConsoleColor colDefaultBg = Console.BackgroundColor;
+        private readonly ConsoleColor colDefaultFg = Console.ForegroundColor;
+        private readonly ConsoleColor colAIZombieBg = ConsoleColor.Black;
+        private readonly ConsoleColor colAIZombieFg = ConsoleColor.Red;
+        private readonly ConsoleColor colPlayerZombieBg = ConsoleColor.DarkMagenta;
+        private readonly ConsoleColor colPlayerZombieFg = ConsoleColor.DarkRed;
+        private readonly ConsoleColor colAIHumanBg = ConsoleColor.Black;
+        private readonly ConsoleColor colAIHumanFg = ConsoleColor.Green;
+        private readonly ConsoleColor colPlayerHumanBg = ConsoleColor.DarkMagenta;
+        private readonly ConsoleColor colPlayerHumanFg = ConsoleColor.DarkGreen;
+
+        private readonly int worldXRenderNCellsMax = 30;
+        private readonly int worldYRenderNCellsMax = 30;
+        private readonly int worldCellLength = 4;
+        private readonly int posTurnTop = 0;
+        private readonly int posTurnLeft = 0;
+        private readonly int posWorldTop = 1;
+        private readonly int posWorldLeft = 0;
+        private readonly int posLegendTop = 3;
+        private readonly int posLegendLeftFromWorld = 3;
+        private readonly int posAgentInfoTop = 10;
+        private readonly int posAgentInfoLeftFromWorld = 3;
+        private readonly int posDialogLeft = 0;
+        private readonly int posDialogTopFromWorld = 2;
+        private readonly int dialogWidth = 35;
+        private readonly int dialogHeight = 10;
+        private readonly int posMessagesLeftFromDialog = 2;
+        private readonly int posMessagesTopFromWorld = 2;
 
         public ConsoleUserInterface()
         {
@@ -31,8 +56,40 @@ namespace ZombiesVsHumans
 
         public void Initialize(int xDim, int yDim)
         {
-            this.xDim = xDim;
-            this.yDim = yDim;
+            // Variables which define world size in console characters
+            int worldLength;
+            int worldHeight;
+
+            // Determine maximum number of world cells to render
+            worldXRenderNCells = Math.Min(xDim, worldXRenderNCellsMax);
+            worldYRenderNCells = Math.Min(yDim, worldYRenderNCellsMax);
+
+            // Render fog is world doesn't fit into screen
+            worldXRenderFog = xDim > worldXRenderNCellsMax;
+            worldYRenderFog = yDim > worldYRenderNCellsMax;
+
+            // Determine world length in console characters
+            worldLength = posWorldLeft +
+                worldCellLength *
+                (worldXRenderNCells + (worldXRenderFog ? 1 : 0));
+
+            // Determine world height in console characters
+            worldHeight = posTurnTop + yDim;
+
+            // Determine left position of legend
+            posLegendLeft = worldLength + posLegendLeftFromWorld;
+
+            // Determine left position of agent info
+            posAgentInfoLeft = worldLength + posAgentInfoLeftFromWorld;
+
+            // Determine top position of player dialog
+            posDialogTop = worldHeight + posDialogTopFromWorld;
+
+            // Determine position of information messages
+            posMessagesLeft = dialogWidth + posMessagesLeftFromDialog;
+            posMessagesTop = worldHeight + posMessagesTopFromWorld;
+
+            // Clear console, ready to start
             Console.Clear();
         }
 
@@ -48,24 +105,18 @@ namespace ZombiesVsHumans
 
         public void RenderTurn(int i)
         {
-            Console.CursorTop = 0;
-            Console.CursorLeft = 0;
+            SetCursor(posTurnTop, posTurnLeft);
             Console.Write($"******** Turn {i} *********");
         }
 
         public void RenderWorld(IReadOnlyWorld world)
         {
-            int xRenderDim = Math.Min(world.XDim, MaxXRenderDim);
-            int yRenderDim = Math.Min(world.YDim, MaxYRenderDim);
-            bool renderXFog = world.XDim > MaxXRenderDim;
-            bool renderYFog = world.YDim > MaxYRenderDim;
 
-            Console.CursorTop = 1;
-            Console.CursorLeft = 0;
+            SetCursor(posWorldTop, posWorldLeft);
 
-            for (int y = 0; y < yRenderDim; y++)
+            for (int y = 0; y < worldYRenderNCells; y++)
             {
-                for (int x = 0; x < xRenderDim; x++)
+                for (int x = 0; x < worldXRenderNCells; x++)
                 {
                     Coord coord = new Coord(x, y);
 
@@ -91,12 +142,14 @@ namespace ZombiesVsHumans
                     }
                 }
 
-                if (renderXFog) Console.Write("~~~ ");
+                if (worldXRenderFog) Console.Write("~~~ ");
                 Console.WriteLine();
             }
-            if (renderYFog)
+            if (worldYRenderFog)
             {
-                for (int x = 0; x < xRenderDim + (renderXFog ? 1 : 0); x++)
+                for (int x = 0;
+                    x < worldXRenderNCells + (worldXRenderFog ? 1 : 0);
+                    x++)
                 {
                     Console.Write("~~~ ");
                 }
@@ -106,6 +159,9 @@ namespace ZombiesVsHumans
 
         public Direction InputDirection(string id)
         {
+
+            SetCursor(posDialogTop, posDialogLeft);
+
             Console.WriteLine($"Where to move {id}? ");
             Console.WriteLine("   Q W E          ↖ ↑ ↗");
             Console.WriteLine("   A   D    or    ←   →");
@@ -168,32 +224,38 @@ namespace ZombiesVsHumans
             }
         }
 
+        private void SetCursor(int top, int left)
+        {
+            Console.CursorTop = top;
+            Console.CursorLeft = left;
+        }
+
         private void SetDefaultColor()
         {
-            Console.BackgroundColor = defaultColorBg;
-            Console.ForegroundColor = defaultColorFg;
+            Console.BackgroundColor = colDefaultBg;
+            Console.ForegroundColor = colDefaultFg;
         }
         private void SetAgentColor(AgentKind kind, AgentMovement mov)
         {
             if (kind == AgentKind.Zombie && mov == AgentMovement.AI)
             {
-                Console.BackgroundColor = zombieColorBg;
-                Console.ForegroundColor = zombieColorFg;
+                Console.BackgroundColor = colAIZombieBg;
+                Console.ForegroundColor = colAIZombieFg;
             }
             else if (kind == AgentKind.Zombie && mov == AgentMovement.Player)
             {
-                Console.BackgroundColor = playerZombieColorBg;
-                Console.ForegroundColor = playerZombieColorFg;
+                Console.BackgroundColor = colPlayerZombieBg;
+                Console.ForegroundColor = colPlayerZombieFg;
             }
             else if (kind == AgentKind.Human && mov == AgentMovement.AI)
             {
-                Console.BackgroundColor = humanColorBg;
-                Console.ForegroundColor = humanColorFg;
+                Console.BackgroundColor = colAIHumanBg;
+                Console.ForegroundColor = colAIHumanFg;
             }
             else if (kind == AgentKind.Human && mov == AgentMovement.Player)
             {
-                Console.BackgroundColor = playerHumanColorBg;
-                Console.ForegroundColor = playerHumanColorFg;
+                Console.BackgroundColor = colPlayerHumanBg;
+                Console.ForegroundColor = colPlayerHumanFg;
             }
         }
     }
