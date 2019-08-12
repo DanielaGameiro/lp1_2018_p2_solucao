@@ -1,7 +1,6 @@
 // License: GPLv3
 // Author: Nuno Fachada
 using System;
-using System.Collections.Generic;
 
 namespace ZombiesVsHumans
 {
