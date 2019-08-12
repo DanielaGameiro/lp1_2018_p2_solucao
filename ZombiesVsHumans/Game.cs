@@ -76,8 +76,8 @@ namespace ZombiesVsHumans
                 {
                     Thread.Sleep(agentActionDelay);
 
-                    Program.UI.RenderMessage($"Moving {agent}...");
                     agent.PlayTurn();
+                    Program.UI.RenderMessage(agent.Message);
 
                     // Render after agent movement
                     Program.UI.RenderWorld(world);

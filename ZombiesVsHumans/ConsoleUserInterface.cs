@@ -50,7 +50,7 @@ namespace ZombiesVsHumans
         private readonly int posMessagesLeftFromDialog = 2;
         private readonly int posMessagesTopFromWorld = 2;
         private readonly int messagesMaxNum = 6;
-        private readonly int messagesMaxLength = 40;
+        private readonly int messagesMaxLength = 80;
 
         public ConsoleUserInterface()
         {

@@ -10,6 +10,7 @@ namespace ZombiesVsHumans
         public Coord Pos { get; private set; }
         public AgentKind Kind { get; private set; }
         public AgentMovement Movement { get; private set; }
+        public string Message { get; private set; }
 
         private World world;
         private AbstractMovement moveBehavior;
@@ -60,29 +61,39 @@ namespace ZombiesVsHumans
         public void PlayTurn()
         {
             Coord dest = moveBehavior.WhereToMove(this);
+            Message = moveBehavior.Message;
 
             if (!world.IsOccupied(dest))
             {
                 world.MoveAgent(this, dest);
                 Pos = dest;
+                Message += " and succeeded";
             }
             else
             {
-                if (Kind == AgentKind.Zombie)
+                Agent other = world.GetAgentAt(dest);
+                if (this == other)
                 {
-                    world.GetAgentAt(dest).TryInfect();
+                    Message += " and failed to move";
+                }
+                else if (Kind == AgentKind.Zombie
+                    && other.Kind == AgentKind.Human)
+                {
+                    world.GetAgentAt(dest).Infect();
+                    Message += $" and infected {other}";
+                }
+                else
+                {
+                    Message += $" but failed since it's occupied by {other}";
                 }
             }
         }
 
-        private void TryInfect()
+        private void Infect()
         {
-            if (Kind == AgentKind.Human)
-            {
-                Kind = AgentKind.Zombie;
-                Movement = AgentMovement.AI;
-                moveBehavior = new AIMovement(AgentKind.Human, false, world);
-            }
+            Kind = AgentKind.Zombie;
+            Movement = AgentMovement.AI;
+            moveBehavior = new AIMovement(AgentKind.Human, false, world);
         }
 
         public override string ToString()
