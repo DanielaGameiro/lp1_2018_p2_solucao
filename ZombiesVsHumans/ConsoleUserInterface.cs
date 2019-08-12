@@ -160,6 +160,7 @@ namespace ZombiesVsHumans
         public Direction InputDirection(string id)
         {
 
+            ClearDialog();
             SetCursor(posDialogTop, posDialogLeft);
 
             Console.WriteLine($"Where to move {id}? ");
@@ -257,6 +258,17 @@ namespace ZombiesVsHumans
                 Console.BackgroundColor = colPlayerHumanBg;
                 Console.ForegroundColor = colPlayerHumanFg;
             }
+        }
+
+        private void ClearDialog()
+        {
+            string blank = String.Format("{0," + dialogWidth + "}", " ");
+
+            SetCursor(posDialogTop, posDialogLeft);
+            SetDefaultColor();
+
+            for (int i = 0; i < dialogHeight; i++)
+                Console.WriteLine(blank);
         }
     }
 }
