@@ -8,8 +8,18 @@ namespace ZombiesVsHumans
 {
     public class ConsoleUserInterface : IUserInterface
     {
-        public const int MaxXRenderDim = 30;
-        public const int MaxYRenderDim = 30;
+        public readonly int MaxXRenderDim = 30;
+        public readonly int MaxYRenderDim = 30;
+        public readonly ConsoleColor defaultColorBg = Console.BackgroundColor;
+        public readonly ConsoleColor defaultColorFg = Console.ForegroundColor;
+        public readonly ConsoleColor zombieColorBg = ConsoleColor.Black;
+        public readonly ConsoleColor zombieColorFg = ConsoleColor.Red;
+        public readonly ConsoleColor playerZombieColorBg = ConsoleColor.DarkMagenta;
+        public readonly ConsoleColor playerZombieColorFg = ConsoleColor.DarkRed;
+        public readonly ConsoleColor humanColorBg = ConsoleColor.Black;
+        public readonly ConsoleColor humanColorFg = ConsoleColor.Green;
+        public readonly ConsoleColor playerHumanColorBg = ConsoleColor.DarkMagenta;
+        public readonly ConsoleColor playerHumanColorFg = ConsoleColor.DarkGreen;
 
         private int xDim;
         private int yDim;
@@ -61,12 +71,22 @@ namespace ZombiesVsHumans
 
                     if (!world.IsOccupied(coord))
                     {
+                        SetDefaultColor();
                         Console.Write("... ");
                     }
                     else
                     {
                         Agent agent = world.GetAgentAt(coord);
-                        Console.Write($"{agent} ");
+                        string agentID = agent.ToString();
+
+                        if (agentID.Length > 3) agentID =
+                            agentID.Substring(0, 3);
+
+                        SetAgentColor(agent.Kind, agent.Movement);
+
+                        Console.Write(agentID);
+                        SetDefaultColor();
+                        Console.Write(" ");
 
                     }
                 }
@@ -145,6 +165,35 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.UpRight);
                         return Direction.UpRight;
                 }
+            }
+        }
+
+        private void SetDefaultColor()
+        {
+            Console.BackgroundColor = defaultColorBg;
+            Console.ForegroundColor = defaultColorFg;
+        }
+        private void SetAgentColor(AgentKind kind, AgentMovement mov)
+        {
+            if (kind == AgentKind.Zombie && mov == AgentMovement.AI)
+            {
+                Console.BackgroundColor = zombieColorBg;
+                Console.ForegroundColor = zombieColorFg;
+            }
+            else if (kind == AgentKind.Zombie && mov == AgentMovement.Player)
+            {
+                Console.BackgroundColor = playerZombieColorBg;
+                Console.ForegroundColor = playerZombieColorFg;
+            }
+            else if (kind == AgentKind.Human && mov == AgentMovement.AI)
+            {
+                Console.BackgroundColor = humanColorBg;
+                Console.ForegroundColor = humanColorFg;
+            }
+            else if (kind == AgentKind.Human && mov == AgentMovement.Player)
+            {
+                Console.BackgroundColor = playerHumanColorBg;
+                Console.ForegroundColor = playerHumanColorFg;
             }
         }
     }

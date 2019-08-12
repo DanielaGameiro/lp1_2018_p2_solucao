@@ -7,7 +7,7 @@ namespace ZombiesVsHumans
 {
     public class Game
     {
-        public const int agentActionDelay = 100;
+        public const int agentActionDelay = 75;
         public const int turnActionDelay = 250;
 
         private Options options;
