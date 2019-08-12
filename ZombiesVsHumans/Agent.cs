@@ -80,6 +80,7 @@ namespace ZombiesVsHumans
             if (Kind == AgentKind.Human)
             {
                 Kind = AgentKind.Zombie;
+                Movement = AgentMovement.AI;
                 moveBehavior = new AIMovement(AgentKind.Human, false, world);
             }
         }
