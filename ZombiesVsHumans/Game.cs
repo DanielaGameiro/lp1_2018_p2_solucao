@@ -7,8 +7,8 @@ namespace ZombiesVsHumans
 {
     public class Game
     {
-        public const int agentActionDelay = 75;
-        public const int turnActionDelay = 250;
+        public const int agentActionDelay = 150;
+        public const int turnActionDelay = 300;
 
         private Options options;
         private IReadOnlyWorld world;
@@ -76,7 +76,7 @@ namespace ZombiesVsHumans
                 {
                     Thread.Sleep(agentActionDelay);
 
-                    //Program.UI.RenderMessage($"Moving {agent.ToString()}...");
+                    Program.UI.RenderMessage($"Moving {agent}...");
                     agent.PlayTurn();
 
                     // Render after agent movement

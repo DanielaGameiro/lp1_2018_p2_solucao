@@ -19,6 +19,7 @@ namespace ZombiesVsHumans
         private int worldYRenderLength;
         private bool worldXRenderFog;
         private bool worldYRenderFog;
+        private int msgCounter;
 
         private readonly ConsoleColor colDefaultBg = Console.BackgroundColor;
         private readonly ConsoleColor colDefaultFg = Console.ForegroundColor;
@@ -48,9 +49,12 @@ namespace ZombiesVsHumans
         private readonly int dialogHeight = 10;
         private readonly int posMessagesLeftFromDialog = 2;
         private readonly int posMessagesTopFromWorld = 2;
+        private readonly int messagesMaxNum = 6;
+        private readonly int messagesMaxLength = 40;
 
         public ConsoleUserInterface()
         {
+            msgCounter = 0;
             Console.OutputEncoding = Encoding.UTF8;
         }
 
@@ -95,12 +99,33 @@ namespace ZombiesVsHumans
 
         public void RenderError(string msg)
         {
+            Console.Clear();
             Console.Error.WriteLine(msg);
         }
 
         public void RenderMessage(string msg)
         {
-            Console.WriteLine(msg);
+            string msgBullet = "> ";
+
+            if (msg.Length < messagesMaxLength)
+            {
+                msg = msg + NewBlankString(messagesMaxLength - msg.Length);
+            }
+            else
+            {
+                msg = msg.Substring(0, messagesMaxLength);
+            }
+
+            if (msgCounter >= messagesMaxNum)
+            {
+                ClearBox(posMessagesTop, posMessagesLeft,
+                    messagesMaxLength + msgBullet.Length, messagesMaxNum);
+                msgCounter = 0;
+            }
+
+            SetCursor(posMessagesTop + msgCounter, posMessagesLeft);
+            Console.WriteLine($"{msgBullet}{msg}");
+            msgCounter++;
         }
 
         public void RenderTurn(int i)
@@ -160,7 +185,7 @@ namespace ZombiesVsHumans
         public Direction InputDirection(string id)
         {
 
-            ClearDialog();
+            ClearBox(posDialogTop, posDialogLeft, dialogWidth, dialogHeight);
             SetCursor(posDialogTop, posDialogLeft);
 
             Console.WriteLine($"Where to move {id}? ");
@@ -260,15 +285,20 @@ namespace ZombiesVsHumans
             }
         }
 
-        private void ClearDialog()
+        private void ClearBox(int top, int left, int width, int height)
         {
-            string blank = String.Format("{0," + dialogWidth + "}", " ");
+            string blank = NewBlankString(width);
 
-            SetCursor(posDialogTop, posDialogLeft);
             SetDefaultColor();
 
-            for (int i = 0; i < dialogHeight; i++)
+            for (int i = 0; i < height; i++)
+            {
+                SetCursor(top + i, left);
                 Console.WriteLine(blank);
+            }
         }
+
+        private string NewBlankString(int len) =>
+            String.Format("{0," + len + "}", " ");
     }
 }
