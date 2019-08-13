@@ -10,9 +10,7 @@ namespace ZombiesVsHumans
     public class ConsoleUserInterface : IUserInterface
     {
         private int posLegendLeft;
-        private int posAgentInfoLeft;
         private int posDialogTop;
-        private int posMessagesLeft;
         private int posMessagesTop;
         private int worldXRenderNCells;
         private int worldYRenderNCells;
@@ -38,25 +36,25 @@ namespace ZombiesVsHumans
         private readonly ConsoleColor colMessagesFg = ConsoleColor.Gray;
         private readonly ConsoleColor colLastMessageBg = ConsoleColor.DarkGray;
         private readonly ConsoleColor colLastMessageFg = ConsoleColor.White;
+        private readonly ConsoleColor colPlayerDialogBg = ConsoleColor.DarkGreen;
+        private readonly ConsoleColor colPlayerDialogFg = ConsoleColor.White;
 
         private readonly int worldXRenderNCellsMax = 30;
         private readonly int worldYRenderNCellsMax = 30;
         private readonly int worldCellLength = 4;
         private readonly int posTitleTop = 0;
         private readonly int posTitleLeft = 0;
-        private readonly int posWorldTop = 1;
-        private readonly int posWorldLeft = 0;
+        private readonly int posWorldTop = 2;
+        private readonly int posWorldLeft = 1;
         private readonly int posLegendTop = 3;
         private readonly int posLegendLeftFromWorld = 3;
-        private readonly int posAgentInfoTop = 10;
-        private readonly int posAgentInfoLeftFromWorld = 3;
-        private readonly int posDialogLeft = 0;
-        private readonly int posDialogTopFromWorld = 2;
-        private readonly int dialogWidth = 35;
-        private readonly int dialogHeight = 10;
-        private readonly int posMessagesLeftFromDialog = 2;
-        private readonly int posMessagesTopFromWorld = 2;
-        private readonly int messagesMaxNum = 6;
+        private readonly int posPlayerDialogLeft = 10;
+        private readonly int posPlayerDialogTopFromWorld = 3;
+        private readonly int playerDialogWidth = 35;
+        private readonly int playerDialogHeight = 10;
+        private readonly int posMessagesLeft = 2;
+        private readonly int posMessagesTopFromWorld = 1;
+        private readonly int messagesMaxNum = 11;
         private readonly int messagesMaxLength = 80;
 
         public ConsoleUserInterface()
@@ -90,15 +88,11 @@ namespace ZombiesVsHumans
             // Determine left position of legend
             posLegendLeft = worldLength + posLegendLeftFromWorld;
 
-            // Determine left position of agent info
-            posAgentInfoLeft = worldLength + posAgentInfoLeftFromWorld;
-
             // Determine top position of player dialog
-            posDialogTop = worldHeight + posDialogTopFromWorld;
+            posDialogTop = posWorldTop + worldHeight + posPlayerDialogTopFromWorld;
 
             // Determine position of information messages
-            posMessagesLeft = dialogWidth + posMessagesLeftFromDialog;
-            posMessagesTop = worldHeight + posMessagesTopFromWorld;
+            posMessagesTop = posWorldTop + worldHeight + posMessagesTopFromWorld;
 
             // Clear console, ready to start
             Console.Clear();
@@ -124,7 +118,7 @@ namespace ZombiesVsHumans
             if (message.Length < messagesMaxLength)
             {
                 message = message
-                    + NewBlankString(messagesMaxLength - message.Length);
+                    + BlankString(messagesMaxLength - message.Length);
             }
             else
             {
@@ -137,20 +131,20 @@ namespace ZombiesVsHumans
             Console.ForegroundColor = colMessagesFg;
             foreach (string msg in messageQueue)
             {
-                SetCursor(posMessagesTop + msgCounter, posMessagesLeft);
+                SetCursor(posMessagesLeft, posMessagesTop + msgCounter);
                 Console.WriteLine($"{msgBullet}{msg}");
                 msgCounter++;
                 lastMsg = msg;
             }
             Console.BackgroundColor = colLastMessageBg;
             Console.ForegroundColor = colLastMessageFg;
-            SetCursor(posMessagesTop + msgCounter - 1, posMessagesLeft);
+            SetCursor(posMessagesLeft, posMessagesTop + msgCounter - 1);
             Console.WriteLine($"{msgBullet}{lastMsg}");
         }
 
         public void RenderTitle()
         {
-            SetCursor(posTitleTop, posTitleLeft);
+            SetCursor(posTitleLeft, posTitleTop);
             Console.BackgroundColor = colTitleBg;
             Console.ForegroundColor = colTitleFg;
             Console.Write(" ========== Zombies VS Humans ========== ");
@@ -158,17 +152,18 @@ namespace ZombiesVsHumans
 
         public void RenderLegend(int i)
         {
-            SetCursor(posLegendTop, posLegendLeft);
+            SetCursor(posLegendLeft, posLegendTop);
             Console.Write($"Turn {i,4:d4}");
         }
 
         public void RenderWorld(IReadOnlyWorld world)
         {
 
-            SetCursor(posWorldTop, posWorldLeft);
+            SetCursor(posWorldLeft, posWorldTop);
 
             for (int y = 0; y < worldYRenderNCells; y++)
             {
+                SetCursor(posWorldLeft, posWorldTop + y);
                 for (int x = 0; x < worldXRenderNCells; x++)
                 {
                     Coord coord = new Coord(x, y);
@@ -191,12 +186,10 @@ namespace ZombiesVsHumans
                         Console.Write(agentID);
                         SetDefaultColor();
                         Console.Write(" ");
-
                     }
                 }
 
                 if (worldXRenderFog) Console.Write("~~~ ");
-                Console.WriteLine();
             }
             if (worldYRenderFog)
             {
@@ -212,15 +205,25 @@ namespace ZombiesVsHumans
 
         public Direction InputDirection(string id)
         {
+            Console.BackgroundColor = colPlayerDialogBg;
+            Console.ForegroundColor = colPlayerDialogFg;
 
-            ClearBox(posDialogTop, posDialogLeft, dialogWidth, dialogHeight);
-            SetCursor(posDialogTop, posDialogLeft);
+            SetCursor(posPlayerDialogLeft, posDialogTop);
+            Console.Write("╔══════════════════════════╗");
+            SetCursor(posPlayerDialogLeft, posDialogTop + 1);
+            Console.Write($"║ Where to move {id}?       ║");
+            SetCursor(posPlayerDialogLeft, posDialogTop + 2);
+            Console.Write("║   Q W E          ↖ ↑ ↗   ║");
+            SetCursor(posPlayerDialogLeft, posDialogTop + 3);
+            Console.Write("║   A   D    or    ←   →   ║");
+            SetCursor(posPlayerDialogLeft, posDialogTop + 4);
+            Console.Write("║   Z X C          ↙ ↓ ↘   ║");
+            SetCursor(posPlayerDialogLeft, posDialogTop + 5);
+            Console.Write("║  >>>                     ║");
+            SetCursor(posPlayerDialogLeft, posDialogTop + 6);
+            Console.Write("╚══════════════════════════╝");
+            SetCursor(posPlayerDialogLeft + 7, posDialogTop + 5);
 
-            Console.WriteLine($"Where to move {id}? ");
-            Console.WriteLine("   Q W E          ↖ ↑ ↗");
-            Console.WriteLine("   A   D    or    ←   →");
-            Console.WriteLine("   Z X C          ↙ ↓ ↘");
-            Console.Write(">> ");
             while (true)
             {
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
@@ -278,7 +281,7 @@ namespace ZombiesVsHumans
             }
         }
 
-        private void SetCursor(int top, int left)
+        private void SetCursor(int left, int top)
         {
             Console.CursorTop = top;
             Console.CursorLeft = left;
@@ -313,20 +316,7 @@ namespace ZombiesVsHumans
             }
         }
 
-        private void ClearBox(int top, int left, int width, int height)
-        {
-            string blank = NewBlankString(width);
-
-            SetDefaultColor();
-
-            for (int i = 0; i < height; i++)
-            {
-                SetCursor(top + i, left);
-                Console.WriteLine(blank);
-            }
-        }
-
-        private string NewBlankString(int len) =>
+        private string BlankString(int len) =>
             String.Format("{0," + len + "}", " ");
     }
 }
