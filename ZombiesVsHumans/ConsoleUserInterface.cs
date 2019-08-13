@@ -3,6 +3,7 @@
 
 using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace ZombiesVsHumans
 {
@@ -19,7 +20,7 @@ namespace ZombiesVsHumans
         private int worldYRenderLength;
         private bool worldXRenderFog;
         private bool worldYRenderFog;
-        private int msgCounter;
+        private Queue<string> messageQueue;
 
         private readonly ConsoleColor colDefaultBg = Console.BackgroundColor;
         private readonly ConsoleColor colDefaultFg = Console.ForegroundColor;
@@ -33,6 +34,10 @@ namespace ZombiesVsHumans
         private readonly ConsoleColor colPlayerHumanFg = ConsoleColor.DarkGreen;
         private readonly ConsoleColor colTitleBg = ConsoleColor.Yellow;
         private readonly ConsoleColor colTitleFg = ConsoleColor.Black;
+        private readonly ConsoleColor colMessagesBg = Console.BackgroundColor;
+        private readonly ConsoleColor colMessagesFg = ConsoleColor.Gray;
+        private readonly ConsoleColor colLastMessageBg = ConsoleColor.DarkGray;
+        private readonly ConsoleColor colLastMessageFg = ConsoleColor.White;
 
         private readonly int worldXRenderNCellsMax = 30;
         private readonly int worldYRenderNCellsMax = 30;
@@ -56,8 +61,8 @@ namespace ZombiesVsHumans
 
         public ConsoleUserInterface()
         {
-            msgCounter = 0;
             Console.OutputEncoding = Encoding.UTF8;
+            messageQueue = new Queue<string>(messagesMaxNum);
         }
 
         public void Initialize(int xDim, int yDim)
@@ -105,29 +110,42 @@ namespace ZombiesVsHumans
             Console.Error.WriteLine(msg);
         }
 
-        public void RenderMessage(string msg)
+        public void RenderMessage(string message)
         {
             string msgBullet = "> ";
+            string lastMsg = message;
+            int msgCounter = 0;
 
-            if (msg.Length < messagesMaxLength)
+            if (messageQueue.Count == messagesMaxNum)
             {
-                msg = msg + NewBlankString(messagesMaxLength - msg.Length);
+                messageQueue.Dequeue();
+            }
+
+            if (message.Length < messagesMaxLength)
+            {
+                message = message
+                    + NewBlankString(messagesMaxLength - message.Length);
             }
             else
             {
-                msg = msg.Substring(0, messagesMaxLength);
+                message = message.Substring(0, messagesMaxLength);
             }
 
-            if (msgCounter >= messagesMaxNum)
+            messageQueue.Enqueue(message);
+
+            Console.BackgroundColor = colMessagesBg;
+            Console.ForegroundColor = colMessagesFg;
+            foreach (string msg in messageQueue)
             {
-                ClearBox(posMessagesTop, posMessagesLeft,
-                    messagesMaxLength + msgBullet.Length, messagesMaxNum);
-                msgCounter = 0;
+                SetCursor(posMessagesTop + msgCounter, posMessagesLeft);
+                Console.WriteLine($"{msgBullet}{msg}");
+                msgCounter++;
+                lastMsg = msg;
             }
-
-            SetCursor(posMessagesTop + msgCounter, posMessagesLeft);
-            Console.WriteLine($"{msgBullet}{msg}");
-            msgCounter++;
+            Console.BackgroundColor = colLastMessageBg;
+            Console.ForegroundColor = colLastMessageFg;
+            SetCursor(posMessagesTop + msgCounter - 1, posMessagesLeft);
+            Console.WriteLine($"{msgBullet}{lastMsg}");
         }
 
         public void RenderTitle()
