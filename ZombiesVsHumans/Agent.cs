@@ -84,7 +84,7 @@ namespace ZombiesVsHumans
                 }
                 else
                 {
-                    Message += $" but failed since it's occupied by {other}";
+                    Message += $" but bumped into {other}";
                 }
             }
         }
