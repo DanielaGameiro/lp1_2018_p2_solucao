@@ -157,12 +157,14 @@ namespace ZombiesVsHumans
 
         private Coord Normalize(Coord coord)
         {
-            int x = coord.X >= XDim
-                ? coord.X - XDim
-                : coord.X < 0 ? coord.X + XDim : coord.X;
-            int y = coord.Y >= YDim
-                ? coord.Y - YDim
-                : coord.Y < 0 ? coord.Y + YDim : coord.Y;
+            int x = coord.X;
+            int y = coord.Y;
+
+            while (x >= XDim) x -= XDim;
+            while (x < 0) x += XDim;
+            while (y >= YDim) y -= YDim;
+            while (y < 0) y += YDim;
+
             return new Coord(x, y);
         }
     }
