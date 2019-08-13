@@ -31,12 +31,14 @@ namespace ZombiesVsHumans
         private readonly ConsoleColor colAIHumanFg = ConsoleColor.Green;
         private readonly ConsoleColor colPlayerHumanBg = ConsoleColor.DarkMagenta;
         private readonly ConsoleColor colPlayerHumanFg = ConsoleColor.DarkGreen;
+        private readonly ConsoleColor colTitleBg = ConsoleColor.Yellow;
+        private readonly ConsoleColor colTitleFg = ConsoleColor.Black;
 
         private readonly int worldXRenderNCellsMax = 30;
         private readonly int worldYRenderNCellsMax = 30;
         private readonly int worldCellLength = 4;
-        private readonly int posTurnTop = 0;
-        private readonly int posTurnLeft = 0;
+        private readonly int posTitleTop = 0;
+        private readonly int posTitleLeft = 0;
         private readonly int posWorldTop = 1;
         private readonly int posWorldLeft = 0;
         private readonly int posLegendTop = 3;
@@ -78,7 +80,7 @@ namespace ZombiesVsHumans
                 (worldXRenderNCells + (worldXRenderFog ? 1 : 0));
 
             // Determine world height in console characters
-            worldHeight = posTurnTop + yDim;
+            worldHeight = posTitleTop + yDim;
 
             // Determine left position of legend
             posLegendLeft = worldLength + posLegendLeftFromWorld;
@@ -128,10 +130,18 @@ namespace ZombiesVsHumans
             msgCounter++;
         }
 
-        public void RenderTurn(int i)
+        public void RenderTitle()
         {
-            SetCursor(posTurnTop, posTurnLeft);
-            Console.Write($"******** Turn {i} *********");
+            SetCursor(posTitleTop, posTitleLeft);
+            Console.BackgroundColor = colTitleBg;
+            Console.ForegroundColor = colTitleFg;
+            Console.Write(" ========== Zombies VS Humans ========== ");
+        }
+
+        public void RenderLegend(int i)
+        {
+            SetCursor(posLegendTop, posLegendLeft);
+            Console.Write($"Turn {i,4:d4}");
         }
 
         public void RenderWorld(IReadOnlyWorld world)

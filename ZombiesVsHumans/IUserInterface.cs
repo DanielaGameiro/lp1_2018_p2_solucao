@@ -9,11 +9,13 @@ namespace ZombiesVsHumans
 
         void RenderError(string msg);
 
+        void RenderTitle();
+
         void RenderWorld(IReadOnlyWorld world);
 
         void RenderMessage(string msg);
 
-        void RenderTurn(int i);
+        void RenderLegend(int i);
 
         Direction InputDirection(string id);
     }

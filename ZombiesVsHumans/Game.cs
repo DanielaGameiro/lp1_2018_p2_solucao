@@ -58,15 +58,16 @@ namespace ZombiesVsHumans
         public void Play()
         {
             Program.UI.Initialize(world.XDim, world.YDim);
-            Program.UI.RenderTurn(0);
 
             // First render
+            Program.UI.RenderTitle();
             Program.UI.RenderWorld(world);
+            Program.UI.RenderLegend(0);
 
             // Game loop
             for (int i = 0; i < options.Turns; i++)
             {
-                Program.UI.RenderTurn(i + 1);
+                Program.UI.RenderLegend(i + 1);
 
                 // Shuffle agent list
                 Shuffle();
