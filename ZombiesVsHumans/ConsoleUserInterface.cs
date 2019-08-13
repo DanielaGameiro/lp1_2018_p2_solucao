@@ -83,7 +83,7 @@ namespace ZombiesVsHumans
                 (worldXRenderNCells + (worldXRenderFog ? 1 : 0));
 
             // Determine world height in console characters
-            worldHeight = posTitleTop + yDim;
+            worldHeight = worldYRenderNCells + (worldYRenderFog ? 1 : 0);
 
             // Determine left position of legend
             posLegendLeft = worldLength + posLegendLeftFromWorld;
@@ -193,6 +193,7 @@ namespace ZombiesVsHumans
             }
             if (worldYRenderFog)
             {
+                SetCursor(posWorldLeft, posWorldTop + worldYRenderNCells);
                 for (int x = 0;
                     x < worldXRenderNCells + (worldXRenderFog ? 1 : 0);
                     x++)
