@@ -26,29 +26,28 @@ namespace ZombiesVsHumans
 
             for (int r = 1; r <= maxRadius && !foundEnemy; r++)
             {
-                for (int x = -r; x <= r && !foundEnemy; x++)
+                for (int dx = -r; dx <= r && !foundEnemy; dx++)
                 {
-                    for (int y = -r; y <= r && !foundEnemy; y++)
+                    for (int dy = -r; dy <= r && !foundEnemy; dy++)
                     {
-                        Coord currentPos = new Coord(x, y);
+                        Coord currentPos =
+                            new Coord(agent.Pos.X + dx, agent.Pos.Y + dy);
 
                         if (currentPos.Equals(agent.Pos)) continue;
 
                         if (world.IsOccupied(currentPos))
+                        {
                             target = world.GetAgentAt(currentPos);
 
-                        if (target != null && target.Kind == enemy)
-                        {
+                            if (target.Kind == enemy)
+                            {
 
-                            vector = runAway
-                                ? world.VectorBetween(currentPos, agent.Pos)
-                                : world.VectorBetween(agent.Pos, currentPos);
+                                vector = runAway
+                                    ? world.VectorBetween(currentPos, agent.Pos)
+                                    : world.VectorBetween(agent.Pos, currentPos);
 
-                            foundEnemy = true;
-                        }
-                        else
-                        {
-                            target = null;
+                                foundEnemy = true;
+                            }
                         }
                     }
                 }
@@ -56,7 +55,8 @@ namespace ZombiesVsHumans
 
             if (foundEnemy)
             {
-                Message = $"{agent} tried to move towards {target}";
+                string way = runAway ? "runaway from" : "move towards";
+                Message = $"{agent} tried to {way} {target}";
                 return world.GetNeighbor(agent.Pos, vector);
             }
 
