@@ -55,7 +55,7 @@ namespace ZombiesVsHumans
         private readonly int posMessagesLeft = 2;
         private readonly int posMessagesTopFromWorld = 1;
         private readonly int messagesMaxNum = 11;
-        private readonly int messagesMaxLength = 80;
+        private readonly int messagesMaxLength = 60;
 
         public ConsoleUserInterface()
         {
@@ -108,7 +108,7 @@ namespace ZombiesVsHumans
         {
             string msgBullet = "> ";
             string lastMsg = message;
-            int msgCounter = 0;
+            StringBuilder sb = new StringBuilder();
 
             if (messageQueue.Count == messagesMaxNum)
             {
@@ -127,19 +127,21 @@ namespace ZombiesVsHumans
 
             messageQueue.Enqueue(message);
 
-            Console.BackgroundColor = colMessagesBg;
-            Console.ForegroundColor = colMessagesFg;
             foreach (string msg in messageQueue)
             {
-                SetCursor(posMessagesLeft, posMessagesTop + msgCounter);
-                Console.WriteLine($"{msgBullet}{msg}");
-                msgCounter++;
-                lastMsg = msg;
+                lastMsg = $"{BlankString(posMessagesLeft)}{msgBullet}{msg}{Environment.NewLine}";
+                sb.Append(lastMsg);
             }
+
+            sb.Length = sb.Length - lastMsg.Length;
+            SetCursor(0, posMessagesTop);
+            Console.BackgroundColor = colMessagesBg;
+            Console.ForegroundColor = colMessagesFg;
+            Console.Write(sb);
+
             Console.BackgroundColor = colLastMessageBg;
             Console.ForegroundColor = colLastMessageFg;
-            SetCursor(posMessagesLeft, posMessagesTop + msgCounter - 1);
-            Console.WriteLine($"{msgBullet}{lastMsg}");
+            Console.Write(lastMsg);
         }
 
         public void RenderTitle()
