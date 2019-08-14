@@ -60,6 +60,7 @@ namespace ZombiesVsHumans
         public ConsoleUserInterface()
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Console.CursorVisible = false;
             messageQueue = new Queue<string>(messagesMaxNum);
         }
 
