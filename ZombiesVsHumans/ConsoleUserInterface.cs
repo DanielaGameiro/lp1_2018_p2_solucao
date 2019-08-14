@@ -21,6 +21,8 @@ namespace ZombiesVsHumans
         private Queue<string> messageQueue;
         private string[,] cache;
 
+        private bool worldRendered;
+
         private const string EMPTY = null;
         private const string UNINITIALIZED = " ";
 
@@ -65,6 +67,7 @@ namespace ZombiesVsHumans
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.CursorVisible = false;
+            worldRendered = false;
             messageQueue = new Queue<string>(messagesMaxNum);
         }
 
@@ -221,19 +224,22 @@ namespace ZombiesVsHumans
                     }
                 }
 
-                if (worldXRenderFog) Console.Write("~~~ ");
-            }
-            if (worldYRenderFog)
-            {
-                SetCursor(posWorldLeft, posWorldTop + worldYRenderNCells);
-                for (int x = 0;
-                    x < worldXRenderNCells + (worldXRenderFog ? 1 : 0);
-                    x++)
+                if (worldXRenderFog && !worldRendered)
                 {
+                    SetCursor(posWorldLeft + worldCellLength * worldXRenderNCells, posWorldTop + y);
                     Console.Write("~~~ ");
                 }
             }
-            Console.WriteLine();
+            if (worldYRenderFog && !worldRendered)
+            {
+                string fogLine = new StringBuilder().Insert(0, "~~~ ", worldXRenderNCells + (worldXRenderFog ? 1 : 0)).ToString();
+
+                SetCursor(posWorldLeft, posWorldTop + worldYRenderNCells);
+                Console.Write(fogLine);
+            }
+
+            worldRendered = true;
+
         }
 
         public Direction InputDirection(string id)
