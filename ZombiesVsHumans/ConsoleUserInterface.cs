@@ -19,6 +19,10 @@ namespace ZombiesVsHumans
         private bool worldXRenderFog;
         private bool worldYRenderFog;
         private Queue<string> messageQueue;
+        private string[,] cache;
+
+        private const string EMPTY = null;
+        private const string UNINITIALIZED = " ";
 
         private readonly ConsoleColor colDefaultBg = Console.BackgroundColor;
         private readonly ConsoleColor colDefaultFg = Console.ForegroundColor;
@@ -95,6 +99,13 @@ namespace ZombiesVsHumans
             // Determine position of information messages
             posMessagesTop = posWorldTop + worldHeight + posMessagesTopFromWorld;
 
+            // Initialize visualization cache (contains IDs of agents in the
+            // several world positions)
+            cache = new string[xDim, yDim];
+            for (int i = 0; i < xDim; i++)
+                for (int j = 0; j < yDim; j++)
+                    cache[i, j] = UNINITIALIZED;
+
             // Clear console, ready to start
             Console.Clear();
         }
@@ -162,33 +173,51 @@ namespace ZombiesVsHumans
         public void RenderWorld(IReadOnlyWorld world)
         {
 
-            SetCursor(posWorldLeft, posWorldTop);
-
             for (int y = 0; y < worldYRenderNCells; y++)
             {
-                SetCursor(posWorldLeft, posWorldTop + y);
+                if (cache[0, y] == UNINITIALIZED)
+                    SetCursor(posWorldLeft, posWorldTop + y);
+
                 for (int x = 0; x < worldXRenderNCells; x++)
                 {
                     Coord coord = new Coord(x, y);
 
                     if (!world.IsOccupied(coord))
                     {
+                        if (cache[x, y] == EMPTY) continue;
+
+                        if (cache[x, y] != UNINITIALIZED)
+                            SetCursor(posWorldLeft + worldCellLength * x, posWorldTop + y);
+
                         SetDefaultColor();
                         Console.Write("... ");
+
+                        cache[x, y] = EMPTY;
+
                     }
                     else
                     {
+                        string agentID;
                         Agent agent = world.GetAgentAt(coord);
-                        string agentID = agent.ToString();
+
+                        agentID = agent.ToString();
+
+                        if (cache[x, y] == agentID) continue;
 
                         if (agentID.Length > 3) agentID =
                             agentID.Substring(0, 3);
+
+                        if (cache[x, y] != UNINITIALIZED)
+                            SetCursor(posWorldLeft + worldCellLength * x, posWorldTop + y);
 
                         SetAgentColor(agent.Kind, agent.Movement);
 
                         Console.Write(agentID);
                         SetDefaultColor();
                         Console.Write(" ");
+
+                        cache[x, y] = agentID;
+
                     }
                 }
 
