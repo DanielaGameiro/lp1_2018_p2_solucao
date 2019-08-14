@@ -75,18 +75,20 @@ namespace ZombiesVsHumans
                 // Cycle through agents and make them play
                 foreach (Agent agent in agents)
                 {
-                    Thread.Sleep(agentActionDelay);
+                    //Thread.Sleep(agentActionDelay);
+                    //Program.UI.RenderMessage($"To move: {agent}");
+                    //Console.ReadKey();
 
                     agent.PlayTurn();
                     Program.UI.RenderMessage(agent.Message);
 
                     // Render after agent movement
-                    Program.UI.RenderWorld(world);
+                    Program.UI.RenderWorldNeighborhood(world, agent.Pos);
                 }
 
                 // Render at end of turn
-                Program.UI.RenderWorld(world);
-                Thread.Sleep(turnActionDelay);
+                //Program.UI.RenderWorld(world);
+                //Thread.Sleep(turnActionDelay);
             }
         }
 

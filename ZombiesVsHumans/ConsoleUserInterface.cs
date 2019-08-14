@@ -159,10 +159,18 @@ namespace ZombiesVsHumans
             Console.Write($"Turn {i,4:d4}");
         }
 
+        public void RenderWorldNeighborhood(IReadOnlyWorld world, Coord coord)
+        {
+            foreach (Direction direction in Enum.GetValues(typeof(Direction)))
+            {
+                Coord pos = world.GetNeighbor(coord, direction);
+                SetCursor(posWorldLeft + worldCellLength * pos.X, posWorldTop + pos.Y);
+                RenderWorldCell(world, pos);
+            }
+        }
+
         public void RenderWorld(IReadOnlyWorld world)
         {
-
-            SetCursor(posWorldLeft, posWorldTop);
 
             for (int y = 0; y < worldYRenderNCells; y++)
             {
@@ -170,26 +178,7 @@ namespace ZombiesVsHumans
                 for (int x = 0; x < worldXRenderNCells; x++)
                 {
                     Coord coord = new Coord(x, y);
-
-                    if (!world.IsOccupied(coord))
-                    {
-                        SetDefaultColor();
-                        Console.Write("... ");
-                    }
-                    else
-                    {
-                        Agent agent = world.GetAgentAt(coord);
-                        string agentID = agent.ToString();
-
-                        if (agentID.Length > 3) agentID =
-                            agentID.Substring(0, 3);
-
-                        SetAgentColor(agent.Kind, agent.Movement);
-
-                        Console.Write(agentID);
-                        SetDefaultColor();
-                        Console.Write(" ");
-                    }
+                    RenderWorldCell(world, coord);
                 }
 
                 if (worldXRenderFog) Console.Write("~~~ ");
@@ -282,6 +271,29 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.UpRight);
                         return Direction.UpRight;
                 }
+            }
+        }
+
+        private void RenderWorldCell(IReadOnlyWorld world, Coord coord)
+        {
+            if (!world.IsOccupied(coord))
+            {
+                SetDefaultColor();
+                Console.Write("... ");
+            }
+            else
+            {
+                Agent agent = world.GetAgentAt(coord);
+                string agentID = agent.ToString();
+
+                if (agentID.Length > 3) agentID =
+                    agentID.Substring(0, 3);
+
+                SetAgentColor(agent.Kind, agent.Movement);
+
+                Console.Write(agentID);
+                SetDefaultColor();
+                Console.Write(" ");
             }
         }
 

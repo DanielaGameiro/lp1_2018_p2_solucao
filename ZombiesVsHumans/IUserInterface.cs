@@ -10,7 +10,7 @@ namespace ZombiesVsHumans
         void RenderError(string msg);
 
         void RenderTitle();
-
+        void RenderWorldNeighborhood(IReadOnlyWorld world, Coord coord);
         void RenderWorld(IReadOnlyWorld world);
 
         void RenderMessage(string msg);
