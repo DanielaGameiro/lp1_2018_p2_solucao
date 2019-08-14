@@ -23,6 +23,7 @@ namespace ZombiesVsHumans
             bool foundEnemy = false;
             int maxRadius = Math.Max(world.XDim, world.YDim) / 2;
             Coord vector = default(Coord);
+            Coord currentPos;
 
             for (int r = 1; r <= maxRadius && !foundEnemy; r++)
             {
@@ -30,10 +31,10 @@ namespace ZombiesVsHumans
                 {
                     for (int dy = -r; dy <= r && !foundEnemy; dy++)
                     {
-                        Coord currentPos =
-                            new Coord(agent.Pos.X + dx, agent.Pos.Y + dy);
+                        if (Math.Max(Math.Abs(dx), Math.Abs(dy)) != r) continue;
 
-                        if (currentPos.Equals(agent.Pos)) continue;
+                        currentPos =
+                            new Coord(agent.Pos.X + dx, agent.Pos.Y + dy);
 
                         if (world.IsOccupied(currentPos))
                         {
