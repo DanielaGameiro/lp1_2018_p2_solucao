@@ -11,7 +11,7 @@ namespace ZombiesVsHumans
 
         void RenderError(string msg);
 
-        void RenderTitle();
+        void RenderStart();
 
         void RenderWorld(IReadOnlyWorld world);
 
@@ -21,6 +21,6 @@ namespace ZombiesVsHumans
 
         Direction InputDirection(string id);
 
-        void Finish();
+        void RenderFinish();
     }
 }

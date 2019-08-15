@@ -11,6 +11,7 @@ namespace ZombiesVsHumans
     {
         private int posLegendLeft;
         private int posInfoLeft;
+        private int posInfoTop;
         private int posDialogTop;
         private int posMessagesTop;
         private int posWorldTop;
@@ -52,14 +53,15 @@ namespace ZombiesVsHumans
         private readonly int worldXRenderNCellsMax = 30;
         private readonly int worldYRenderNCellsMax = 30;
         private readonly int worldCellLength = 4;
+        private readonly int worldMinHeight = 4;
         private readonly int posTitleTop = 1;
         private readonly int posTitleLeft = 1;
         private readonly int posWorldTopFromTitle = 2;
         private readonly int posWorldLeft = 1;
         private readonly int posLegendTop = 3;
-        private readonly int posLegendLeftFromWorldOrMessages = 3;
-        private readonly int posInfoTop = 8;
-        private readonly int posInfoLeftFromWorldOrMessages = 3;
+        private readonly int posLegendLeftFromWorld = 3;
+        private readonly int posInfoTopFromWorld = 1;
+        private readonly int posInfoLeftFromMessages = 3;
         private readonly int posPlayerDialogLeft = 10;
         private readonly int posPlayerDialogTopFromWorld = 3;
         private readonly int playerDialogWidth = 35;
@@ -67,7 +69,7 @@ namespace ZombiesVsHumans
         private readonly int posMessagesLeft = 2;
         private readonly int posMessagesTopFromWorld = 1;
         private readonly int messagesMaxNum = 11;
-        private readonly int messagesMaxLength = 60;
+        private readonly int messagesMaxLength = 55;
         private string msgBullet = "> ";
 
         public ConsoleUserInterface()
@@ -104,21 +106,23 @@ namespace ZombiesVsHumans
                 (worldXRenderNCells + (worldXRenderFog ? 1 : 0));
 
             // Determine world height in console characters
-            worldHeight = worldYRenderNCells + (worldYRenderFog ? 1 : 0);
+            worldHeight = Math.Max(
+                worldYRenderNCells + (worldYRenderFog ? 1 : 0),
+                worldMinHeight);
 
             // Determine complete length of messages
             messagesCompleteLength =
                 posMessagesLeft + msgBullet.Length + messagesMaxLength;
 
             // Determine left position of legend
-            posLegendLeft =
-                Math.Max(worldLength, messagesCompleteLength)
-                + posLegendLeftFromWorldOrMessages;
+            posLegendLeft = worldLength + posLegendLeftFromWorld;
 
             // Determine left position of info
-            posInfoLeft =
-                Math.Max(worldLength, messagesCompleteLength)
-                + posInfoLeftFromWorldOrMessages;
+            posInfoLeft = messagesCompleteLength + posInfoLeftFromMessages;
+
+            // Determine top position of info
+            posInfoTop =
+                posWorldTop + worldHeight + posInfoTopFromWorld;
 
             // Determine top position of player dialog
             posDialogTop =
@@ -137,6 +141,7 @@ namespace ZombiesVsHumans
 
             // Clear console, ready to start
             Console.Clear();
+
         }
 
         public void RenderError(string msg)
@@ -183,11 +188,35 @@ namespace ZombiesVsHumans
             Console.Write(lastMsg);
         }
 
-        public void RenderTitle()
+        public void RenderStart()
         {
-            SetCursor(posTitleLeft, posTitleTop);
             SetColor(colTitleFg, colTitleBg);
+            SetCursor(posTitleLeft, posTitleTop);
             Console.Write(" ========== Zombies VS Humans ========== ");
+
+            SetCursor(posLegendLeft, posLegendTop);
+            SetColor(colAIZombieFg, colAIZombieBg);
+            Console.Write("zXX");
+            SetDefaultColor();
+            Console.Write(" Zombie (AI)");
+
+            SetCursor(posLegendLeft, posLegendTop + 1);
+            SetColor(colAIHumanFg, colAIHumanBg);
+            Console.Write("hXX");
+            SetDefaultColor();
+            Console.Write(" Human (AI)");
+
+            SetCursor(posLegendLeft, posLegendTop + 2);
+            SetColor(colPlayerZombieFg, colPlayerZombieBg);
+            Console.Write("ZXX");
+            SetDefaultColor();
+            Console.Write(" Zombie (player)");
+
+            SetCursor(posLegendLeft, posLegendTop + 3);
+            SetColor(colPlayerHumanFg, colPlayerHumanBg);
+            Console.Write("HXX");
+            SetDefaultColor();
+            Console.Write(" Human (player)");
         }
 
         public void RenderInfo(IDictionary<string, int> info)
@@ -374,7 +403,7 @@ namespace ZombiesVsHumans
             return dir;
         }
 
-        public void Finish()
+        public void RenderFinish()
         {
             Console.CursorVisible = true;
             SetDefaultColor();

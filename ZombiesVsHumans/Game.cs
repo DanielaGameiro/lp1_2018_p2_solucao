@@ -81,7 +81,7 @@ namespace ZombiesVsHumans
             Program.UI.Initialize(world.XDim, world.YDim);
 
             // First render
-            Program.UI.RenderTitle();
+            Program.UI.RenderStart();
             Program.UI.RenderWorld(world);
             Program.UI.RenderInfo(info);
 
@@ -130,9 +130,10 @@ namespace ZombiesVsHumans
                 Program.UI.RenderMessage(
                     $"Humans survived after {options.Turns} turns!");
             else
-                Program.UI.RenderMessage("No humans left! Zombies have won!");
+                Program.UI.RenderMessage(
+                    $"No humans left! Zombies won after {info[turnKey]} turns!");
 
-            Program.UI.Finish();
+            Program.UI.RenderFinish();
 
         }
 
