@@ -7,12 +7,10 @@ namespace ZombiesVsHumans
     {
         protected readonly IReadOnlyWorld world;
 
-        public abstract string Message { get; protected set; }
-
         protected AbstractMovement(IReadOnlyWorld world)
         {
             this.world = world;
         }
-        public abstract Coord WhereToMove(Agent agent);
+        public abstract Coord WhereToMove(Agent agent, out string message);
     }
 }

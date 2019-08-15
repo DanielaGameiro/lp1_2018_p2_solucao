@@ -7,12 +7,10 @@ namespace ZombiesVsHumans
     {
         public PlayerMovement(IReadOnlyWorld world) : base(world) { }
 
-        public override string Message { get; protected set; }
-
-        public override Coord WhereToMove(Agent agent)
+        public override Coord WhereToMove(Agent agent, out string message)
         {
             Direction direction = Program.UI.InputDirection(agent.ToString());
-            Message = $"Player tried to move {direction}";
+            message = $"Player tried to move {direction}";
             return world.GetNeighbor(agent.Pos, direction);
         }
     }

@@ -59,8 +59,7 @@ namespace ZombiesVsHumans
 
         public void PlayTurn(out bool changePopulation, out string message)
         {
-            Coord dest = moveBehavior.WhereToMove(this);
-            message = moveBehavior.Message;
+            Coord dest = moveBehavior.WhereToMove(this, out message);
             changePopulation = false;
 
             if (!world.IsOccupied(dest))

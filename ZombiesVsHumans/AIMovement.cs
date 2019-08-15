@@ -15,9 +15,7 @@ namespace ZombiesVsHumans
             this.runAway = runAway;
         }
 
-        public override string Message { get; protected set; }
-
-        public override Coord WhereToMove(Agent agent)
+        public override Coord WhereToMove(Agent agent, out string message)
         {
             Agent target = null;
             bool foundEnemy = false;
@@ -57,11 +55,11 @@ namespace ZombiesVsHumans
             if (foundEnemy)
             {
                 string way = runAway ? "runaway from" : "move towards";
-                Message = $"{agent} tried to {way} {target}";
+                message = $"{agent} tried to {way} {target}";
                 return world.GetNeighbor(agent.Pos, vector);
             }
 
-            Message = $"{agent} didn't find enemies";
+            message = $"{agent} didn't find enemies";
             return agent.Pos;
         }
     }
