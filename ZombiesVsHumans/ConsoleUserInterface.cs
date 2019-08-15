@@ -368,6 +368,12 @@ namespace ZombiesVsHumans
             return dir;
         }
 
+        public void Finish()
+        {
+            Console.CursorVisible = true;
+            SetDefaultColor();
+            Console.WriteLine();
+        }
         private void SetCursor(int left, int top)
         {
             Console.CursorTop = top;

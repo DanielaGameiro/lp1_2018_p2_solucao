@@ -20,5 +20,7 @@ namespace ZombiesVsHumans
         void RenderInfo(IDictionary<string, int> info);
 
         Direction InputDirection(string id);
+
+        void Finish();
     }
 }

@@ -86,10 +86,11 @@ namespace ZombiesVsHumans
             Program.UI.RenderInfo(info);
 
             // Game loop
-            for (int i = 0; i < options.Turns; i++)
+            for (int i = 0; i < options.Turns && totalHumansValue > 0; i++)
             {
                 info[turnKey] = i + 1;
                 Program.UI.RenderInfo(info);
+                Program.UI.RenderMessage($"Starting turn {i + 1}");
 
                 // Shuffle agent list
                 Shuffle();
@@ -124,6 +125,15 @@ namespace ZombiesVsHumans
 
                 if (turnActionDelay > 0) Thread.Sleep(turnActionDelay);
             }
+
+            if (totalHumansValue > 0)
+                Program.UI.RenderMessage(
+                    $"Humans survived after {options.Turns} turns!");
+            else
+                Program.UI.RenderMessage("No humans left! Zombies have won!");
+
+            Program.UI.Finish();
+
         }
 
         private void NewAgent(AgentKind kind, AgentMovement movement, int id)
