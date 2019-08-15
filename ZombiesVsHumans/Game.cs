@@ -2,6 +2,7 @@
 // Author: Nuno Fachada
 using System;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace ZombiesVsHumans
 {
@@ -57,17 +58,38 @@ namespace ZombiesVsHumans
 
         public void Play()
         {
+            string turnKey = "Turn";
+            string totalZombiesKey = "Total Zombies";
+            string totalHumansKey = "Total Humans";
+            string playerZombiesKey = "Player Zombies";
+            string playerHumansKey = "Player Humans";
+
+            int totalZombiesValue = (int)options.Zombies;
+            int totalHumansValue = (int)options.Humans;
+            int playerZombiesValue = (int)options.PlayerZombies;
+            int playerHumansValue = (int)options.PlayerHumans;
+
+            IDictionary<string, int> info = new Dictionary<string, int>()
+            {
+                { turnKey, 0 },
+                { totalZombiesKey, totalZombiesValue },
+                { totalHumansKey, totalHumansValue },
+                { playerZombiesKey, playerZombiesValue },
+                { playerHumansKey, playerHumansValue }
+            };
+
             Program.UI.Initialize(world.XDim, world.YDim);
 
             // First render
             Program.UI.RenderTitle();
             Program.UI.RenderWorld(world);
-            Program.UI.RenderLegend(0);
+            Program.UI.RenderInfo(info);
 
             // Game loop
             for (int i = 0; i < options.Turns; i++)
             {
-                Program.UI.RenderLegend(i + 1);
+                info[turnKey] = i + 1;
+                Program.UI.RenderInfo(info);
 
                 // Shuffle agent list
                 Shuffle();
@@ -77,15 +99,24 @@ namespace ZombiesVsHumans
                 {
                     if (agentActionDelay > 0) Thread.Sleep(agentActionDelay);
 
-                    agent.PlayTurn();
+                    if (agent.PlayTurn())
+                    {
+                        ReCountAgents(
+                            out totalZombiesValue, out totalHumansValue,
+                            out playerZombiesValue, out playerHumansValue);
+                        info[totalZombiesKey] = totalZombiesValue;
+                        info[totalHumansKey] = totalHumansValue;
+                        info[playerZombiesKey] = playerZombiesValue;
+                        info[playerHumansKey] = playerHumansValue;
+                        Program.UI.RenderInfo(info);
+                    }
+
                     Program.UI.RenderMessage(agent.Message);
 
                     // Render after agent movement
                     Program.UI.RenderWorld(world);
                 }
 
-                // Render at end of turn
-                Program.UI.RenderWorld(world);
                 if (turnActionDelay > 0) Thread.Sleep(turnActionDelay);
             }
         }
@@ -118,6 +149,35 @@ namespace ZombiesVsHumans
                 aux = agents[j];
                 agents[j] = agents[i];
                 agents[i] = aux;
+            }
+        }
+
+        private void ReCountAgents(
+            out int totalZombies, out int totalHumans,
+            out int playerZombies, out int playerHumans)
+        {
+            totalZombies = 0;
+            totalHumans = 0;
+            playerZombies = 0;
+            playerHumans = 0;
+            foreach (Agent ag in agents)
+            {
+                if (ag.Kind == AgentKind.Zombie)
+                {
+                    totalZombies++;
+                    if (ag.Movement == AgentMovement.Player)
+                    {
+                        playerZombies++;
+                    }
+                }
+                else
+                {
+                    totalHumans++;
+                    if (ag.Movement == AgentMovement.Player)
+                    {
+                        playerHumans++;
+                    }
+                }
             }
         }
     }

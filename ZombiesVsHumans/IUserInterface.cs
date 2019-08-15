@@ -1,6 +1,8 @@
 // License: GPLv3
 // Author: Nuno Fachada
 
+using System.Collections.Generic;
+
 namespace ZombiesVsHumans
 {
     public interface IUserInterface
@@ -15,7 +17,7 @@ namespace ZombiesVsHumans
 
         void RenderMessage(string msg);
 
-        void RenderLegend(int i);
+        void RenderInfo(IDictionary<string, int> info);
 
         Direction InputDirection(string id);
     }

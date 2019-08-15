@@ -167,10 +167,15 @@ namespace ZombiesVsHumans
             Console.Write(" ========== Zombies VS Humans ========== ");
         }
 
-        public void RenderLegend(int i)
+        public void RenderInfo(IDictionary<string, int> info)
         {
-            SetCursor(posLegendLeft, posLegendTop);
-            Console.Write($"Turn {i,4:d4}");
+            int pos = 0;
+            foreach (KeyValuePair<string, int> kv in info)
+            {
+                SetCursor(posLegendLeft, posLegendTop + pos);
+                Console.Write($"{kv.Key,15} | {kv.Value,5}");
+                pos++;
+            }
         }
 
         public void RenderWorld(IReadOnlyWorld world)
@@ -244,6 +249,8 @@ namespace ZombiesVsHumans
 
         public Direction InputDirection(string id)
         {
+            Direction dir = Direction.None;
+
             Console.BackgroundColor = colPlayerDialogBg;
             Console.ForegroundColor = colPlayerDialogFg;
 
@@ -263,7 +270,8 @@ namespace ZombiesVsHumans
             Console.Write("╚══════════════════════════╝");
             SetCursor(posPlayerDialogLeft + 7, posDialogTop + 5);
 
-            while (true)
+            Console.CursorVisible = true;
+            while (dir == Direction.None)
             {
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 switch (keyInfo.Key)
@@ -273,51 +281,61 @@ namespace ZombiesVsHumans
                     case ConsoleKey.UpArrow:
                     case ConsoleKey.W:
                         Console.WriteLine(Direction.Up);
-                        return Direction.Up;
+                        dir = Direction.Up;
+                        break;
                     case ConsoleKey.NumPad7:
                     case ConsoleKey.D7:
                     case ConsoleKey.Home:
                     case ConsoleKey.Q:
                         Console.WriteLine(Direction.UpLeft);
-                        return Direction.UpLeft;
+                        dir = Direction.UpLeft;
+                        break;
                     case ConsoleKey.NumPad4:
                     case ConsoleKey.D4:
                     case ConsoleKey.LeftArrow:
                     case ConsoleKey.A:
                         Console.WriteLine(Direction.Left);
-                        return Direction.Left;
+                        dir = Direction.Left;
+                        break;
                     case ConsoleKey.NumPad1:
                     case ConsoleKey.D1:
                     case ConsoleKey.End:
                     case ConsoleKey.Z:
                         Console.WriteLine(Direction.DownLeft);
-                        return Direction.DownLeft;
+                        dir = Direction.DownLeft;
+                        break;
                     case ConsoleKey.NumPad2:
                     case ConsoleKey.D2:
                     case ConsoleKey.DownArrow:
                     case ConsoleKey.X:
                         Console.WriteLine(Direction.Down);
-                        return Direction.Down;
+                        dir = Direction.Down;
+                        break;
                     case ConsoleKey.NumPad3:
                     case ConsoleKey.D3:
                     case ConsoleKey.PageDown:
                     case ConsoleKey.C:
                         Console.WriteLine(Direction.DownRight);
-                        return Direction.DownRight;
+                        dir = Direction.DownRight;
+                        break;
                     case ConsoleKey.NumPad6:
                     case ConsoleKey.D6:
                     case ConsoleKey.RightArrow:
                     case ConsoleKey.D:
                         Console.WriteLine(Direction.Right);
-                        return Direction.Right;
+                        dir = Direction.Right;
+                        break;
                     case ConsoleKey.NumPad9:
                     case ConsoleKey.D9:
                     case ConsoleKey.PageUp:
                     case ConsoleKey.E:
                         Console.WriteLine(Direction.UpRight);
-                        return Direction.UpRight;
+                        dir = Direction.UpRight;
+                        break;
                 }
             }
+            Console.CursorVisible = false;
+            return dir;
         }
 
         private void SetCursor(int left, int top)

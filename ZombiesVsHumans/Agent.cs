@@ -58,10 +58,11 @@ namespace ZombiesVsHumans
 
         }
 
-        public void PlayTurn()
+        public bool PlayTurn()
         {
             Coord dest = moveBehavior.WhereToMove(this);
             Message = moveBehavior.Message;
+            bool changePopulation = false;
 
             if (!world.IsOccupied(dest))
             {
@@ -80,6 +81,7 @@ namespace ZombiesVsHumans
                     && other.Kind == AgentKind.Human)
                 {
                     world.GetAgentAt(dest).Infect();
+                    changePopulation = true;
                     Message += $" and infected {other}";
                 }
                 else
@@ -87,6 +89,7 @@ namespace ZombiesVsHumans
                     Message += $" but bumped into {other}";
                 }
             }
+            return changePopulation;
         }
 
         private void Infect()
