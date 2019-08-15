@@ -13,6 +13,7 @@ namespace ZombiesVsHumans
         private int posInfoLeft;
         private int posDialogTop;
         private int posMessagesTop;
+        private int posWorldTop;
         private int worldXRenderNCells;
         private int worldYRenderNCells;
         private int worldXRenderLength;
@@ -51,9 +52,9 @@ namespace ZombiesVsHumans
         private readonly int worldXRenderNCellsMax = 30;
         private readonly int worldYRenderNCellsMax = 30;
         private readonly int worldCellLength = 4;
-        private readonly int posTitleTop = 0;
-        private readonly int posTitleLeft = 0;
-        private readonly int posWorldTop = 2;
+        private readonly int posTitleTop = 1;
+        private readonly int posTitleLeft = 1;
+        private readonly int posWorldTopFromTitle = 2;
         private readonly int posWorldLeft = 1;
         private readonly int posLegendTop = 3;
         private readonly int posLegendLeftFromWorldOrMessages = 3;
@@ -86,6 +87,9 @@ namespace ZombiesVsHumans
             // Maximum length of messages
             int messagesCompleteLength;
 
+            // Determine distance of world from top
+            posWorldTop = posTitleTop + posWorldTopFromTitle;
+
             // Determine maximum number of world cells to render
             worldXRenderNCells = Math.Min(xDim, worldXRenderNCellsMax);
             worldYRenderNCells = Math.Min(yDim, worldYRenderNCellsMax);
@@ -117,10 +121,12 @@ namespace ZombiesVsHumans
                 + posInfoLeftFromWorldOrMessages;
 
             // Determine top position of player dialog
-            posDialogTop = posWorldTop + worldHeight + posPlayerDialogTopFromWorld;
+            posDialogTop =
+                posWorldTop + worldHeight + posPlayerDialogTopFromWorld;
 
             // Determine position of information messages
-            posMessagesTop = posWorldTop + worldHeight + posMessagesTopFromWorld;
+            posMessagesTop =
+                posWorldTop + worldHeight + posMessagesTopFromWorld;
 
             // Initialize visualization cache (contains IDs of agents in the
             // several world positions)
