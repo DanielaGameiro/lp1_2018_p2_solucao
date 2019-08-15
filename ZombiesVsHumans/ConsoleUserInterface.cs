@@ -17,8 +17,6 @@ namespace ZombiesVsHumans
         private int posWorldTop;
         private int worldXRenderNCells;
         private int worldYRenderNCells;
-        private int worldXRenderLength;
-        private int worldYRenderLength;
         private bool worldXRenderFog;
         private bool worldYRenderFog;
         private Queue<string> messageQueue;
@@ -64,8 +62,6 @@ namespace ZombiesVsHumans
         private readonly int posInfoLeftFromMessages = 3;
         private readonly int posPlayerDialogLeft = 10;
         private readonly int posPlayerDialogTopFromWorld = 3;
-        private readonly int playerDialogWidth = 35;
-        private readonly int playerDialogHeight = 10;
         private readonly int posMessagesLeft = 2;
         private readonly int posMessagesTopFromWorld = 1;
         private readonly int messagesMaxNum = 11;
