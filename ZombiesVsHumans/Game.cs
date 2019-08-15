@@ -97,9 +97,14 @@ namespace ZombiesVsHumans
                 // Cycle through agents and make them play
                 foreach (Agent agent in agents)
                 {
+                    bool changePopulation;
+                    string agentMessage;
+
                     if (agentActionDelay > 0) Thread.Sleep(agentActionDelay);
 
-                    if (agent.PlayTurn())
+                    agent.PlayTurn(out changePopulation, out agentMessage);
+
+                    if (changePopulation)
                     {
                         ReCountAgents(
                             out totalZombiesValue, out totalHumansValue,
@@ -111,7 +116,7 @@ namespace ZombiesVsHumans
                         Program.UI.RenderInfo(info);
                     }
 
-                    Program.UI.RenderMessage(agent.Message);
+                    Program.UI.RenderMessage(agentMessage);
 
                     // Render after agent movement
                     Program.UI.RenderWorld(world);

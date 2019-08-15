@@ -10,7 +10,6 @@ namespace ZombiesVsHumans
         public Coord Pos { get; private set; }
         public AgentKind Kind { get; private set; }
         public AgentMovement Movement { get; private set; }
-        public string Message { get; private set; }
 
         private World world;
         private AbstractMovement moveBehavior;
@@ -58,38 +57,37 @@ namespace ZombiesVsHumans
 
         }
 
-        public bool PlayTurn()
+        public void PlayTurn(out bool changePopulation, out string message)
         {
             Coord dest = moveBehavior.WhereToMove(this);
-            Message = moveBehavior.Message;
-            bool changePopulation = false;
+            message = moveBehavior.Message;
+            changePopulation = false;
 
             if (!world.IsOccupied(dest))
             {
                 world.MoveAgent(this, dest);
                 Pos = dest;
-                Message += " and succeeded";
+                message += " and succeeded";
             }
             else
             {
                 Agent other = world.GetAgentAt(dest);
                 if (this == other)
                 {
-                    Message += " and failed to move";
+                    message += " and failed to move";
                 }
                 else if (Kind == AgentKind.Zombie
                     && other.Kind == AgentKind.Human)
                 {
                     world.GetAgentAt(dest).Infect();
                     changePopulation = true;
-                    Message += $" and infected {other}";
+                    message += $" and infected {other}";
                 }
                 else
                 {
-                    Message += $" but bumped into {other}";
+                    message += $" but bumped into {other}";
                 }
             }
-            return changePopulation;
         }
 
         private void Infect()
