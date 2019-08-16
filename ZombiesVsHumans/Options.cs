@@ -1,11 +1,10 @@
 /// @file
-/// Este ficheiro contém a struct `Options`, trata e contém as opções inseridas
-/// pelo utilizador na linha de comandos.
+/// @brief Este ficheiro contém a `struct` ZombiesVsHumans.Options, trata e
+/// contém as opções inseridas pelo utilizador na linha de comandos.
 ///
 /// @author Nuno Fachada
 /// @date 2019
 /// @copyright [GPLv3](http://www.gnu.org/licenses/gpl.html)
-
 
 using System.Collections.Generic;
 

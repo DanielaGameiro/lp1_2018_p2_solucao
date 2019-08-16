@@ -1,5 +1,11 @@
-// License: GPLv3
-// Author: Nuno Fachada
+/// @file
+/// @brief Este ficheiro contém a classe ZombiesVsHumans.Agent, que representa
+/// um agente no jogo.
+///
+/// @author Nuno Fachada
+/// @date 2019
+/// @copyright [GPLv3](http://www.gnu.org/licenses/gpl.html)
+
 using System.ComponentModel;
 
 namespace ZombiesVsHumans

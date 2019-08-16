@@ -1,5 +1,10 @@
-// License: GPLv3
-// Author: Nuno Fachada
+/// @file
+/// @brief Este ficheiro contém a classe ZombiesVsHumans.World, que
+/// implementa o mundo de jogo concreto.
+///
+/// @author Nuno Fachada
+/// @date 2019
+/// @copyright [GPLv3](http://www.gnu.org/licenses/gpl.html)
 
 using System;
 using System.ComponentModel;

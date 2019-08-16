@@ -1,5 +1,10 @@
-// License: GPLv3
-// Author: Nuno Fachada
+/// @file
+/// @brief Este ficheiro contém a interface ZombiesVsHumans.IUserInterface,
+/// que representa de forma abstrata uma UI para o jogo.
+///
+/// @author Nuno Fachada
+/// @date 2019
+/// @copyright [GPLv3](http://www.gnu.org/licenses/gpl.html)
 
 using System.Collections.Generic;
 

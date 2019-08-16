@@ -1,13 +1,31 @@
-// License: GPLv3
-// Author: Nuno Fachada
+/// @file
+/// @brief Este ficheiro contém a classe ZombiesVsHumans.AIMovement, que
+/// implementa o movimento por "inteligência artificial" dos agentes.
+///
+/// @author Nuno Fachada
+/// @date 2019
+/// @copyright [GPLv3](http://www.gnu.org/licenses/gpl.html)
+
 using System;
 
 namespace ZombiesVsHumans
 {
+    /// <summary>
+    /// Define o movimento por "inteligência artificial" dos agentes.
+    /// </summary>
     public class AIMovement : AbstractMovement
     {
+        /// <summary>
+        /// Género de agente considerado inimigo.
+        /// </summary>
         private AgentKind enemy;
+
+        /// <summary>
+        /// Indica se agent deve fugir ou perseguir os agentes considerados
+        /// inimigos.
+        /// </summary>
         private bool runAway;
+
         public AIMovement(AgentKind target, bool runAway, IReadOnlyWorld world)
             : base(world)
         {

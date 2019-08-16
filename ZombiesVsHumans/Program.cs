@@ -1,6 +1,6 @@
 ﻿/// @file
-/// Este ficheiro contém a classe `Program`, que por sua vez contém o método
-/// `Main()`. Assim sendo, o programa começa aqui.
+/// @brief Este ficheiro contém a classe ZombiesVsHumans.Program, responsável
+/// por iniciar o jogo.
 ///
 /// @author Nuno Fachada
 /// @date 2019

@@ -1,5 +1,10 @@
-// License: GPLv3
-// Author: Nuno Fachada
+/// @file
+/// @brief Este ficheiro contém a classe ZombiesVsHumans.ConsoleUserInterface,
+/// que implementa uma UI em consola.
+///
+/// @author Nuno Fachada
+/// @date 2019
+/// @copyright [GPLv3](http://www.gnu.org/licenses/gpl.html)
 
 using System;
 using System.Text;
