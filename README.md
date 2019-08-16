@@ -5,13 +5,16 @@ Proposta de resolução do
 
 Em breve.
 
-## Licenças
+## Licenças e atribuições
 
-O código é disponibilizado através da licença [GPLv3].
+* O código é disponibilizado através da licença [GPLv3].
+* A documentação é disponibilizada através da licença [CC BY-NC-SA 4.0][CCBYNC].
+* O [logótipo] do projeto é baseado nos ícones desenhados por [Freepik]
+  disponíveis em <https://www.flaticon.com>.
 
 ## Metadados
 
-* Autor: [Nuno Fachada][]
+* Autor: [Nuno Fachada]
 * Curso:  [Licenciatura em Videojogos][lamv]
 * Instituição: [Universidade Lusófona de Humanidades e Tecnologias][ULHT]
 
@@ -19,3 +22,6 @@ O código é disponibilizado através da licença [GPLv3].
 [Nuno Fachada]:https://github.com/fakenmc
 [ULHT]:https://www.ulusofona.pt/
 [GPLv3]:http://www.gnu.org/licenses/gpl.html
+[CCBYNC]:https://creativecommons.org/licenses/by-nc-sa/4.0/
+[logótipo]:logo.png
+[Freepik]:https://www.freepik.com/home
