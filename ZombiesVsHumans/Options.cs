@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace ZombiesVsHumans
 {
     /// <summary>
-    /// Esta struct trata as opções inseridas pelo utilizador na linha de
+    /// Struct que trata as opções inseridas pelo utilizador na linha de
     /// comandos, disponibilizando-as depois em propriedades.
     /// </summary>
     /// <remarks>
@@ -106,7 +106,7 @@ namespace ZombiesVsHumans
 
         /// <summary>
         /// Construtor estático que simplesmente inicializa a variável de
-        /// instância <see cref="validOptions"/>.
+        /// classe (estática) <see cref="validOptions"/>.
         /// </summary>
         static Options()
         {

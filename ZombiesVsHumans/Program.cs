@@ -9,7 +9,7 @@
 namespace ZombiesVsHumans
 {
     /// <summary>
-    /// Esta classe contém o método <see cref="Main()"/>, pelo que o programa
+    /// Classe que contém o método <see cref="Main()"/>, pelo que o programa
     /// começa aqui.
     /// </summary>
     public class Program
