@@ -307,7 +307,7 @@ namespace ZombiesVsHumans
         /// Método privado que estabelece o estado de erro das opções,
         /// adicionando uma mensagem de erro à lista de mensagens de erro
         /// </summary>
-        /// <param name="msg"></param>
+        /// <param name="msg">Mensagem de erro a guardar.</param>
         private void SetError(string msg)
         {
             Error = true;
