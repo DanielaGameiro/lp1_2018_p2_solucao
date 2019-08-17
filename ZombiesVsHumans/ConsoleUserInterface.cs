@@ -12,185 +12,511 @@ using System.Collections.Generic;
 
 namespace ZombiesVsHumans
 {
+    /// <summary>
+    /// Classe que implementa uma UI em modo de consola para o jogo Zombies
+    /// vs Humans.
+    /// </summary>
     public class ConsoleUserInterface : IUserInterface
     {
-        private int posLegendLeft;
-        private int posInfoLeft;
-        private int posInfoTop;
-        private int posDialogTop;
-        private int posMessagesTop;
-        private int posWorldTop;
-        private int worldXRenderNCells;
-        private int worldYRenderNCells;
-        private bool worldXRenderFog;
-        private bool worldYRenderFog;
-        private Queue<string> messageQueue;
-        private string[,] cache;
 
-        private bool worldRendered;
+        // //////////////////////////////////////////////////////////////// //
+        // Constantes que não devem ser modificadas, utilizadas pela cache. //
+        // //////////////////////////////////////////////////////////////// //
 
+        /// <summary>
+        /// Constante que representa, na cache, um espaço sem agentes.
+        /// </summary>
         private const string EMPTY = null;
+
+        /// <summary>
+        /// Constante que representa um espaço não inicializado na cache, ou
+        /// seja, ainda não mostrado no ecrã.
+        /// </summary>
         private const string UNINITIALIZED = " ";
 
+        // ///////////////////////////////////////////////////////////////// //
+        // Variáveis de instância só de leitura que podem ser alteradas      //
+        // manualmente p/ personalizar a UI.                                 //
+        // Idealmente os seus valores deveriam ser carregados a partir de um //
+        // ficheiro de configuração.
+        // ///////////////////////////////////////////////////////////////// //
+
+        /// <summary>
+        /// Cor de fundo por omissão.
+        /// </summary>
         private readonly ConsoleColor colDefaultBg = Console.BackgroundColor;
+
+        /// <summary>
+        /// Cor de primeiro plano por omissão.
+        /// </summary>
         private readonly ConsoleColor colDefaultFg = Console.ForegroundColor;
+
+        /// <summary>
+        /// Cor de fundo dos zombies controlados pela IA.
+        /// </summary>
         private readonly ConsoleColor colAIZombieBg = ConsoleColor.Black;
+
+        /// <summary>
+        /// Cor de primeiro plano dos zombies controlados pela IA.
+        /// </summary>
         private readonly ConsoleColor colAIZombieFg = ConsoleColor.Red;
+
+        /// <summary>
+        /// Cor de fundo dos zombies controlados pelo jogador.
+        /// </summary>
         private readonly ConsoleColor colPlayerZombieBg = ConsoleColor.DarkMagenta;
+
+        /// <summary>
+        /// Cor de primeiro plano dos zombies controlados pelo jogador.
+        /// </summary>
         private readonly ConsoleColor colPlayerZombieFg = ConsoleColor.DarkRed;
+
+        /// <summary>
+        /// Cor de fundo dos humanos controlados pela IA.
+        /// </summary>
         private readonly ConsoleColor colAIHumanBg = ConsoleColor.Black;
+
+        /// <summary>
+        /// Cor de primeiro plano dos humanos controlados pela IA.
+        /// </summary>
         private readonly ConsoleColor colAIHumanFg = ConsoleColor.Green;
+
+        /// <summary>
+        /// Cor de fundo dos humanos controlados pelo jogador.
+        /// </summary>
         private readonly ConsoleColor colPlayerHumanBg = ConsoleColor.DarkMagenta;
+
+        /// <summary>
+        /// Cor de primeiro plano dos humanos controlados pelo jogador.
+        /// </summary>
         private readonly ConsoleColor colPlayerHumanFg = ConsoleColor.DarkGreen;
+
+        /// <summary>
+        /// Cor de fundo do título.
+        /// </summary>
         private readonly ConsoleColor colTitleBg = ConsoleColor.Yellow;
+
+        /// <summary>
+        /// Cor de primeiro plano do título.
+        /// </summary>
         private readonly ConsoleColor colTitleFg = ConsoleColor.Black;
+
+        /// <summary>
+        /// Cor de fundo das mensagens.
+        /// </summary>
         private readonly ConsoleColor colMessagesBg = Console.BackgroundColor;
+
+        /// <summary>
+        /// Cor de primeiro plano das mensagens.
+        /// </summary>
         private readonly ConsoleColor colMessagesFg = ConsoleColor.Gray;
+
+        /// <summary>
+        /// Cor de fundo da mensagem mais recente.
+        /// </summary>
         private readonly ConsoleColor colLastMessageBg = ConsoleColor.DarkGray;
+
+        /// <summary>
+        /// Cor de primeiro plano da mensagem mais recente.
+        /// </summary>
         private readonly ConsoleColor colLastMessageFg = ConsoleColor.White;
+
+        /// <summary>
+        /// Cor de fundo da janela de diálogo que pede a direção ao jogador.
+        /// </summary>
         private readonly ConsoleColor colPlayerDialogBg = ConsoleColor.DarkGreen;
+
+        /// <summary>
+        /// Cor de primeiro plano da janela de diálogo que pede a direção ao
+        /// jogador.
+        /// </summary>
         private readonly ConsoleColor colPlayerDialogFg = ConsoleColor.White;
+
+        /// <summary>
+        /// Cor de fundo do painel de informação/estatísticas.
+        /// </summary>
         private readonly ConsoleColor colInfoBg = ConsoleColor.DarkGray;
+
+        /// <summary>
+        /// Cor de primeiro plano do painel de informação/estatísticas.
+        /// </summary>
         private readonly ConsoleColor colInfoFg = ConsoleColor.White;
 
+        /// <summary>
+        /// Número máximo de células a mostrar na horizontal.
+        /// </summary>
         private readonly int worldXRenderNCellsMax = 30;
-        private readonly int worldYRenderNCellsMax = 30;
-        private readonly int worldCellLength = 4;
-        private readonly int worldMinHeight = 4;
-        private readonly int posTitleTop = 1;
-        private readonly int posTitleLeft = 1;
-        private readonly int posWorldTopFromTitle = 2;
-        private readonly int posWorldLeft = 1;
-        private readonly int posLegendTop = 3;
-        private readonly int posLegendLeftFromWorld = 3;
-        private readonly int posInfoTopFromWorld = 1;
-        private readonly int posInfoLeftFromMessages = 3;
-        private readonly int posPlayerDialogLeft = 10;
-        private readonly int posPlayerDialogTopFromWorld = 3;
-        private readonly int posMessagesLeft = 2;
-        private readonly int posMessagesTopFromWorld = 1;
-        private readonly int messagesMaxNum = 11;
-        private readonly int messagesMaxLength = 55;
-        private string msgBullet = "> ";
 
+        /// <summary>
+        /// Número máximo de células a mostrar na vertical.
+        /// </summary>
+        private readonly int worldYRenderNCellsMax = 30;
+
+        /// <summary>
+        /// Número de carateres (dimensão horizontal) de cada célula do mundo.
+        /// </summary>
+        private readonly int worldCellLength = 4;
+
+        /// <summary>
+        /// Altura mínima (em carateres) reservada no ecrã para mostrar o mundo.
+        /// </summary>
+        private readonly int worldMinHeight = 4;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o título e o topo da
+        /// consola.
+        /// </summary>
+        private readonly int posTitleTop = 1;
+
+        /// <summary>
+        /// Distância horizontal (em carateres) entre título e o lado esquerdo
+        /// da consola.
+        /// </summary>
+        private readonly int posTitleLeft = 1;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o mundo e o título.
+        /// </summary>
+        private readonly int posWorldTopFromTitle = 2;
+
+        /// <summary>
+        /// Distância horizontal (em carateres) entre o mundo e o lado esquerdo
+        /// da consola.
+        /// </summary>
+        private readonly int posWorldLeft = 1;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre a legenda e o topo da
+        /// consola.
+        /// </summary>
+        private readonly int posLegendTop = 3;
+
+        /// <summary>
+        /// Distância horizontal (em carateres) entre a legenda e o mundo.
+        /// </summary>
+        private readonly int posLegendLeftFromWorld = 3;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o painel de informação e
+        /// o mundo.
+        /// </summary>
+        private readonly int posInfoTopFromWorld = 1;
+
+        /// <summary>
+        /// Distância horizontal (em carateres) entre o painel de informação
+        /// e o painel de mensagens.
+        /// </summary>
+        private readonly int posInfoLeftFromMessages = 3;
+
+        /// <summary>
+        /// Distância horizontal (em carateres) entre o diálogo do jogador e
+        /// o lado esquerdo da consola.
+        /// </summary>
+        private readonly int posPlayerDialogLeft = 10;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o diálogo do jogador e o
+        /// mundo.
+        /// </summary>
+        private readonly int posPlayerDialogTopFromWorld = 3;
+
+        /// <summary>
+        /// Distância horizontal (em carateres) entre o painel de mensagens e
+        /// o lado esquerdo da consola.
+        /// </summary>
+        private readonly int posMessagesLeft = 2;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o painel de mensagens e o
+        /// mundo.
+        /// </summary>
+        private readonly int posMessagesTopFromWorld = 1;
+
+        /// <summary>
+        /// Número máximo de mensagens a mostrar no painel de mensagens.
+        /// </summary>
+        private readonly int messagesMaxNum = 11;
+
+        /// <summary>
+        /// Dimensão máxima (em carateres) das mensagens.
+        /// </summary>
+        private readonly int messagesMaxLength = 55;
+
+        /// <summary>
+        /// String que marca o início de cada mensagem.
+        /// </summary>
+        private readonly string msgBullet = "> ";
+
+        // ////////////////////////////////////////////////////////////////// //
+        // Variáveis de instância cujo valor depende das variáveis só de      //
+        // leitura definidas em cima.                                         //
+        // ////////////////////////////////////////////////////////////////// //
+
+        /// <summary>
+        /// Distância horizontal (em carateres) entre a legenda e o lado
+        /// esquerdo da consola.
+        /// </summary>
+        private int posLegendLeft;
+
+        /// <summary>
+        /// Distância horizontal (em carateres) entre o painel de informação
+        /// e o lado esquerdo da consola.
+        /// </summary>
+        private int posInfoLeft;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o painel de informação e o
+        /// topo da consola.
+        /// </summary>
+        private int posInfoTop;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o diálogo do jogador e o
+        /// topo da consola.
+        /// </summary>
+        private int posDialogTop;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o painel de mensagens e o
+        /// topo da consola.
+        /// </summary>
+        private int posMessagesTop;
+
+        /// <summary>
+        /// Distância vertical (em carateres) entre o mundo e o topo da consola.
+        /// </summary>
+        private int posWorldTop;
+
+        /// <summary>
+        /// Número de células do mundo a mostrar na horizontal.
+        /// </summary>
+        private int worldXRenderNCells;
+
+        /// <summary>
+        /// Número de células do mundo a mostrar na vertical.
+        /// </summary>
+        private int worldYRenderNCells;
+
+        /// <summary>
+        /// Mostrar nevoeiro horizontal? Isto ocorre se a dimensão horizontal
+        /// do mundo for maior que <see cref="worldXRenderNCellsMax"/>.
+        /// </summary>
+        private bool worldXRenderFog;
+
+        /// <summary>
+        /// Mostrar nevoeiro vertical? Isto ocorre se a dimensão vertical
+        /// do mundo for maior que <see cref="worldYRenderNCellsMax"/>.
+        /// </summary>
+        private bool worldYRenderFog;
+
+        /// <summary>
+        /// Fila de mensagens a mostrar.
+        /// </summary>
+        private Queue<string> messageQueue;
+
+        /// <summary>
+        /// Cache do mundo que permite evitarmos renderizar posições do mundo
+        /// cujos conteúdos não foram alterados.
+        /// </summary>
+        private string[,] cache;
+
+        /// <summary>
+        /// Booleano que indica que se o mundo já foi alguma vez renderizado.
+        /// </summary>
+        private bool worldRendered;
+
+        /// <summary>
+        /// Construtor, cria uma nova instância da UI em consola.
+        /// </summary>
         public ConsoleUserInterface()
         {
+            // Especificar codificação UTF-8, de modo a podermos mostrar uma
+            // maior gama de carateres
             Console.OutputEncoding = Encoding.UTF8;
+
+            // Não mostrar cursos a piscar, tornando a visualização mais
+            // agradável
             Console.CursorVisible = false;
+
+            // Indicar que o mundo ainda não foi renderizado
             worldRendered = false;
             messageQueue = new Queue<string>(messagesMaxNum);
         }
 
+        /// <summary>
+        /// Inicializa e calcula todas as variáveis necessárias para desenhar
+        /// a UI no ecrã, com base na dimensão do mundo.
+        /// </summary>
+        /// <remarks>
+        /// Este método respeita o que está definido em
+        /// <see cref="IUserInterface.Initialize(int, int)"/>.
+        /// </remarks>
+        /// <param name="xDim">Dimensão horizontal do mundo.</param>
+        /// <param name="yDim">Dimensão vertical do mundo.</param>
         public void Initialize(int xDim, int yDim)
         {
-            // Variables which define world size in console characters
+            // Variáveis que definem o tamanho do mundo (em carateres)
             int worldLength;
             int worldHeight;
 
-            // Maximum length of messages
+            // Tamanho completo das mensagens, incluindo o marcador inicial
             int messagesCompleteLength;
 
-            // Determine distance of world from top
+            // Calcular a distância vertical entre o mundo e o topo da consola
             posWorldTop = posTitleTop + posWorldTopFromTitle;
 
-            // Determine maximum number of world cells to render
+            // Calcular o número máximo de células do mundo a mostrar no ecrã
             worldXRenderNCells = Math.Min(xDim, worldXRenderNCellsMax);
             worldYRenderNCells = Math.Min(yDim, worldYRenderNCellsMax);
 
-            // Render fog is world doesn't fit into screen
+            // Decidir se vamos mostrar o nevoeiro na horizontal e/ou vertical
             worldXRenderFog = xDim > worldXRenderNCellsMax;
             worldYRenderFog = yDim > worldYRenderNCellsMax;
 
-            // Determine world length in console characters
+            // Calcular dimensão horizontal do mundo em carateres
             worldLength = posWorldLeft +
                 worldCellLength *
                 (worldXRenderNCells + (worldXRenderFog ? 1 : 0));
 
-            // Determine world height in console characters
+            // Calcular dimensão vertical do mundo em carateres
             worldHeight = Math.Max(
                 worldYRenderNCells + (worldYRenderFog ? 1 : 0),
                 worldMinHeight);
 
-            // Determine complete length of messages
+            // Calcular tamanho total das mensagens, incluindo marcador inicial
             messagesCompleteLength =
                 posMessagesLeft + msgBullet.Length + messagesMaxLength;
 
-            // Determine left position of legend
+            // Calcular distância horizontal (em carateres) entre a legenda e o
+            // lado esquerdo da consola
             posLegendLeft = worldLength + posLegendLeftFromWorld;
 
-            // Determine left position of info
+            // Calcular distância horizontal (em carateres) entre o painel de
+            // informação e o lado esquerdo da consola
             posInfoLeft = messagesCompleteLength + posInfoLeftFromMessages;
 
-            // Determine top position of info
+            // Calcular distância vertical (em carateres) entre o painel de
+            // informação e o topo da consola
             posInfoTop =
                 posWorldTop + worldHeight + posInfoTopFromWorld;
 
-            // Determine top position of player dialog
+            // Calcular distância vertical (em carateres) entre o diálogo do
+            // jogador e o topo da consola
             posDialogTop =
                 posWorldTop + worldHeight + posPlayerDialogTopFromWorld;
 
-            // Determine position of information messages
+            // Calcular distância vertical (em carateres) entre o painel de
+            // mensagens e o topo da consola
             posMessagesTop =
                 posWorldTop + worldHeight + posMessagesTopFromWorld;
 
-            // Initialize visualization cache (contains IDs of agents in the
-            // several world positions)
+            // Criar cache de visualização, que irá conter os IDs dos agentes
+            // já renderizados, bem como as posições vazias
             cache = new string[xDim, yDim];
+            // Inicialmente, todos o elementos da cache não estão inicializados
+            // (só estarão inicializados após a primeira renderização)
             for (int i = 0; i < xDim; i++)
                 for (int j = 0; j < yDim; j++)
                     cache[i, j] = UNINITIALIZED;
-
-            // Clear console, ready to start
-            Console.Clear();
-
         }
 
+        /// <summary>
+        /// Mostrar uma mensagem de erro.
+        /// </summary>
+        /// <param name="msg">Mensagem de erro a mostrar.</param>
         public void RenderError(string msg)
         {
+            // Limpar consola
             Console.Clear();
+
+            // Mostrar mensagem de erro no output específico para erros
+            // (Console.Error)
             Console.Error.WriteLine(msg);
         }
 
+
+        /// <summary>
+        /// Apresenta uma mensagem ao utilizador.
+        /// </summary>
+        /// <param name="message">Mensagem a apresentar.</param>
         public void RenderMessage(string message)
         {
-            string lastMsg = message;
+            // Variável onde guardar a última mensagem, que será mostrada com
+            // cores diferentes
+            string lastMsg = null;
+
+            // Um string builder, que permite construir strings de forma
+            // mais eficiente (comparativamente a concatenar strings)
+            // Vai ser usado para construir todas as mensagens a imprimir de
+            // uma só vez
             StringBuilder sb = new StringBuilder();
 
+            // Se a fila de mensagens estiver cheia...
             if (messageQueue.Count == messagesMaxNum)
             {
+                // ...remover mensagem mais antiga da fila
                 messageQueue.Dequeue();
             }
 
+            // O tamanho da mensagem é superior ao máximo?
             if (message.Length < messagesMaxLength)
             {
+                // Se não for, colocar espaços no fim de modo a que a string
+                // fique com o tamanho máximo
+                // Isto permite mostrar a cor de fundo das mensagens de forma
+                // consistente
                 message = message
                     + BlankString(messagesMaxLength - message.Length);
             }
             else
             {
+                // Se for, encurtar a mensagem de modo a que fique com o
+                // tamanho máximo
                 message = message.Substring(0, messagesMaxLength);
             }
 
+            // Colocar mensagem na fila
             messageQueue.Enqueue(message);
 
+            // Construir string contendo as mensagens a mostrar
             foreach (string msg in messageQueue)
             {
+                // Construir mensagem atual, com espaçamento à esquerda,
+                // marcador de início de mensagem, a mensagem propriamente dita
+                // e a nova linha ("\n" em Linux/Mac, "\r\n" em Windows)
                 lastMsg =
                     $"{BlankString(posMessagesLeft)}{msgBullet}{msg}{Environment.NewLine}";
+
+                // Adicionar mensagem atual ao string builder, que produzirá
+                // todas as mensagens a mostrar de forma mais eficiente
                 sb.Append(lastMsg);
             }
 
+            // Remover última mensagem do string builder, pois esta será
+            // mostrada com cores diferentes
             sb.Length = sb.Length - lastMsg.Length;
+
+            // Posicionar o cursor para mostrar o painel de mensagens
             SetCursor(0, posMessagesTop);
+
+            // Definir cores das mensagens (exceto da última)
             SetColor(colMessagesFg, colMessagesBg);
+
+            // Mostrar mensagens (exceto a última)
+            // Notar que o string builder é automaticamente convertido em
+            // string através do seu método ToString()
             Console.Write(sb);
 
+            // Definir a cor para a última mensagem e mostrá-la
             SetColor(colLastMessageFg, colLastMessageBg);
             Console.Write(lastMsg);
         }
 
         public void RenderStart()
         {
+            // Limpar consola, prontos para começar
+            Console.Clear();
+
             SetColor(colTitleFg, colTitleBg);
             SetCursor(posTitleLeft, posTitleTop);
             Console.Write(" ========== Zombies VS Humans ========== ");
