@@ -348,8 +348,8 @@ namespace ZombiesVsHumans
         /// a UI no ecrã, com base na dimensão do mundo.
         /// </summary>
         /// <remarks>
-        /// Este método respeita o que está definido em
-        /// <see cref="IUserInterface.Initialize(int, int)"/>.
+        /// Este método é uma implementação de
+        /// <see cref="IUserInterface.Initialize(int, int)"/> para consola.
         /// </remarks>
         /// <param name="xDim">Dimensão horizontal do mundo.</param>
         /// <param name="yDim">Dimensão vertical do mundo.</param>
@@ -421,23 +421,30 @@ namespace ZombiesVsHumans
         }
 
         /// <summary>
-        /// Mostrar uma mensagem de erro.
+        /// Apresenta uma mensagem de erro ao utilizador.
         /// </summary>
-        /// <param name="msg">Mensagem de erro a mostrar.</param>
+        /// <remarks>
+        /// Este método é uma implementação de
+        /// <see cref="IUserInterface.RenderError(string)"/> para consola.
+        /// </remarks>
+        /// <param name="msg">Mensagem de erro a apresentar.</param>
         public void RenderError(string msg)
         {
             // Limpar consola
             Console.Clear();
 
-            // Mostrar mensagem de erro no output específico para erros
-            // (Console.Error)
+            // Mostrar mensagem de erro no output específico para erros na
+            // consola (chamado Console.Error)
             Console.Error.WriteLine(msg);
         }
-
 
         /// <summary>
         /// Apresenta uma mensagem ao utilizador.
         /// </summary>
+        /// <remarks>
+        /// Este método é uma implementação de
+        /// <see cref="IUserInterface.RenderMessage(string)"/> para consola.
+        /// </remarks>
         /// <param name="message">Mensagem a apresentar.</param>
         public void RenderMessage(string message)
         {
@@ -512,33 +519,47 @@ namespace ZombiesVsHumans
             Console.Write(lastMsg);
         }
 
+        /// <summary>
+        /// Inicializa a UI, apresentado-a pela primeira vez no ecrã.
+        /// </summary>
+        /// <remarks>
+        /// Este método é uma implementação de
+        /// <see cref="IUserInterface.RenderStart()"/> para consola.
+        /// </remarks>
         public void RenderStart()
         {
-            // Limpar consola, prontos para começar
+            // Limpar consola
             Console.Clear();
 
+            //
+            // Mostrar o título
+            //
             SetColor(colTitleFg, colTitleBg);
             SetCursor(posTitleLeft, posTitleTop);
             Console.Write(" ========== Zombies VS Humans ========== ");
 
+            //
+            // Mostrar a legenda
+            //
+            // Legenda do zombie controlado pela IA
             SetCursor(posLegendLeft, posLegendTop);
             SetColor(colAIZombieFg, colAIZombieBg);
             Console.Write("zXX");
             SetDefaultColor();
             Console.Write(" Zombie (AI)");
-
+            // Legenda do humano controlado pela IA
             SetCursor(posLegendLeft, posLegendTop + 1);
             SetColor(colAIHumanFg, colAIHumanBg);
             Console.Write("hXX");
             SetDefaultColor();
             Console.Write(" Human (AI)");
-
+            // Legenda do zombie controlado pelo jogador
             SetCursor(posLegendLeft, posLegendTop + 2);
             SetColor(colPlayerZombieFg, colPlayerZombieBg);
             Console.Write("ZXX");
             SetDefaultColor();
             Console.Write(" Zombie (player)");
-
+            // Legenda do humano controlado pelo jogador
             SetCursor(posLegendLeft, posLegendTop + 3);
             SetColor(colPlayerHumanFg, colPlayerHumanBg);
             Console.Write("HXX");
@@ -546,106 +567,212 @@ namespace ZombiesVsHumans
             Console.Write(" Human (player)");
         }
 
+        /// <summary>
+        /// Apresenta e/ou atualiza o painel de informação contendo as
+        /// estatísticas do jogo, por exemplo nº de turnos, nº de zombies, etc.
+        /// </summary>
+        /// <remarks>
+        /// Este método é uma implementação de
+        /// <see cref="IUserInterface.RenderInfo(IDictionary{string, int})"/>
+        /// para consola.
+        /// </remarks>
+        /// <param name="info">
+        /// Dicionário contendo a informação/estatísticas a apresentar. As
+        /// chaves são strings contendo o nome da informação, os valores são
+        /// os valores inteiros que correspondem à informação a apresentar.
+        /// </param>
         public void RenderInfo(IDictionary<string, int> info)
         {
+            // Posição relativa da linha de informação a mostrar
             int pos = 1;
 
+            // Especificar cor e posição do cursor do painel de informação
             SetColor(colInfoFg, colInfoBg);
             SetCursor(posInfoLeft, posInfoTop);
+
+            // Desenhar a barra superior do painel de informação
             Console.WriteLine("╔════════════════════════╗");
+
+            // Apresentar informação no dicionário
             foreach (KeyValuePair<string, int> kv in info)
             {
+                // Posicionar cursor para item atual de informação
                 SetCursor(posInfoLeft, posInfoTop + pos);
+
+                // Apresentar informação (chave, valor), devidamente formatada
                 Console.Write($"║ {kv.Value,5} {kv.Key,-16} ║");
+
+                // Incrementar posição relativa da informação a mostrar
                 pos++;
             }
+
+            // Desenhar a barra inferior do painel de informação
             SetCursor(posInfoLeft, posInfoTop + pos);
             Console.Write("╚════════════════════════╝");
         }
 
+        /// <summary>
+        /// Atualiza a visualização do mundo de simulação no ecrã.
+        /// </summary>
+        /// <remarks>
+        /// Este método é uma implementação de
+        /// <see cref="IUserInterface.RenderWorld(IReadOnlyWorld)"/> para
+        /// consola.
+        /// </remarks>
+        /// <param name="world">
+        /// Referência só de leitura ao objeto que define o mundo de simulação.
+        /// </param>
         public void RenderWorld(IReadOnlyWorld world)
         {
-
+            // Percorrer linhas do mundo de simulação (até ao máximo calculado)
             for (int y = 0; y < worldYRenderNCells; y++)
             {
+                // Caso a cache ainda não tenha sido inicializada, colocar o
+                // cursor no início da linha atual
                 if (cache[0, y] == UNINITIALIZED)
                     SetCursor(posWorldLeft, posWorldTop + y);
 
+                // Percorrer colunas do mundo para a linha atual (até ao máximo
+                // calculado)
                 for (int x = 0; x < worldXRenderNCells; x++)
                 {
+                    // Obter objeto posição para os valores atuais de x e y
                     Coord coord = new Coord(x, y);
 
-                    if (!world.IsOccupied(coord))
+                    // Está alguém na posição atual?
+                    if (world.IsOccupied(coord))
                     {
-                        if (cache[x, y] == EMPTY) continue;
+                        // Em caso afirmativo, tratar de mostrar esse "alguém"
 
-                        if (cache[x, y] != UNINITIALIZED)
-                            SetCursor(
-                                posWorldLeft + worldCellLength * x,
-                                posWorldTop + y);
-
-                        SetDefaultColor();
-                        Console.Write("... ");
-
-                        cache[x, y] = EMPTY;
-
-                    }
-                    else
-                    {
+                        // Variável que representa o ID único do agente
                         string agentID;
+
+                        // Agent na posição atual
                         Agent agent = world.GetAgentAt(coord);
 
+                        // Obter o ID único do agente
                         agentID = agent.ToString();
 
-                        if (cache[x, y] == agentID) continue;
-
+                        // Se o ID único do agente tiver mais de 3 carateres,
+                        // reduzir para 3 de modo a não desformatar mundo
                         if (agentID.Length > 3) agentID =
                             agentID.Substring(0, 3);
 
+                        // Este agente já cá estava no turno anterior? Se sim,
+                        // não é necessário desenhá-lo novamente, pelo que
+                        // podemos passar para a próxima iteração do ciclo
+                        if (cache[x, y] == agentID) continue;
+
+                        // Caso a cache já tenha sido inicializada, colocar o
+                        // cursos na posição correta (caso contrário já lá
+                        // estaria)
                         if (cache[x, y] != UNINITIALIZED)
                             SetCursor(
                                 posWorldLeft + worldCellLength * x,
                                 posWorldTop + y);
 
+                        // Ativar cor correta para o agente atual
                         SetAgentColor(agent.Kind, agent.Movement);
 
+                        // Mostrar agente bem como o espaço que lhe se segue
                         Console.Write(agentID);
                         SetDefaultColor();
                         Console.Write(" ");
 
+                        // Atualizar cache com a informação sobre este agente
+                        // nesta posição
                         cache[x, y] = agentID;
+                    }
+                    else
+                    {
+                        // Se chegarmos aqui é porque não está ninguém na
+                        // posição atual
 
+                        // Se a cache indicar que não estava cá ninguém no
+                        // turno anterior, escusamos de desenhar "..." e
+                        // saltamos para a próxima iteração do ciclo
+                        if (cache[x, y] == EMPTY) continue;
+
+                        // Caso a cache já tenha sido inicializada, colocar o
+                        // cursos na posição correta (caso contrário já lá
+                        // estaria)
+                        if (cache[x, y] != UNINITIALIZED)
+                            SetCursor(
+                                posWorldLeft + worldCellLength * x,
+                                posWorldTop + y);
+
+                        // Ativar cor por omissão e desenhar "...", que
+                        // corresponde a um espaço vazio
+                        SetDefaultColor();
+                        Console.Write("... ");
+
+                        // Atualizar a cache sobre esta posição, nomeadamente
+                        // com a indicação que não está cá ninguém
+                        cache[x, y] = EMPTY;
                     }
                 }
 
+                // É suposto desenhar o nevoeiro horizontal? Só o precisamos de
+                // fazer uma vez, antes do mundo ser renderizado pela primeira
+                // vez
                 if (worldXRenderFog && !worldRendered)
                 {
+                    // Posicionar cursor no fim da linha atual
                     SetCursor(
                         posWorldLeft + worldCellLength * worldXRenderNCells,
                         posWorldTop + y);
+
+                    // Desenhar nevoeiro
                     Console.Write("~~~ ");
                 }
             }
+
+            // É suposto desenhar o nevoeiro vertical? Só o precisamos de fazer
+            // uma vez, antes do mundo ser renderizado pela primeira vez.
             if (worldYRenderFog && !worldRendered)
             {
+                // Vamos usar um string builder para construir uma linha
+                // inteira de nevoeiro, que será a última linha do mundo,
+                // contendo um nevoeiro para cada coluna
                 string fogLine = new StringBuilder().Insert(
+                    // Inserir nevoeiro a partir da posição 0 do string builder
                     0, "~~~ ",
+                    // Repetir esse nevoeiro o número de vezes necessária
                     worldXRenderNCells + (worldXRenderFog ? 1 : 0)).ToString();
 
+                // Posicionar cursos no início da última linha
                 SetCursor(posWorldLeft, posWorldTop + worldYRenderNCells);
+
+                // Desenhar nevoeiro guardado no string builder
                 Console.Write(fogLine);
             }
 
+            // Especificar que o mundo já foi renderizado uma vez
             worldRendered = true;
-
         }
 
+        /// <summary>
+        /// Aguarda por input do utilizador para definir a direção na qual o
+        /// agente (controlado pelo jogador) se deve mover.
+        /// </summary>
+        /// <remarks>
+        /// Este método é uma implementação de
+        /// <see cref="IUserInterface.InputDirection(string)"/> para consola.
+        /// </remarks>
+        /// <param name="id">
+        /// Identificar único do agente, de modo a que o
+        /// jogador saiba de que agente se trata.
+        /// </param>
+        /// <returns>Direção para a qual o agente se deve mover.</returns>
         public Direction InputDirection(string id)
         {
+            // Direção a devolver
             Direction dir = Direction.None;
 
+            // Ativar cor para o painel de diálogo do jogador
             SetColor(colPlayerDialogFg, colPlayerDialogBg);
 
+            // Mostrar painel
             SetCursor(posPlayerDialogLeft, posDialogTop);
             Console.Write("╔══════════════════════════╗");
             SetCursor(posPlayerDialogLeft, posDialogTop + 1);
@@ -662,12 +789,21 @@ namespace ZombiesVsHumans
             Console.Write("╚══════════════════════════╝");
             SetCursor(posPlayerDialogLeft + 7, posDialogTop + 5);
 
+            // Ativar cursor temporariamente para jogador perceber que tem que
+            // inserir uma tecla
             Console.CursorVisible = true;
+
+            // Entrar num ciclo até que jogador pressione uma tecla válida
             while (dir == Direction.None)
             {
+                // Ler tecla, mas não mostrando o respetivo valor inserido no
+                // ecrã
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+                // Verificar se se trata de uma tecla válida
                 switch (keyInfo.Key)
                 {
+                    // Verificar se é uma tecla válida para direção Up
                     case ConsoleKey.NumPad8:
                     case ConsoleKey.D8:
                     case ConsoleKey.UpArrow:
@@ -675,6 +811,7 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.Up);
                         dir = Direction.Up;
                         break;
+                    // Verificar se é uma tecla válida para direção UpLeft
                     case ConsoleKey.NumPad7:
                     case ConsoleKey.D7:
                     case ConsoleKey.Home:
@@ -682,6 +819,7 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.UpLeft);
                         dir = Direction.UpLeft;
                         break;
+                    // Verificar se é uma tecla válida para direção Left
                     case ConsoleKey.NumPad4:
                     case ConsoleKey.D4:
                     case ConsoleKey.LeftArrow:
@@ -689,6 +827,7 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.Left);
                         dir = Direction.Left;
                         break;
+                    // Verificar se é uma tecla válida para direção DownLeft
                     case ConsoleKey.NumPad1:
                     case ConsoleKey.D1:
                     case ConsoleKey.End:
@@ -696,6 +835,7 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.DownLeft);
                         dir = Direction.DownLeft;
                         break;
+                    // Verificar se é uma tecla válida para direção Down
                     case ConsoleKey.NumPad2:
                     case ConsoleKey.D2:
                     case ConsoleKey.DownArrow:
@@ -703,6 +843,7 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.Down);
                         dir = Direction.Down;
                         break;
+                    // Verificar se é uma tecla válida para direção DownRight
                     case ConsoleKey.NumPad3:
                     case ConsoleKey.D3:
                     case ConsoleKey.PageDown:
@@ -710,6 +851,7 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.DownRight);
                         dir = Direction.DownRight;
                         break;
+                    // Verificar se é uma tecla válida para direção Right
                     case ConsoleKey.NumPad6:
                     case ConsoleKey.D6:
                     case ConsoleKey.RightArrow:
@@ -717,6 +859,7 @@ namespace ZombiesVsHumans
                         Console.WriteLine(Direction.Right);
                         dir = Direction.Right;
                         break;
+                    // Verificar se é uma tecla válida para direção UpRight
                     case ConsoleKey.NumPad9:
                     case ConsoleKey.D9:
                     case ConsoleKey.PageUp:
@@ -726,53 +869,105 @@ namespace ZombiesVsHumans
                         break;
                 }
             }
+
+            // Voltar a esconder cursor
             Console.CursorVisible = false;
+
+            // Devolver direção escolhida pelo jogador
             return dir;
         }
 
+        /// <summary>
+        /// Finaliza e termina a UI.
+        /// </summary>
+        /// <remarks>
+        /// Este método é uma implementação de
+        /// <see cref="IUserInterface.RenderFinish"/> para consola.
+        /// </remarks>
         public void RenderFinish()
         {
+            // Torna o cursor de novo visível no terminal
             Console.CursorVisible = true;
+            // Ativa as cores por omissão no terminal
             SetDefaultColor();
+            // Insere nova linha
             Console.WriteLine();
         }
+
+        /// <summary>
+        /// Método privado que posiciona o cursor numa dada posição da consola.
+        /// </summary>
+        /// <param name="left">
+        /// Distância (em carateres) ao lado esquerdo da consola.
+        /// </param>
+        /// <param name="top">
+        /// Distância (em carateres) ao topo da consola.
+        /// </param>
         private void SetCursor(int left, int top)
         {
             Console.CursorTop = top;
             Console.CursorLeft = left;
         }
 
+        /// <summary>
+        /// Método privado que ativa a cor por omissão.
+        /// </summary>
         private void SetDefaultColor()
         {
             SetColor(colDefaultFg, colDefaultBg);
         }
 
+        /// <summary>
+        /// Método privado que ativa a cor especificada.
+        /// </summary>
+        /// <param name="fgColor">Cor de primeiro plano.</param>
+        /// <param name="bgColor">Cor de fundo.</param>
         private void SetColor(ConsoleColor fgColor, ConsoleColor bgColor)
         {
             Console.ForegroundColor = fgColor;
             Console.BackgroundColor = bgColor;
         }
 
+        /// <summary>
+        /// Método privado que ativa a cor para um agente, dependendo das suas
+        /// caraterísticas.
+        /// </summary>
+        /// <param name="kind">Género do agente (humano ou zombie).</param>
+        /// <param name="mov">Tipo de movimento do agente (jogador ou IA).</param>
         private void SetAgentColor(AgentKind kind, AgentMovement mov)
         {
             if (kind == AgentKind.Zombie && mov == AgentMovement.AI)
             {
+                // Ativar cor para zombie movido pela IA
                 SetColor(colAIZombieFg, colAIZombieBg);
             }
             else if (kind == AgentKind.Zombie && mov == AgentMovement.Player)
             {
+                // Ativar cor para zombie movido pelo jogador
                 SetColor(colPlayerZombieFg, colPlayerZombieBg);
             }
             else if (kind == AgentKind.Human && mov == AgentMovement.AI)
             {
+                // Ativar cor para humano movido pela IA
                 SetColor(colAIHumanFg, colAIHumanBg);
             }
             else if (kind == AgentKind.Human && mov == AgentMovement.Player)
             {
+                // Ativar cor para humano movido pelo jogador
                 SetColor(colPlayerHumanFg, colPlayerHumanBg);
             }
         }
 
+        /// <summary>
+        /// Método privado que devolve uma string em branco, composta apenas
+        /// por espaços, com comprimento definido pelo parâmetro
+        /// <paramref name="len"/>.
+        /// </summary>
+        /// <param name="len">Comprimento da string.</param>
+        /// <returns>
+        /// Uma string em branco com comprimento definido no parâmetro
+        /// <paramref name="len"/>.
+        /// </returns>
         private string BlankString(int len) =>
             String.Format("{0," + len + "}", " ");
     }
