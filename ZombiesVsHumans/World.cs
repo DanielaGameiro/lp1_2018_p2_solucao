@@ -165,7 +165,6 @@ namespace ZombiesVsHumans
         /// Posição vizinha da posição dada no parâmetro <paramref name="pos"/>
         /// indo na direção indicada no parâmetro <paramref name="direction"/>.
         /// </returns>
-
         public Coord GetNeighbor(Coord pos, Direction direction)
         {
             // x e y começam por ser a posição atual
