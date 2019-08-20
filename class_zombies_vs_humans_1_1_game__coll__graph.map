@@ -1,0 +1,8 @@
+<map id="Game" name="Game">
+<area shape="rect" id="node1" title="Classe responsável por gerir o andamento do jogo." alt="" coords="64,851,197,1016"/>
+<area shape="rect" id="node2" href="$interface_zombies_vs_humans_1_1_i_read_only_world.html" title="Interface que oferece uma visão só de leitura do mundo de simulação." alt="" coords="52,5,182,156"/>
+<area shape="rect" id="node5" href="$class_zombies_vs_humans_1_1_world.html" title="Mundo de simulação." alt="" coords="52,219,182,428"/>
+<area shape="rect" id="node6" href="$class_zombies_vs_humans_1_1_abstract_movement.html" title="Classe que define de forma abstrata o movimento realizado pelos agentes." alt="" coords="207,277,358,369"/>
+<area shape="rect" id="node3" href="$struct_zombies_vs_humans_1_1_options.html" title="Struct que trata as opções inseridas pelo utilizador na linha de comandos, disponibilizando&#45;as depois..." alt="" coords="202,491,325,788"/>
+<area shape="rect" id="node4" href="$class_zombies_vs_humans_1_1_agent.html" title="Classe que representa um agente." alt="" coords="83,557,178,722"/>
+</map>

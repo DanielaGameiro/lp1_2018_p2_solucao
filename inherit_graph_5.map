@@ -1,0 +1,4 @@
+<map id="Representação gráfica da hiearquia da classe" name="Representação gráfica da hiearquia da classe">
+<area shape="rect" id="node1" href="$interface_zombies_vs_humans_1_1_i_user_interface.html" title="Interface que define de forma geral a funcionalidade de uma UI para o jogo Zombies vs Humans." alt="" coords="5,5,111,32"/>
+<area shape="rect" id="node2" href="$class_zombies_vs_humans_1_1_console_user_interface.html" title="Classe que implementa uma UI em modo de consola para o jogo Zombies vs Humans." alt="" coords="159,5,308,32"/>
+</map>

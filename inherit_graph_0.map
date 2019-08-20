@@ -1,0 +1,5 @@
+<map id="Representação gráfica da hiearquia da classe" name="Representação gráfica da hiearquia da classe">
+<area shape="rect" id="node1" href="$class_zombies_vs_humans_1_1_abstract_movement.html" title="Classe que define de forma abstrata o movimento realizado pelos agentes." alt="" coords="5,31,137,57"/>
+<area shape="rect" id="node2" href="$class_zombies_vs_humans_1_1_a_i_movement.html" title="Define o movimento por &quot;inteligência artificial&quot; dos agentes." alt="" coords="197,5,293,32"/>
+<area shape="rect" id="node3" href="$class_zombies_vs_humans_1_1_player_movement.html" title="Classe que controla o movimento dos agentes controlado pelo jogador." alt="" coords="185,56,305,83"/>
+</map>

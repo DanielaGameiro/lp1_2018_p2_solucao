@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.16"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Zombies vs Humanos: Código-Fonte de ZombiesVsHumans/Program.cs</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Zombies vs Humanos
+   </div>
+   <div id="projectbrief">Proposta de solução para o 2º projeto de LP1 2018/19</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.16 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Localizar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_program_8cs_source.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Program.cs</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_program_8cs.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_zombies_vs_humans.html">ZombiesVsHumans</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_program.html">   15</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">   27</a></span>&#160;        <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html">IUserInterface</a> <a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a> { <span class="keyword">get</span>; <span class="keyword">private</span> <span class="keyword">set</span>; }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_program.html#a25f94f55e8993781b6a82d5eb88ea252">   69</a></span>&#160;        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_zombies_vs_humans_1_1_program.html#a25f94f55e8993781b6a82d5eb88ea252">Main</a>(<span class="keywordtype">string</span>[] args)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="comment">// Instanciar uma UI para consola. Se quisermos outro tipo de UI,</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="comment">// por exemplo uma interface gráfica, bastaria instanciar outro</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="comment">// tipo de objeto, desde que a sua classe implemente a interface</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="comment">// IUserInterface.</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a> = <span class="keyword">new</span> <a class="code" href="class_zombies_vs_humans_1_1_console_user_interface.html">ConsoleUserInterface</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="comment">// Tratar as opções da linha de comando, criando um objeto do tipo</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="comment">// Options, que contém essas mesmas opções já tratadas.</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <a class="code" href="struct_zombies_vs_humans_1_1_options.html">Options</a> options = <a class="code" href="struct_zombies_vs_humans_1_1_options.html">Options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#aec559800043953f9bb578f998235fa4b">ParseArgs</a>(args);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="comment">// Foram encontrados erros no tratamento das opções da linha de</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="comment">// comandos?</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">if</span> (options.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#aecc60211f552f50fdb6d7b78e4a9b390">Error</a>)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="comment">// Em caso afirmativo, mostrar todos esses erros</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordflow">foreach</span> (<span class="keywordtype">string</span> error <span class="keywordflow">in</span> options.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ad4000402d80d0b154a9f8c4298bab860">ErrorMessages</a>)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#a7f3ad22d1123f9fc59775013b0f075d5">RenderError</a>(<span class="stringliteral">&quot;ERROR: &quot;</span> + error);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="comment">// Caso contrário, criar um novo jogo...</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_game.html">Game</a> game = <span class="keyword">new</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html">Game</a>(options);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="comment">// ...e jogá-lo</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                game.<a class="code" href="class_zombies_vs_humans_1_1_game.html#a12574569144fb9d22d996965ee42b627">Play</a>();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a12574569144fb9d22d996965ee42b627"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a12574569144fb9d22d996965ee42b627">ZombiesVsHumans.Game.Play</a></div><div class="ttdeci">void Play()</div><div class="ttdoc">Começar o jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00124">Game.cs:124</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_user_interface_html"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_user_interface.html">ZombiesVsHumans.IUserInterface</a></div><div class="ttdoc">Interface que define de forma geral a funcionalidade de uma UI para o jogo Zombies vs Humans.</div><div class="ttdef"><b>Definition:</b> <a href="_i_user_interface_8cs_source.html#l00022">IUserInterface.cs:22</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_aecc60211f552f50fdb6d7b78e4a9b390"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#aecc60211f552f50fdb6d7b78e4a9b390">ZombiesVsHumans.Options.Error</a></div><div class="ttdeci">bool Error</div><div class="ttdoc">Propriedade auto-implementada que indica se ocorreram erros no tratamento das opções da linha de coma...</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00082">Options.cs:82</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_console_user_interface_html"><div class="ttname"><a href="class_zombies_vs_humans_1_1_console_user_interface.html">ZombiesVsHumans.ConsoleUserInterface</a></div><div class="ttdoc">Classe que implementa uma UI em modo de consola para o jogo Zombies vs Humans.</div><div class="ttdef"><b>Definition:</b> <a href="_console_user_interface_8cs_source.html#l00019">ConsoleUserInterface.cs:19</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_user_interface_html_a7f3ad22d1123f9fc59775013b0f075d5"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_user_interface.html#a7f3ad22d1123f9fc59775013b0f075d5">ZombiesVsHumans.IUserInterface.RenderError</a></div><div class="ttdeci">void RenderError(string msg)</div><div class="ttdoc">Apresenta uma mensagem de erro ao utilizador.</div></div>
+<div class="ttc" id="anamespace_zombies_vs_humans_html"><div class="ttname"><a href="namespace_zombies_vs_humans.html">ZombiesVsHumans</a></div><div class="ttdef"><b>Definition:</b> <a href="_abstract_movement_8cs_source.html#l00009">AbstractMovement.cs:9</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_program_html_afd8b750deb5d324091451e2c29a470a0"><div class="ttname"><a href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">ZombiesVsHumans.Program.UI</a></div><div class="ttdeci">static IUserInterface UI</div><div class="ttdoc">Uma referência static e globalmente acessível ao objeto que implementa a interface de utilizador (UI)...</div><div class="ttdef"><b>Definition:</b> <a href="_program_8cs_source.html#l00027">Program.cs:27</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_ad4000402d80d0b154a9f8c4298bab860"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#ad4000402d80d0b154a9f8c4298bab860">ZombiesVsHumans.Options.ErrorMessages</a></div><div class="ttdeci">IEnumerable&lt; string &gt; ErrorMessages</div><div class="ttdoc">Propriedade que expõe um enumerável mensagens de erro que possam ter ocorrido no tratamento das opçõe...</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00091">Options.cs:91</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_program_html"><div class="ttname"><a href="class_zombies_vs_humans_1_1_program.html">ZombiesVsHumans.Program</a></div><div class="ttdoc">Classe que contém o método Main(), pelo que o programa começa aqui.</div><div class="ttdef"><b>Definition:</b> <a href="_program_8cs_source.html#l00015">Program.cs:15</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html">ZombiesVsHumans.Options</a></div><div class="ttdoc">Struct que trata as opções inseridas pelo utilizador na linha de comandos, disponibilizando-as depois...</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00023">Options.cs:23</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_aec559800043953f9bb578f998235fa4b"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#aec559800043953f9bb578f998235fa4b">ZombiesVsHumans.Options.ParseArgs</a></div><div class="ttdeci">static Options ParseArgs(string[] args)</div><div class="ttdoc">Método estático que trata as opções da linha de comandos, produzindo objetos do tipo Options que cont...</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00175">Options.cs:175</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html">ZombiesVsHumans.Game</a></div><div class="ttdoc">Classe responsável por gerir o andamento do jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00018">Game.cs:18</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_program_html_a25f94f55e8993781b6a82d5eb88ea252"><div class="ttname"><a href="class_zombies_vs_humans_1_1_program.html#a25f94f55e8993781b6a82d5eb88ea252">ZombiesVsHumans.Program.Main</a></div><div class="ttdeci">static void Main(string[] args)</div><div class="ttdoc">O programa começa aqui.</div><div class="ttdef"><b>Definition:</b> <a href="_program_8cs_source.html#l00069">Program.cs:69</a></div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d6d709bbf808010c0cbc189ce9b80d10.html">ZombiesVsHumans</a></li><li class="navelem"><a class="el" href="_program_8cs.html">Program.cs</a></li>
+    <li class="footer">Gerado por
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
+  </ul>
+</div>
+</body>
+</html>

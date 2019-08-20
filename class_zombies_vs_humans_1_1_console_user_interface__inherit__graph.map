@@ -1,0 +1,4 @@
+<map id="ConsoleUserInterface" name="ConsoleUserInterface">
+<area shape="rect" id="node1" title="Classe que implementa uma UI em modo de consola para o jogo Zombies vs Humans." alt="" coords="5,233,216,1279"/>
+<area shape="rect" id="node2" href="$interface_zombies_vs_humans_1_1_i_user_interface.html" title="Interface que define de forma geral a funcionalidade de uma UI para o jogo Zombies vs Humans." alt="" coords="42,5,179,185"/>
+</map>

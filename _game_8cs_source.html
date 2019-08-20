@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.16"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Zombies vs Humanos: Código-Fonte de ZombiesVsHumans/Game.cs</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Zombies vs Humanos
+   </div>
+   <div id="projectbrief">Proposta de solução para o 2º projeto de LP1 2018/19</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.16 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Localizar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_game_8cs_source.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Game.cs</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_game_8cs.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using</span> System;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using</span> System.Threading;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using</span> System.Collections.Generic;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_zombies_vs_humans.html">ZombiesVsHumans</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html">   18</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="class_zombies_vs_humans_1_1_game.html">Game</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="comment">// ///////////////////////////////////////////////////////////////// //</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="comment">// Variáveis de instância que podem ser alteradas manualmente para   //</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="comment">// personalizar a o jogo. Idealmente os seus valores deveriam ser    //</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="comment">// carregados a partir de um ficheiro de configuração.               //</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="comment">// ///////////////////////////////////////////////////////////////// //</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a225fe6b1d05c36cbd8563bb3bfdaef0e">   30</a></span>&#160;        <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a225fe6b1d05c36cbd8563bb3bfdaef0e">agentActionDelay</a> = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a21640683bbaec411fafc927e1074e61e">   35</a></span>&#160;        <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a21640683bbaec411fafc927e1074e61e">turnActionDelay</a> = 300;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// ///////////////////////////////////////////////////////////////// //</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">// Outras variáveis de instância, não devem ser modificadas.         //</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="comment">// ///////////////////////////////////////////////////////////////// //</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">   48</a></span>&#160;        <span class="keyword">private</span> <a class="code" href="struct_zombies_vs_humans_1_1_options.html">Options</a> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">   53</a></span>&#160;        <span class="keyword">private</span> <a class="code" href="interface_zombies_vs_humans_1_1_i_read_only_world.html">IReadOnlyWorld</a> <a class="code" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">world</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">   62</a></span>&#160;        <span class="keyword">private</span> <a class="code" href="class_zombies_vs_humans_1_1_agent.html">Agent</a>[] <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a2391b9dab13f09bae65ae349c8d4c271">   67</a></span>&#160;        <span class="keyword">private</span> Random <a class="code" href="class_zombies_vs_humans_1_1_game.html#a2391b9dab13f09bae65ae349c8d4c271">rand</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#af890b560d7eb5a93b55ae499eae804ab">   73</a></span>&#160;        <span class="keyword">public</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#af890b560d7eb5a93b55ae499eae804ab">Game</a>(<a class="code" href="struct_zombies_vs_humans_1_1_options.html">Options</a> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="comment">// Guardar as opções do jogo numa variável de instância</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            this.options = <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="comment">// Criar o mundo de jogo com o tamanho indicado nas opções do jogo</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">world</a> = <span class="keyword">new</span> <a class="code" href="class_zombies_vs_humans_1_1_world.html">World</a>((<span class="keywordtype">int</span>)<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#a1adec114260f53b9e9f6da5c787f63a6">XDim</a>, (<span class="keywordtype">int</span>)<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#aeee84ca0252220bc0dd4e0485cc87e26">YDim</a>);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="comment">// Instanciar o array de agentes com o tamanho exacto para todos</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="comment">// os agentes</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a> = <span class="keyword">new</span> <a class="code" href="class_zombies_vs_humans_1_1_agent.html">Agent</a>[<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ab80b6d35a7077df5cb9b80d69bb27925">Zombies</a> + <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#a6ef3fc73ef51ce76522c96e343971716">Humans</a>];</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="comment">// Instanciar o gerador de números aleatórios</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_game.html#a2391b9dab13f09bae65ae349c8d4c271">rand</a> = <span class="keyword">new</span> Random();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="comment">// Criar os zombies</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">for</span> (uint i = 0; i &lt; <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ab80b6d35a7077df5cb9b80d69bb27925">Zombies</a>; i++)</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="keywordflow">if</span> (i &lt; <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ac9b29677de5f146089cb1a369752b233">PlayerZombies</a>)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    <span class="comment">// Criar novo zombie controlado pelo jogador</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_game.html#a6bb3ffce83f6ff399e06a966a1072b63">NewAgent</a>(<a class="code" href="namespace_zombies_vs_humans.html#af4a832c130d8463de8e0b1d6f1079711">AgentKind</a>.Zombie, <a class="code" href="namespace_zombies_vs_humans.html#a90d26d0d95e26e090395ce210be389fb">AgentMovement</a>.Player, (<span class="keywordtype">int</span>)i);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="comment">// Criar novo zombie controlado pela IA</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_game.html#a6bb3ffce83f6ff399e06a966a1072b63">NewAgent</a>(<a class="code" href="namespace_zombies_vs_humans.html#af4a832c130d8463de8e0b1d6f1079711">AgentKind</a>.Zombie, <a class="code" href="namespace_zombies_vs_humans.html#a90d26d0d95e26e090395ce210be389fb">AgentMovement</a>.AI, (<span class="keywordtype">int</span>)i);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="comment">// Criar os humanos</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">for</span> (uint i = 0; i &lt; <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#a6ef3fc73ef51ce76522c96e343971716">Humans</a>; i++)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                <span class="keywordflow">if</span> (i &lt; <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#afd70ebbcb73b1b832b7a410899a065af">PlayerHumans</a>)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    <span class="comment">// Criar novo humano controlado pelo jogador</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_game.html#a6bb3ffce83f6ff399e06a966a1072b63">NewAgent</a>(<a class="code" href="namespace_zombies_vs_humans.html#af4a832c130d8463de8e0b1d6f1079711">AgentKind</a>.Human, <a class="code" href="namespace_zombies_vs_humans.html#a90d26d0d95e26e090395ce210be389fb">AgentMovement</a>.Player,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                        (<span class="keywordtype">int</span>)(<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ab80b6d35a7077df5cb9b80d69bb27925">Zombies</a> + i));</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    <span class="comment">// Criar novo humano controlado pela IA</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_game.html#a6bb3ffce83f6ff399e06a966a1072b63">NewAgent</a>(<a class="code" href="namespace_zombies_vs_humans.html#af4a832c130d8463de8e0b1d6f1079711">AgentKind</a>.Human, <a class="code" href="namespace_zombies_vs_humans.html#a90d26d0d95e26e090395ce210be389fb">AgentMovement</a>.AI,</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                        (<span class="keywordtype">int</span>)(<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ab80b6d35a7077df5cb9b80d69bb27925">Zombies</a> + i));</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a12574569144fb9d22d996965ee42b627">  124</a></span>&#160;        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a12574569144fb9d22d996965ee42b627">Play</a>()</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        {</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="comment">// Chaves (nome) da informação estatística sobre o jogo</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordtype">string</span> turnKey = <span class="stringliteral">&quot;Turn&quot;</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordtype">string</span> totalZombiesKey = <span class="stringliteral">&quot;Total Zombies&quot;</span>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="keywordtype">string</span> totalHumansKey = <span class="stringliteral">&quot;Total Humans&quot;</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keywordtype">string</span> playerZombiesKey = <span class="stringliteral">&quot;Player Zombies&quot;</span>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <span class="keywordtype">string</span> playerHumansKey = <span class="stringliteral">&quot;Player Humans&quot;</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="comment">// Valores da informação estatística sobre o jogo</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordtype">int</span> totalZombiesValue = (int)<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ab80b6d35a7077df5cb9b80d69bb27925">Zombies</a>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keywordtype">int</span> totalHumansValue = (<span class="keywordtype">int</span>)<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#a6ef3fc73ef51ce76522c96e343971716">Humans</a>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordtype">int</span> playerZombiesValue = (int)<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ac9b29677de5f146089cb1a369752b233">PlayerZombies</a>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordtype">int</span> playerHumansValue = (<span class="keywordtype">int</span>)<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#afd70ebbcb73b1b832b7a410899a065af">PlayerHumans</a>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="comment">// Criar um dicionário com as chaves-valores da informação</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="comment">// estatística sobre o jogo</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            IDictionary&lt;string, int&gt; info = <span class="keyword">new</span> Dictionary&lt;string, int&gt;()</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                { turnKey, 0 },</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                { totalZombiesKey, totalZombiesValue },</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                { totalHumansKey, totalHumansValue },</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                { playerZombiesKey, playerZombiesValue },</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                { playerHumansKey, playerHumansValue }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            };</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <span class="comment">// Inicializar a interface gráfica tendo em conta o tamanho do</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="comment">// mundo de jogo</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#ae44b71d8908fa46128d0a75ceff26ae8">Initialize</a>(<a class="code" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">world</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_read_only_world.html#a9585664dbb4433831086d68dc183cbdb">XDim</a>, <a class="code" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">world</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_read_only_world.html#a7bd0b7fa3f79dbceb2fb78bbacbbc2a4">YDim</a>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="comment">// Inicializar renderização</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#a4206788d11a620174f6f99685579fa9d">RenderStart</a>();</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="comment">// Renderizar mundo de jogo pela primeira vez</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#a11c194d7c4c235b2d5cb70d827615b32">RenderWorld</a>(<a class="code" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">world</a>);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <span class="comment">// Renderizar informação estatística sobre o jogo pela primeira vez</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#a0f0ce91eadac05a3f00afce1d95c014e">RenderInfo</a>(info);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            <span class="comment">// Game loop:</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            <span class="comment">// - Ciclo principal do jogo, cada iteração corresponde a um turno</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="comment">// - Ciclo continua enquanto não tiver sido atingindo o número</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="comment">//   máximo de turnos e enquanto existirem humanos no jogo</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#ada26173928397a1fb91110f6bda865cc">Turns</a> &amp;&amp; totalHumansValue &gt; 0; i++)</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                <span class="comment">// Atualizar turno no dicionário que contém a info estatística</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                info[turnKey] = i + 1;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                <span class="comment">// Atualizar a informação estatística na UI</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#a0f0ce91eadac05a3f00afce1d95c014e">RenderInfo</a>(info);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <span class="comment">// Mostrar mensagem com indicação de novo turno</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#adc78620634c277b7451a8f5b35f6635b">RenderMessage</a>($<span class="stringliteral">&quot;Starting turn {i + 1}&quot;</span>);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                <span class="comment">// Embaralhar array de agentes</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_game.html#a2697cc8b37d7bca7c055228382a9b208">Shuffle</a>();</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                <span class="comment">// Percorrer array de agentes de modo a que eles possam</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                <span class="comment">// realizar a sua ação no turno atual</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                <span class="keywordflow">foreach</span> (<a class="code" href="class_zombies_vs_humans_1_1_agent.html">Agent</a> agent <span class="keywordflow">in</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>)</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                {</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                    <span class="comment">// Variável que indica se houve uma alteração na composição</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                    <span class="comment">// da população (isto é, se um humano se transformou em</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                    <span class="comment">// zombie)</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                    <span class="keywordtype">bool</span> changePopulation;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                    <span class="comment">// Mensagem devolvida pelo agente após ter realizado a sua</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                    <span class="comment">// ação neste turno</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                    <span class="keywordtype">string</span> agentMessage;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                    <span class="comment">// Se for necessário esperar entre a ação de cada agente,</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                    <span class="comment">// então vamos fazê-lo agora</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                    <span class="keywordflow">if</span> (<a class="code" href="class_zombies_vs_humans_1_1_game.html#a225fe6b1d05c36cbd8563bb3bfdaef0e">agentActionDelay</a> &gt; 0) Thread.Sleep(<a class="code" href="class_zombies_vs_humans_1_1_game.html#a225fe6b1d05c36cbd8563bb3bfdaef0e">agentActionDelay</a>);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                    <span class="comment">// Pedir ao agente atual para realizar a sua ação</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                    agent.<a class="code" href="class_zombies_vs_humans_1_1_agent.html#af757b9997f0374f726935421024ab3d3">PlayTurn</a>(out changePopulation, out agentMessage);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                    <span class="comment">// Houve uma alteração na população devido à ação do agente?</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                    <span class="keywordflow">if</span> (changePopulation)</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                    {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                        <span class="comment">// Se sim, recontar número de agentes...</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                        <a class="code" href="class_zombies_vs_humans_1_1_game.html#a3475b689cb49d518c1aa3fe6919047ab">ReCountAgents</a>(</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                            out totalZombiesValue, out totalHumansValue,</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                            out playerZombiesValue, out playerHumansValue);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                        <span class="comment">// ...atualizar dicionário com informação estatística...</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                        info[totalZombiesKey] = totalZombiesValue;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                        info[totalHumansKey] = totalHumansValue;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                        info[playerZombiesKey] = playerZombiesValue;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                        info[playerHumansKey] = playerHumansValue;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                        <span class="comment">// ...e atualizar UI com essa nova informação</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                        <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#a0f0ce91eadac05a3f00afce1d95c014e">RenderInfo</a>(info);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                    }</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                    <span class="comment">// Mostrar mensagem devolvida pelo agente relativa à sua</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                    <span class="comment">// ação</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#adc78620634c277b7451a8f5b35f6635b">RenderMessage</a>(agentMessage);</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                    <span class="comment">// Atualizar mundo de simulação na UI após a ação do agente</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                    <span class="comment">// atual</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#a11c194d7c4c235b2d5cb70d827615b32">RenderWorld</a>(<a class="code" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">world</a>);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                }</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                <span class="comment">// Se for necessário esperar entre turnos, então vamos fazê-lo</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                <span class="comment">// agora</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="class_zombies_vs_humans_1_1_game.html#a21640683bbaec411fafc927e1074e61e">turnActionDelay</a> &gt; 0) Thread.Sleep(<a class="code" href="class_zombies_vs_humans_1_1_game.html#a21640683bbaec411fafc927e1074e61e">turnActionDelay</a>);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            }</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <span class="comment">// Se chegarmos aqui significa que o jogo terminou, sendo</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <span class="comment">// necessário mostrar a mensagem de vitória adequada</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <span class="keywordflow">if</span> (totalHumansValue &gt; 0)</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                <span class="comment">// Humanos sobreviveram!</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#adc78620634c277b7451a8f5b35f6635b">RenderMessage</a>(</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                    $<span class="stringliteral">&quot;Humans survived after {options.Turns} turns!&quot;</span>);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                <span class="comment">// Zombies infetaram todos os humanos!</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#adc78620634c277b7451a8f5b35f6635b">RenderMessage</a>(</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                    $<span class="stringliteral">&quot;No humans left! Zombies won after {info[turnKey]} turns!&quot;</span>);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <span class="comment">// Finalizar UI/renderização</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_program.html">Program</a>.<a class="code" href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">UI</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_user_interface.html#afdc6b2ea3aa34c3608d19a87a642ec84">RenderFinish</a>();</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        }</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a6bb3ffce83f6ff399e06a966a1072b63">  252</a></span>&#160;        <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a6bb3ffce83f6ff399e06a966a1072b63">NewAgent</a>(<a class="code" href="namespace_zombies_vs_humans.html#af4a832c130d8463de8e0b1d6f1079711">AgentKind</a> kind, <a class="code" href="namespace_zombies_vs_humans.html#a90d26d0d95e26e090395ce210be389fb">AgentMovement</a> movement, <span class="keywordtype">int</span> <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        {</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="comment">// Posição inicial do agente</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            <a class="code" href="struct_zombies_vs_humans_1_1_coord.html">Coord</a> pos;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <span class="comment">// Referência ao agente</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_agent.html">Agent</a> agent;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            <span class="comment">// Escolher um local aleatório desocupado para colocar o agente</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <span class="keywordflow">do</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            {</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                pos = <span class="keyword">new</span> <a class="code" href="struct_zombies_vs_humans_1_1_coord.html">Coord</a>(</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_game.html#a2391b9dab13f09bae65ae349c8d4c271">rand</a>.Next((<span class="keywordtype">int</span>)<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#a1adec114260f53b9e9f6da5c787f63a6">XDim</a>),</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                    <a class="code" href="class_zombies_vs_humans_1_1_game.html#a2391b9dab13f09bae65ae349c8d4c271">rand</a>.Next((<span class="keywordtype">int</span>)<a class="code" href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">options</a>.<a class="code" href="struct_zombies_vs_humans_1_1_options.html#aeee84ca0252220bc0dd4e0485cc87e26">YDim</a>));</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                <span class="comment">// Este ciclo continua até que um local desocupado tenha sido</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                <span class="comment">// encontrado</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            } <span class="keywordflow">while</span> (<a class="code" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">world</a>.<a class="code" href="interface_zombies_vs_humans_1_1_i_read_only_world.html#ad1bb201cf252eee16b96973286ee8dbd">IsOccupied</a>(pos));</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            <span class="comment">// Instanciar novo agente</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            agent = <span class="keyword">new</span> <a class="code" href="class_zombies_vs_humans_1_1_agent.html">Agent</a>(<span class="keywordtype">id</span>, pos, kind, movement, (<a class="code" href="class_zombies_vs_humans_1_1_world.html">World</a>)<a class="code" href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">world</a>);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            <span class="comment">// Guardar agente no array de agentes</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>[id] = agent;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a2697cc8b37d7bca7c055228382a9b208">  283</a></span>&#160;        <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a2697cc8b37d7bca7c055228382a9b208">Shuffle</a>()</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        {</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>.Length - 1; i &gt;= 1; i--)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_agent.html">Agent</a> aux;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <span class="keywordtype">int</span> j = <a class="code" href="class_zombies_vs_humans_1_1_game.html#a2391b9dab13f09bae65ae349c8d4c271">rand</a>.Next(i + 1);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                aux = <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>[j];</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>[j] = <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>[i];</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>[i] = aux;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            }</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        }</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno"><a class="line" href="class_zombies_vs_humans_1_1_game.html#a3475b689cb49d518c1aa3fe6919047ab">  312</a></span>&#160;        <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a3475b689cb49d518c1aa3fe6919047ab">ReCountAgents</a>(</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            out <span class="keywordtype">int</span> totalZombies, out <span class="keywordtype">int</span> totalHumans,</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            out <span class="keywordtype">int</span> playerZombies, out <span class="keywordtype">int</span> playerHumans)</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        {</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            <span class="comment">// Valores iniciais</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;            totalZombies = 0;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            totalHumans = 0;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            playerZombies = 0;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            playerHumans = 0;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            <span class="comment">// Percorrer array de agentes</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            <span class="keywordflow">foreach</span> (<a class="code" href="class_zombies_vs_humans_1_1_agent.html">Agent</a> ag <span class="keywordflow">in</span> <a class="code" href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">agents</a>)</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                <span class="comment">// Agente é zombie ou humano?</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                <span class="keywordflow">if</span> (ag.<a class="code" href="class_zombies_vs_humans_1_1_agent.html#ab3f3ceae4c6521630b6959a7e5c49b18">Kind</a> == <a class="code" href="namespace_zombies_vs_humans.html#af4a832c130d8463de8e0b1d6f1079711">AgentKind</a>.Zombie)</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                {</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                    <span class="comment">// Agente é zombie, incrementar número total de zombies</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                    totalZombies++;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                    <span class="comment">// Zombie é controlado pelo jogador?</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                    <span class="keywordflow">if</span> (ag.<a class="code" href="class_zombies_vs_humans_1_1_agent.html#a12a70b9053359b916649107d58b18431">Movement</a> == <a class="code" href="namespace_zombies_vs_humans.html#a90d26d0d95e26e090395ce210be389fb">AgentMovement</a>.Player)</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                    {</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        <span class="comment">// Se sim, incrementar número de zombies controlados</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                        <span class="comment">// pelo jogador</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                        playerZombies++;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                    }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                }</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                {</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                    <span class="comment">// Agente é humano, incrementar número total de humanos</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                    totalHumans++;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                    <span class="comment">// Humano é controlado pelo jogador?</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                    <span class="keywordflow">if</span> (ag.<a class="code" href="class_zombies_vs_humans_1_1_agent.html#a12a70b9053359b916649107d58b18431">Movement</a> == <a class="code" href="namespace_zombies_vs_humans.html#a90d26d0d95e26e090395ce210be389fb">AgentMovement</a>.Player)</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                    {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                        <span class="comment">// Se sim, incrementar número de humanos controlados</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                        <span class="comment">// pelo jogador</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                        playerHumans++;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                    }</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            }</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        }</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;}</div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_agent_html"><div class="ttname"><a href="class_zombies_vs_humans_1_1_agent.html">ZombiesVsHumans.Agent</a></div><div class="ttdoc">Classe que representa um agente.</div><div class="ttdef"><b>Definition:</b> <a href="_agent_8cs_source.html#l00016">Agent.cs:16</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_agent_html_a12a70b9053359b916649107d58b18431"><div class="ttname"><a href="class_zombies_vs_humans_1_1_agent.html#a12a70b9053359b916649107d58b18431">ZombiesVsHumans.Agent.Movement</a></div><div class="ttdeci">AgentMovement Movement</div><div class="ttdoc">Propriedade auto-implementada que representa o tipo de movimento realizado pelo agente.</div><div class="ttdef"><b>Definition:</b> <a href="_agent_8cs_source.html#l00047">Agent.cs:47</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_ada26173928397a1fb91110f6bda865cc"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#ada26173928397a1fb91110f6bda865cc">ZombiesVsHumans.Options.Turns</a></div><div class="ttdeci">uint Turns</div><div class="ttdoc">Propriedade auto-implementada que contém o número máximo de turnos do jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00072">Options.cs:72</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_read_only_world_html_ad1bb201cf252eee16b96973286ee8dbd"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_read_only_world.html#ad1bb201cf252eee16b96973286ee8dbd">ZombiesVsHumans.IReadOnlyWorld.IsOccupied</a></div><div class="ttdeci">bool IsOccupied(Coord coord)</div><div class="ttdoc">Método que indica se existe um agente na posição indicada no parâmetro coord .</div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a12574569144fb9d22d996965ee42b627"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a12574569144fb9d22d996965ee42b627">ZombiesVsHumans.Game.Play</a></div><div class="ttdeci">void Play()</div><div class="ttdoc">Começar o jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00124">Game.cs:124</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_user_interface_html_ae44b71d8908fa46128d0a75ceff26ae8"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_user_interface.html#ae44b71d8908fa46128d0a75ceff26ae8">ZombiesVsHumans.IUserInterface.Initialize</a></div><div class="ttdeci">void Initialize(int xDim, int yDim)</div><div class="ttdoc">Inicializa e calcula todas as variáveis necessárias para desenhar a UI no ecrã, com base na dimensão ...</div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_ac14982d6eded33bb0fae34aafa9804dc"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#ac14982d6eded33bb0fae34aafa9804dc">ZombiesVsHumans.Game.world</a></div><div class="ttdeci">IReadOnlyWorld world</div><div class="ttdoc">Referência só de leitura ao mundo do jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00053">Game.cs:53</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_user_interface_html_adc78620634c277b7451a8f5b35f6635b"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_user_interface.html#adc78620634c277b7451a8f5b35f6635b">ZombiesVsHumans.IUserInterface.RenderMessage</a></div><div class="ttdeci">void RenderMessage(string msg)</div><div class="ttdoc">Apresenta uma mensagem ao utilizador.</div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_world_html"><div class="ttname"><a href="class_zombies_vs_humans_1_1_world.html">ZombiesVsHumans.World</a></div><div class="ttdoc">Mundo de simulação.</div><div class="ttdef"><b>Definition:</b> <a href="_world_8cs_source.html#l00017">World.cs:17</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a4d92a8f5b7d984c1b4ed7b54f347b7a9"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a4d92a8f5b7d984c1b4ed7b54f347b7a9">ZombiesVsHumans.Game.options</a></div><div class="ttdeci">Options options</div><div class="ttdoc">Opções do jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00048">Game.cs:48</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_user_interface_html_a4206788d11a620174f6f99685579fa9d"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_user_interface.html#a4206788d11a620174f6f99685579fa9d">ZombiesVsHumans.IUserInterface.RenderStart</a></div><div class="ttdeci">void RenderStart()</div><div class="ttdoc">Inicializa a UI, apresentado-a pela primeira vez no ecrã.</div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a6bb3ffce83f6ff399e06a966a1072b63"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a6bb3ffce83f6ff399e06a966a1072b63">ZombiesVsHumans.Game.NewAgent</a></div><div class="ttdeci">void NewAgent(AgentKind kind, AgentMovement movement, int id)</div><div class="ttdoc">Método privado que cria um novo agente no mundo de jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00252">Game.cs:252</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_agent_html_af757b9997f0374f726935421024ab3d3"><div class="ttname"><a href="class_zombies_vs_humans_1_1_agent.html#af757b9997f0374f726935421024ab3d3">ZombiesVsHumans.Agent.PlayTurn</a></div><div class="ttdeci">void PlayTurn(out bool changePopulation, out string message)</div><div class="ttdoc">Método que executa as ações do agente para o turno atual.</div><div class="ttdef"><b>Definition:</b> <a href="_agent_8cs_source.html#l00145">Agent.cs:145</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_ab80b6d35a7077df5cb9b80d69bb27925"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#ab80b6d35a7077df5cb9b80d69bb27925">ZombiesVsHumans.Options.Zombies</a></div><div class="ttdeci">uint Zombies</div><div class="ttdoc">Propriedade auto-implementada que contém o número inicial de zombies.</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00044">Options.cs:44</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_read_only_world_html_a7bd0b7fa3f79dbceb2fb78bbacbbc2a4"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_read_only_world.html#a7bd0b7fa3f79dbceb2fb78bbacbbc2a4">ZombiesVsHumans.IReadOnlyWorld.YDim</a></div><div class="ttdeci">int YDim</div><div class="ttdoc">Propriedade que representa a dimensão vertical do mundo.</div><div class="ttdef"><b>Definition:</b> <a href="_i_read_only_world_8cs_source.html#l00031">IReadOnlyWorld.cs:31</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_agent_html_ab3f3ceae4c6521630b6959a7e5c49b18"><div class="ttname"><a href="class_zombies_vs_humans_1_1_agent.html#ab3f3ceae4c6521630b6959a7e5c49b18">ZombiesVsHumans.Agent.Kind</a></div><div class="ttdeci">AgentKind Kind</div><div class="ttdoc">Propriedade auto-implementada que representa o género do agente.</div><div class="ttdef"><b>Definition:</b> <a href="_agent_8cs_source.html#l00037">Agent.cs:37</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_a6ef3fc73ef51ce76522c96e343971716"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#a6ef3fc73ef51ce76522c96e343971716">ZombiesVsHumans.Options.Humans</a></div><div class="ttdeci">uint Humans</div><div class="ttdoc">Propriedade auto-implementada que contém o número inicial de humanos.</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00051">Options.cs:51</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_coord_html"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_coord.html">ZombiesVsHumans.Coord</a></div><div class="ttdoc">Define uma posição no mundo do jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_coord_8cs_source.html#l00014">Coord.cs:14</a></div></div>
+<div class="ttc" id="anamespace_zombies_vs_humans_html"><div class="ttname"><a href="namespace_zombies_vs_humans.html">ZombiesVsHumans</a></div><div class="ttdef"><b>Definition:</b> <a href="_abstract_movement_8cs_source.html#l00009">AbstractMovement.cs:9</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_program_html_afd8b750deb5d324091451e2c29a470a0"><div class="ttname"><a href="class_zombies_vs_humans_1_1_program.html#afd8b750deb5d324091451e2c29a470a0">ZombiesVsHumans.Program.UI</a></div><div class="ttdeci">static IUserInterface UI</div><div class="ttdoc">Uma referência static e globalmente acessível ao objeto que implementa a interface de utilizador (UI)...</div><div class="ttdef"><b>Definition:</b> <a href="_program_8cs_source.html#l00027">Program.cs:27</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_ac9b29677de5f146089cb1a369752b233"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#ac9b29677de5f146089cb1a369752b233">ZombiesVsHumans.Options.PlayerZombies</a></div><div class="ttdeci">uint PlayerZombies</div><div class="ttdoc">Propriedade auto-implementada que contém o número inicial de zombies controlados pelo jogador.</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00058">Options.cs:58</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a2697cc8b37d7bca7c055228382a9b208"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a2697cc8b37d7bca7c055228382a9b208">ZombiesVsHumans.Game.Shuffle</a></div><div class="ttdeci">void Shuffle()</div><div class="ttdoc">Método que embaralha a lista de agentes usando o algoritmo de Fisher–Yates.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00283">Game.cs:283</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_a1adec114260f53b9e9f6da5c787f63a6"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#a1adec114260f53b9e9f6da5c787f63a6">ZombiesVsHumans.Options.XDim</a></div><div class="ttdeci">uint XDim</div><div class="ttdoc">Propriedade auto-implementada que contém a dimensão horizontal do mundo de jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00030">Options.cs:30</a></div></div>
+<div class="ttc" id="anamespace_zombies_vs_humans_html_af4a832c130d8463de8e0b1d6f1079711"><div class="ttname"><a href="namespace_zombies_vs_humans.html#af4a832c130d8463de8e0b1d6f1079711">ZombiesVsHumans.AgentKind</a></div><div class="ttdeci">AgentKind</div><div class="ttdoc">Género do agente.</div><div class="ttdef"><b>Definition:</b> <a href="_agent_kind_8cs_source.html#l00014">AgentKind.cs:14</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_afd70ebbcb73b1b832b7a410899a065af"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#afd70ebbcb73b1b832b7a410899a065af">ZombiesVsHumans.Options.PlayerHumans</a></div><div class="ttdeci">uint PlayerHumans</div><div class="ttdoc">Propriedade auto-implementada que contém o número inicial de humanos controlados pelo jogador.</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00065">Options.cs:65</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_read_only_world_html"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_read_only_world.html">ZombiesVsHumans.IReadOnlyWorld</a></div><div class="ttdoc">Interface que oferece uma visão só de leitura do mundo de simulação.</div><div class="ttdef"><b>Definition:</b> <a href="_i_read_only_world_8cs_source.html#l00019">IReadOnlyWorld.cs:19</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_program_html"><div class="ttname"><a href="class_zombies_vs_humans_1_1_program.html">ZombiesVsHumans.Program</a></div><div class="ttdoc">Classe que contém o método Main(), pelo que o programa começa aqui.</div><div class="ttdef"><b>Definition:</b> <a href="_program_8cs_source.html#l00015">Program.cs:15</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a3475b689cb49d518c1aa3fe6919047ab"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a3475b689cb49d518c1aa3fe6919047ab">ZombiesVsHumans.Game.ReCountAgents</a></div><div class="ttdeci">void ReCountAgents(out int totalZombies, out int totalHumans, out int playerZombies, out int playerHumans)</div><div class="ttdoc">Realiza contagem dos tipos de agente no jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00312">Game.cs:312</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_af890b560d7eb5a93b55ae499eae804ab"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#af890b560d7eb5a93b55ae499eae804ab">ZombiesVsHumans.Game.Game</a></div><div class="ttdeci">Game(Options options)</div><div class="ttdoc">Construtor, cria uma nova instância desta classe.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00073">Game.cs:73</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html">ZombiesVsHumans.Options</a></div><div class="ttdoc">Struct que trata as opções inseridas pelo utilizador na linha de comandos, disponibilizando-as depois...</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00023">Options.cs:23</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_user_interface_html_a0f0ce91eadac05a3f00afce1d95c014e"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_user_interface.html#a0f0ce91eadac05a3f00afce1d95c014e">ZombiesVsHumans.IUserInterface.RenderInfo</a></div><div class="ttdeci">void RenderInfo(IDictionary&lt; string, int &gt; info)</div><div class="ttdoc">Apresenta e/ou atualiza o painel de informação contendo as estatísticas do jogo, por exemplo nº de tu...</div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_options_html_aeee84ca0252220bc0dd4e0485cc87e26"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_options.html#aeee84ca0252220bc0dd4e0485cc87e26">ZombiesVsHumans.Options.YDim</a></div><div class="ttdeci">uint YDim</div><div class="ttdoc">Propriedade auto-implementada que contém a dimensão vertical do mundo de jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_options_8cs_source.html#l00037">Options.cs:37</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a21640683bbaec411fafc927e1074e61e"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a21640683bbaec411fafc927e1074e61e">ZombiesVsHumans.Game.turnActionDelay</a></div><div class="ttdeci">int turnActionDelay</div><div class="ttdoc">Número de milissegundos entre cada turno.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00035">Game.cs:35</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html">ZombiesVsHumans.Game</a></div><div class="ttdoc">Classe responsável por gerir o andamento do jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00018">Game.cs:18</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_user_interface_html_a11c194d7c4c235b2d5cb70d827615b32"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_user_interface.html#a11c194d7c4c235b2d5cb70d827615b32">ZombiesVsHumans.IUserInterface.RenderWorld</a></div><div class="ttdeci">void RenderWorld(IReadOnlyWorld world)</div><div class="ttdoc">Atualiza a visualização do mundo de simulação no ecrã.</div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a2391b9dab13f09bae65ae349c8d4c271"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a2391b9dab13f09bae65ae349c8d4c271">ZombiesVsHumans.Game.rand</a></div><div class="ttdeci">Random rand</div><div class="ttdoc">Gerador de números aleatórios.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00067">Game.cs:67</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a225fe6b1d05c36cbd8563bb3bfdaef0e"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a225fe6b1d05c36cbd8563bb3bfdaef0e">ZombiesVsHumans.Game.agentActionDelay</a></div><div class="ttdeci">int agentActionDelay</div><div class="ttdoc">Número de milissegundos entre as ações de cada agente.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00030">Game.cs:30</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_user_interface_html_afdc6b2ea3aa34c3608d19a87a642ec84"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_user_interface.html#afdc6b2ea3aa34c3608d19a87a642ec84">ZombiesVsHumans.IUserInterface.RenderFinish</a></div><div class="ttdeci">void RenderFinish()</div><div class="ttdoc">Finaliza e termina a UI.</div></div>
+<div class="ttc" id="anamespace_zombies_vs_humans_html_a90d26d0d95e26e090395ce210be389fb"><div class="ttname"><a href="namespace_zombies_vs_humans.html#a90d26d0d95e26e090395ce210be389fb">ZombiesVsHumans.AgentMovement</a></div><div class="ttdeci">AgentMovement</div><div class="ttdoc">Tipo de movimento realizado pelo agente.</div><div class="ttdef"><b>Definition:</b> <a href="_agent_movement_8cs_source.html#l00014">AgentMovement.cs:14</a></div></div>
+<div class="ttc" id="aclass_zombies_vs_humans_1_1_game_html_a8eaf4cd6ed4c341ea5601c6ff50ecbd7"><div class="ttname"><a href="class_zombies_vs_humans_1_1_game.html#a8eaf4cd6ed4c341ea5601c6ff50ecbd7">ZombiesVsHumans.Game.agents</a></div><div class="ttdeci">Agent[] agents</div><div class="ttdoc">Array contendo todos os agentes existentes na simulação.</div><div class="ttdef"><b>Definition:</b> <a href="_game_8cs_source.html#l00062">Game.cs:62</a></div></div>
+<div class="ttc" id="ainterface_zombies_vs_humans_1_1_i_read_only_world_html_a9585664dbb4433831086d68dc183cbdb"><div class="ttname"><a href="interface_zombies_vs_humans_1_1_i_read_only_world.html#a9585664dbb4433831086d68dc183cbdb">ZombiesVsHumans.IReadOnlyWorld.XDim</a></div><div class="ttdeci">int XDim</div><div class="ttdoc">Propriedade que representa a dimensão horizontal do mundo.</div><div class="ttdef"><b>Definition:</b> <a href="_i_read_only_world_8cs_source.html#l00025">IReadOnlyWorld.cs:25</a></div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d6d709bbf808010c0cbc189ce9b80d10.html">ZombiesVsHumans</a></li><li class="navelem"><a class="el" href="_game_8cs.html">Game.cs</a></li>
+    <li class="footer">Gerado por
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
+  </ul>
+</div>
+</body>
+</html>

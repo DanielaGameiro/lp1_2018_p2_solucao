@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['cache_15',['cache',['../class_zombies_vs_humans_1_1_console_user_interface.html#a0056d746afed1c6eed6dd57177f6dc46',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colaihumanbg_16',['colAIHumanBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a872bd8598461825999c5b9ddfad44c30',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colaihumanfg_17',['colAIHumanFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a95741f41da0bb004b70674fb7a1ca63e',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colaizombiebg_18',['colAIZombieBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a63acd0aa837fca67d4a305dc70b10f9d',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colaizombiefg_19',['colAIZombieFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a88f5f856861cdd8d39b6f69acda28312',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['coldefaultbg_20',['colDefaultBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a4c003075676f1993ccdfc0ea54b560ba',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['coldefaultfg_21',['colDefaultFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a79b55e81bc8244bcc318f06efc7c5b0d',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colinfobg_22',['colInfoBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a2c235fd2a8c60e93bc9f69fe992283f7',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colinfofg_23',['colInfoFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a5b4c7c0c20b8f921bb0145ef4d195a5e',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['collastmessagebg_24',['colLastMessageBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a47be6f67b3a1adbb40fedec0cb516a52',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['collastmessagefg_25',['colLastMessageFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a84f7a714c1123dab4ca6876d0e4a1468',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colmessagesbg_26',['colMessagesBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a78b8ae3bfbaf27d691cf42f6452f7e09',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colmessagesfg_27',['colMessagesFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a277d30457808039ee95bd166538a773d',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerdialogbg_28',['colPlayerDialogBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#aa1ad0ed5807f02bb5ba53e67ce2ec1ae',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerdialogfg_29',['colPlayerDialogFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a042d3c01d1570fb070733429c596f776',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerhumanbg_30',['colPlayerHumanBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#aaf1616634a3a0eb1e9d5d2a1e024dae2',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerhumanfg_31',['colPlayerHumanFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#ac6a2a54cc073dbe6aa54bcfd402f72f3',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerzombiebg_32',['colPlayerZombieBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#adb26477abe22fe7cab97b2366a664e43',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerzombiefg_33',['colPlayerZombieFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a96e98f99dd5e7d38da7748ff76144582',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['coltitlebg_34',['colTitleBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#adcfb8985a9f4e9cd849f9209a2a21447',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['coltitlefg_35',['colTitleFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a6f77fbf21e72572c08cbc0560339fae8',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['consoleuserinterface_36',['ConsoleUserInterface',['../class_zombies_vs_humans_1_1_console_user_interface.html',1,'ConsoleUserInterface'],['../class_zombies_vs_humans_1_1_console_user_interface.html#a06bc55a78d539fb192488fd518aa5ad0',1,'ZombiesVsHumans.ConsoleUserInterface.ConsoleUserInterface()']]],
+  ['consoleuserinterface_2ecs_37',['ConsoleUserInterface.cs',['../_console_user_interface_8cs.html',1,'']]],
+  ['coord_38',['Coord',['../struct_zombies_vs_humans_1_1_coord.html',1,'Coord'],['../struct_zombies_vs_humans_1_1_coord.html#a41ca50d150bb6be08b411598a515c453',1,'ZombiesVsHumans.Coord.Coord()']]],
+  ['coord_2ecs_39',['Coord.cs',['../_coord_8cs.html',1,'']]]
+];

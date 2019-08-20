@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['cache_225',['cache',['../class_zombies_vs_humans_1_1_console_user_interface.html#a0056d746afed1c6eed6dd57177f6dc46',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colaihumanbg_226',['colAIHumanBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a872bd8598461825999c5b9ddfad44c30',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colaihumanfg_227',['colAIHumanFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a95741f41da0bb004b70674fb7a1ca63e',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colaizombiebg_228',['colAIZombieBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a63acd0aa837fca67d4a305dc70b10f9d',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colaizombiefg_229',['colAIZombieFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a88f5f856861cdd8d39b6f69acda28312',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['coldefaultbg_230',['colDefaultBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a4c003075676f1993ccdfc0ea54b560ba',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['coldefaultfg_231',['colDefaultFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a79b55e81bc8244bcc318f06efc7c5b0d',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colinfobg_232',['colInfoBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a2c235fd2a8c60e93bc9f69fe992283f7',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colinfofg_233',['colInfoFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a5b4c7c0c20b8f921bb0145ef4d195a5e',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['collastmessagebg_234',['colLastMessageBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a47be6f67b3a1adbb40fedec0cb516a52',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['collastmessagefg_235',['colLastMessageFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a84f7a714c1123dab4ca6876d0e4a1468',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colmessagesbg_236',['colMessagesBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a78b8ae3bfbaf27d691cf42f6452f7e09',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colmessagesfg_237',['colMessagesFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a277d30457808039ee95bd166538a773d',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerdialogbg_238',['colPlayerDialogBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#aa1ad0ed5807f02bb5ba53e67ce2ec1ae',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerdialogfg_239',['colPlayerDialogFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a042d3c01d1570fb070733429c596f776',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerhumanbg_240',['colPlayerHumanBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#aaf1616634a3a0eb1e9d5d2a1e024dae2',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerhumanfg_241',['colPlayerHumanFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#ac6a2a54cc073dbe6aa54bcfd402f72f3',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerzombiebg_242',['colPlayerZombieBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#adb26477abe22fe7cab97b2366a664e43',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['colplayerzombiefg_243',['colPlayerZombieFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a96e98f99dd5e7d38da7748ff76144582',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['coltitlebg_244',['colTitleBg',['../class_zombies_vs_humans_1_1_console_user_interface.html#adcfb8985a9f4e9cd849f9209a2a21447',1,'ZombiesVsHumans::ConsoleUserInterface']]],
+  ['coltitlefg_245',['colTitleFg',['../class_zombies_vs_humans_1_1_console_user_interface.html#a6f77fbf21e72572c08cbc0560339fae8',1,'ZombiesVsHumans::ConsoleUserInterface']]]
+];

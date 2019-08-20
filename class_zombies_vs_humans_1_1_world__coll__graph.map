@@ -1,0 +1,6 @@
+<map id="World" name="World">
+<area shape="rect" id="node1" title="Mundo de simulação." alt="" coords="5,219,136,428"/>
+<area shape="rect" id="node3" href="$class_zombies_vs_humans_1_1_agent.html" title="Classe que representa um agente." alt="" coords="94,491,189,656"/>
+<area shape="rect" id="node2" href="$interface_zombies_vs_humans_1_1_i_read_only_world.html" title="Interface que oferece uma visão só de leitura do mundo de simulação." alt="" coords="87,5,217,156"/>
+<area shape="rect" id="node4" href="$class_zombies_vs_humans_1_1_abstract_movement.html" title="Classe que define de forma abstrata o movimento realizado pelos agentes." alt="" coords="161,277,311,369"/>
+</map>

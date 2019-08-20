@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.16"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Zombies vs Humanos: Código-Fonte de ZombiesVsHumans/Coord.cs</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Zombies vs Humanos
+   </div>
+   <div id="projectbrief">Proposta de solução para o 2º projeto de LP1 2018/19</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.16 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Localizar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_coord_8cs_source.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Coord.cs</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_coord_8cs.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_zombies_vs_humans.html">ZombiesVsHumans</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="struct_zombies_vs_humans_1_1_coord.html">   14</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">struct </span><a class="code" href="struct_zombies_vs_humans_1_1_coord.html">Coord</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="struct_zombies_vs_humans_1_1_coord.html#a80c0944640e62d3ed6c5419c1bcc0c88">   21</a></span>&#160;        <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code" href="struct_zombies_vs_humans_1_1_coord.html#a80c0944640e62d3ed6c5419c1bcc0c88">X</a> { <span class="keyword">get</span>; }</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="struct_zombies_vs_humans_1_1_coord.html#aa482c4cc86a24474e4fb19b5b5978778">   27</a></span>&#160;        <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code" href="struct_zombies_vs_humans_1_1_coord.html#aa482c4cc86a24474e4fb19b5b5978778">Y</a> { <span class="keyword">get</span>; }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="struct_zombies_vs_humans_1_1_coord.html#a41ca50d150bb6be08b411598a515c453">   34</a></span>&#160;        <span class="keyword">public</span> <a class="code" href="struct_zombies_vs_humans_1_1_coord.html#a41ca50d150bb6be08b411598a515c453">Coord</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="struct_zombies_vs_humans_1_1_coord.html#a80c0944640e62d3ed6c5419c1bcc0c88">X</a> = x;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <a class="code" href="struct_zombies_vs_humans_1_1_coord.html#aa482c4cc86a24474e4fb19b5b5978778">Y</a> = y;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">string</span> <a class="code" href="struct_zombies_vs_humans_1_1_coord.html#aa73e7c4dd1df5fd5fbf81c7764ee1533">ToString</a>() =&gt; $<span class="stringliteral">&quot;({X},{Y})&quot;</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_coord_html_aa73e7c4dd1df5fd5fbf81c7764ee1533"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_coord.html#aa73e7c4dd1df5fd5fbf81c7764ee1533">ZombiesVsHumans.Coord.ToString</a></div><div class="ttdeci">override string ToString()</div><div class="ttdoc">Devolve a posição devidamente formatada.</div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_coord_html"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_coord.html">ZombiesVsHumans.Coord</a></div><div class="ttdoc">Define uma posição no mundo do jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_coord_8cs_source.html#l00014">Coord.cs:14</a></div></div>
+<div class="ttc" id="anamespace_zombies_vs_humans_html"><div class="ttname"><a href="namespace_zombies_vs_humans.html">ZombiesVsHumans</a></div><div class="ttdef"><b>Definition:</b> <a href="_abstract_movement_8cs_source.html#l00009">AbstractMovement.cs:9</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_coord_html_aa482c4cc86a24474e4fb19b5b5978778"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_coord.html#aa482c4cc86a24474e4fb19b5b5978778">ZombiesVsHumans.Coord.Y</a></div><div class="ttdeci">int Y</div><div class="ttdoc">Propriedade auto-implementada que indica uma posição vertical no mundo de jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_coord_8cs_source.html#l00027">Coord.cs:27</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_coord_html_a41ca50d150bb6be08b411598a515c453"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_coord.html#a41ca50d150bb6be08b411598a515c453">ZombiesVsHumans.Coord.Coord</a></div><div class="ttdeci">Coord(int x, int y)</div><div class="ttdoc">Cria uma nova posição no mundo de jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_coord_8cs_source.html#l00034">Coord.cs:34</a></div></div>
+<div class="ttc" id="astruct_zombies_vs_humans_1_1_coord_html_a80c0944640e62d3ed6c5419c1bcc0c88"><div class="ttname"><a href="struct_zombies_vs_humans_1_1_coord.html#a80c0944640e62d3ed6c5419c1bcc0c88">ZombiesVsHumans.Coord.X</a></div><div class="ttdeci">int X</div><div class="ttdoc">Propriedade auto-implementada que indica uma posição horizontal no mundo de jogo.</div><div class="ttdef"><b>Definition:</b> <a href="_coord_8cs_source.html#l00021">Coord.cs:21</a></div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d6d709bbf808010c0cbc189ce9b80d10.html">ZombiesVsHumans</a></li><li class="navelem"><a class="el" href="_coord_8cs.html">Coord.cs</a></li>
+    <li class="footer">Gerado por
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
+  </ul>
+</div>
+</body>
+</html>

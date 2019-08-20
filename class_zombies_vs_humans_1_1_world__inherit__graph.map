@@ -1,0 +1,4 @@
+<map id="World" name="World">
+<area shape="rect" id="node1" title="Mundo de simulação." alt="" coords="5,204,136,428"/>
+<area shape="rect" id="node2" href="$interface_zombies_vs_humans_1_1_i_read_only_world.html" title="Interface que oferece uma visão só de leitura do mundo de simulação." alt="" coords="5,5,136,156"/>
+</map>

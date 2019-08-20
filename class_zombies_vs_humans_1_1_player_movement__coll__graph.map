@@ -1,0 +1,5 @@
+<map id="PlayerMovement" name="PlayerMovement">
+<area shape="rect" id="node1" title="Classe que controla o movimento dos agentes controlado pelo jogador." alt="" coords="11,360,151,452"/>
+<area shape="rect" id="node2" href="$class_zombies_vs_humans_1_1_abstract_movement.html" title="Classe que define de forma abstrata o movimento realizado pelos agentes." alt="" coords="5,219,156,311"/>
+<area shape="rect" id="node3" href="$interface_zombies_vs_humans_1_1_i_read_only_world.html" title="Interface que oferece uma visão só de leitura do mundo de simulação." alt="" coords="15,5,146,156"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="IReadOnlyWorld" name="IReadOnlyWorld">
+<area shape="rect" id="node1" title="Interface que oferece uma visão só de leitura do mundo de simulação." alt="" coords="5,5,136,156"/>
+<area shape="rect" id="node2" href="$class_zombies_vs_humans_1_1_world.html" title="Mundo de simulação." alt="" coords="5,204,136,428"/>
+</map>
