@@ -1,0 +1,19 @@
+// {type:class}
+// {direction:topDown}
+// {generate:true}
+
+[<<abstract>>;AbstractMovement]^[AIMovement]
+[<<abstract>>;AbstractMovement]^[PlayerMovement]
+[Agent]++1-1>[<<abstract>>;AbstractMovement]
+[<<abstract>>;AbstractMovement]*-1>[<<interface>>;IReadOnlyWorld]
+[<<interface>>;IReadOnlyWorld]^-.-[World]
+[Agent]<*-1>[World]
+[Agent]+1-1>[<<struct>>;Coord]
+[Agent]+1-1>[<<enum>>;AgentKind]
+[Agent]+1-1>[<<enum>>;AgentMovement]
+[AIMovement]1-1>[<<enum>>;AgentKind]
+[<<interface>>;IUserInterface]^-.-[ConsoleUserInterface]
+[Game]++1-1>[<<interface>>;IReadOnlyWorld]
+[Game]1-1>[Options]
+[Game]1-*>[Agent]
+[Program]1-static 1>[<<interface>>;IUserInterface]
