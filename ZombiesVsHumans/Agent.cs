@@ -201,7 +201,7 @@ namespace ZombiesVsHumans
         }
 
         /// <summary>
-        /// Método privado que realizada a infeção de um agente.
+        /// Método privado que realiza a infeção de um agente.
         /// </summary>
         private void Infect()
         {
