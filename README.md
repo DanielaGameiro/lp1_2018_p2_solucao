@@ -43,10 +43,16 @@ com os seguintes conteúdos:
 _em breve_
 
 ![Diagrama UML de classes](UML.png "Diagrama UML de classes")
+
 **Figura 1** - Diagrama UML de classes da solução (código fonte da figura
-disponível [aqui](img/uml.yuml), tendo a mesma sido gerada com [yUML]). Para
-simplificação do diagrama são apenas mostradas as relações de dependência mais
-importantes.
+disponível [aqui](imgsource/uml.yuml), tendo a mesma sido gerada em [yUML]).
+Para simplificação do diagrama são apenas mostradas as relações de dependência
+mais importantes.
+
+![Fluxograma](fluxograma.png "Fluxograma")
+
+**Figura 2** - Fluxograma do programa (código fonte da figura
+disponível [aqui](imgsource/fluxograma.drawio), tendo a mesma sido gerada em [Draw.io]).
 
 ## Referências
 
@@ -73,6 +79,7 @@ _em breve_
 [logótipo]:logo.png
 [Freepik]:https://www.freepik.com/home
 [yUML]:https://yuml.me/
+[Draw.io]:https://www.draw.io/
 [Doxygen]:http://www.doxygen.nl/index.html
 [docs]:https://videojogoslusofona.github.io/lp1_2018_p2_solucao/
 [commits]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/commits/master
