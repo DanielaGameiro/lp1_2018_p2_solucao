@@ -44,8 +44,9 @@ _em breve_
 
 ![Diagrama UML de classes](UML.png "Diagrama UML de classes")
 **Figura 1** - Diagrama UML de classes da solução (código fonte da figura
-disponível [aqui](img/uml.yuml), tendo a mesma sido gerada com [yUML]). As
-relações de dependência foram omitidas para simplificação do diagrama.
+disponível [aqui](img/uml.yuml), tendo a mesma sido gerada com [yUML]). Para
+simplificação do diagrama são apenas mostradas as relações de dependência mais
+importantes.
 
 ## Referências
 
