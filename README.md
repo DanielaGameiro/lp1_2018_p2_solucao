@@ -19,8 +19,7 @@ work. If not, see:
 # Zombies vs Humanos
 
 ![Zombies vs Humanos](logo.png "Logo Zombies vs Humanos")
-Proposta de resolução do
-[2º Projeto de LP1 2018/19](https://github.com/VideojogosLusofona/lp1_2018_p2)
+Proposta de resolução do [2º Projeto de LP1 2018/19][enunciado].
 
 ## Sumário
 
@@ -40,23 +39,57 @@ com os seguintes conteúdos:
 
 ## Arquitetura da solução
 
-_em breve_
+### Funcionamento do programa
+
+O programa deve ser invocado com as opções da linha de comandos indicadas no
+[enunciado][enunciado-opcoes], seguindo depois a sequência indicada no
+fluxograma apresentado na Figura 1.
+
+![Fluxograma](fluxograma.png "Fluxograma")
+
+**Figura 1** - Fluxograma do programa (código fonte da figura
+disponível [aqui](imgsource/fluxograma.drawio), tendo a mesma sido gerada em
+[Draw.io]).
+
+O programa começa por tratar as opções da linha de comandos, e se as mesmas
+forem válidas é criado o mundo de simulação, bem como os agentes que o compõem,
+caso contrário, o programa termina. Após a primeira renderização, entramos no
+_game loop_, no qual cada iteração do ciclo corresponde a um turno do jogo.
+Em cada turno, cada agente realiza a sua ação (mover ou infetar), e caso exista
+uma alteração na população, é feita uma recontagem dos agentes. A visualização
+é sempre atualizada após a ação de cada agente. O _game loop_ termina quando
+não existirem mais humanos ou quando tiver sido atingido o número máximo de
+turnos. O programa termina com uma mensagem indicando o resultado final do
+jogo.
+
+### Design de classes
+
+_em construção_
 
 ![Diagrama UML de classes](UML.png "Diagrama UML de classes")
 
-**Figura 1** - Diagrama UML de classes da solução (código fonte da figura
+**Figura 2** - Diagrama UML de classes da solução (código fonte da figura
 disponível [aqui](imgsource/uml.yuml), tendo a mesma sido gerada em [yUML]).
 Para simplificação do diagrama são apenas mostradas as relações de dependência
 mais importantes.
 
-![Fluxograma](fluxograma.png "Fluxograma")
+### Estruturas de dados e algoritmos utilizados
 
-**Figura 2** - Fluxograma do programa (código fonte da figura
-disponível [aqui](imgsource/fluxograma.drawio), tendo a mesma sido gerada em [Draw.io]).
+_em construção_
+
+<!--
+* Fisher–Yates shuffle
+* Array bi-dimensional
+* Fila (para mensagens)
+* Opções e algoritmo para tratamento de opções
+* Algoritmo de IA dos agentes
+* Cache da visualização
+-->
 
 ## Referências
 
-_em breve_
+* [Fisher–Yates shuffle - Wikipedia](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
+* _em construção_
 
 ## Metadados
 
@@ -71,6 +104,8 @@ _em breve_
 * O [logótipo] do projeto é baseado nos ícones desenhados por [Freepik]
   disponíveis em <https://www.flaticon.com>.
 
+[enunciado]:https://github.com/VideojogosLusofona/lp1_2018_p2
+[enunciado-opcoes]:https://github.com/VideojogosLusofona/lp1_2018_p2#invoca%C3%A7%C3%A3o-do-programa
 [lamv]:https://www.ulusofona.pt/licenciatura/videojogos
 [Nuno Fachada]:https://github.com/fakenmc
 [ULHT]:https://www.ulusofona.pt/
