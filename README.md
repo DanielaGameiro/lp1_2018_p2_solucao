@@ -62,9 +62,26 @@ não existirem mais humanos ou quando tiver sido atingido o número máximo de
 turnos. O programa termina com uma mensagem indicando o resultado final do
 jogo.
 
-### Design de classes
+A nível do código, o programa tem início no método `Main()`, que se encontra na
+classe [`Program`]. O `Main()` começa por criar uma instância de
+[`ConsoleUserInterface`] (que representa a interface de utilizador),
+disponibilizando-a globalmente numa propriedade estática chamada `UI` (em LP2
+discutiremos o [*Singleton design pattern*], que é geralmente mais apropriado
+para disponibilizar uma única instância globalmente). De seguida é invocado o
+método [`Options.ParseArgs`], que trata as opções da linha de comandos e
+devolve uma instância de [`Options`] que disponibiliza as opções já tratadas e
+validadas sob a forma de propriedades. Se ocorrer um erro no tratamento das
+opções o programa termina por aqui, caso contrário é criada uma nova instância
+da classe [`Game`] e invocado o método [`Play()`] nessa mesma instância, dando
+início ao jogo.
 
-_em construção_
+As relações entre [`Program`] e as instâncias de [`ConsoleUserInterface`],
+[`Options`] e [`Game`] são mostradas no diagrama UML apresentado na Figura 2.
+Como é possível observar nesta figura, a instância de UI é representada pela
+interface [`IUserInterface`], o que permite usar UIs alternativas, como por
+exemplo uma UI gráfica (GUI). As restantes classes, nomeadamente a classe
+[`Game`], nunca têm conhecimento que se trata na realidade de uma instância de
+[`ConsoleUserInterface`].
 
 ![Diagrama UML de classes](UML.png "Diagrama UML de classes")
 
@@ -72,6 +89,10 @@ _em construção_
 disponível [aqui](imgsource/uml.yuml), tendo a mesma sido gerada em [yUML]).
 Para simplificação do diagrama são apenas mostradas as relações de dependência
 mais importantes.
+
+### Design de classes
+
+_em construção_
 
 ### Estruturas de dados e algoritmos utilizados
 
@@ -118,3 +139,11 @@ _em construção_
 [Doxygen]:http://www.doxygen.nl/index.html
 [docs]:https://videojogoslusofona.github.io/lp1_2018_p2_solucao/
 [commits]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/commits/master
+[`Program`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Program.cs
+[`ConsoleUserInterface`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/ConsoleUserInterface.cs
+[*Singleton design pattern*]:https://en.wikipedia.org/wiki/Singleton_pattern
+[`Options.ParseArgs`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Options.cs#L175
+[`Options`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Options.cs
+[`Game`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Game.cs
+[`Play()`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Game.cs#L124
+[`IUserInterface`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/IUserInterface.cs
