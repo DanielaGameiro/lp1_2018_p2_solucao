@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <img src="logo.png" alt=""/>
 <div class="caption">
 Zombies vs Humanos</div></div>
-   <p>Proposta de resolução do <a href="https://github.com/VideojogosLusofona/lp1_2018_p2">2º Projeto de LP1 2018/19</a></p>
+   <p>Proposta de resolução do <a href="https://github.com/VideojogosLusofona/lp1_2018_p2">2º Projeto de LP1 2018/19</a>.</p>
 <h2>Sumário</h2>
 <p>Este repositório contém uma proposta de resolução do <a href="https://github.com/VideojogosLusofona/lp1_2018_p2">2º Projeto de LP1 2018/19</a>, com os seguintes conteúdos:</p>
 <ul>
@@ -111,19 +111,30 @@ Zombies vs Humanos</div></div>
 </li>
 </ul>
 <h2>Arquitetura da solução</h2>
-<p><em>em breve</em></p>
-<div class="image">
-<img src="UML.png" alt=""/>
-<div class="caption">
-Diagrama UML de classes</div></div>
-   <p><b>Figura 1</b> - Diagrama UML de classes da solução (código fonte da figura disponível <a href="imgsource/uml.yuml">aqui</a>, tendo a mesma sido gerada em <a href="https://yuml.me/">yUML</a>). Para simplificação do diagrama são apenas mostradas as relações de dependência mais importantes.</p>
+<h3>Funcionamento do programa</h3>
+<p>O programa deve ser invocado com as opções da linha de comandos indicadas no <a href="https://github.com/VideojogosLusofona/lp1_2018_p2#invoca%C3%A7%C3%A3o-do-programa">enunciado</a>, seguindo depois a sequência indicada no fluxograma apresentado na Figura 1.</p>
 <div class="image">
 <img src="fluxograma.png" alt=""/>
 <div class="caption">
 Fluxograma</div></div>
-   <p><b>Figura 2</b> - Fluxograma do programa (código fonte da figura disponível <a href="imgsource/fluxograma.drawio">aqui</a>, tendo a mesma sido gerada em <a href="https://www.draw.io/">Draw.io</a>).</p>
+   <p><b>Figura 1</b> - Fluxograma do programa (código fonte da figura disponível <a href="imgsource/fluxograma.drawio">aqui</a>, tendo a mesma sido gerada em <a href="https://www.draw.io/">Draw.io</a>).</p>
+<p>O programa começa por tratar as opções da linha de comandos, e se as mesmas forem válidas é criado o mundo de simulação, bem como os agentes que o compõem, caso contrário, o programa termina. Após a primeira renderização, entramos no <em>game loop</em>, no qual cada iteração do ciclo corresponde a um turno do jogo. Em cada turno, cada agente realiza a sua ação (mover ou infetar), e caso exista uma alteração na população, é feita uma recontagem dos agentes. A visualização é sempre atualizada após a ação de cada agente. O <em>game loop</em> termina quando não existirem mais humanos ou quando tiver sido atingido o número máximo de turnos. O programa termina com uma mensagem indicando o resultado final do jogo.</p>
+<p>A nível do código, o programa tem início no método <code>Main()</code>, que se encontra na classe <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Program.cs"><code>Program</code></a>. O <code>Main()</code> começa por criar uma instância de [<code>ConsoleUserInterface</code>] (que representa a interface de utilizador), disponibilizando-a globalmente numa propriedade estática chamada <code>UI</code> (em LP2 discutiremos o <a href="https://en.wikipedia.org/wiki/Singleton_pattern"><em>Singleton design pattern</em></a>, que é geralmente mais apropriado para disponibilizar uma única instância globalmente). De seguida é invocado o método <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Options.cs#L175"><code>Options.ParseArgs</code></a>, que trata as opções da linha de comandos e devolve uma instância de <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Options.cs"><code>Options</code></a> que disponibiliza as opções já tratadas e validadas sob a forma de propriedades. Se ocorrer um erro no tratamento das opções o programa termina por aqui, caso contrário é criada uma nova instância da classe <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Game.cs"><code>Game</code></a> e invocado o método <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Game.cs#L124"><code>Play()</code></a> nessa mesma instância, dando início ao jogo.</p>
+<p>As relações entre <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Program.cs"><code>Program</code></a> e as instâncias de <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/ConsoleUserInterface.cs"><code>ConsoleUserInterface</code></a>, <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Options.cs"><code>Options</code></a> e <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Game.cs"><code>Game</code></a> são mostradas no diagrama UML apresentado na Figura 2. Como é possível observar nesta figura, a instância de UI é representada pela interface <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/IUserInterface.cs"><code>IUserInterface</code></a>, o que permite usar UIs alternativas, como por exemplo uma UI gráfica (GUI). As restantes classes, nomeadamente a classe <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Game.cs"><code>Game</code></a>, nunca têm conhecimento que se trata na realidade de uma instância de <a href="https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/ConsoleUserInterface.cs"><code>ConsoleUserInterface</code></a>.</p>
+<div class="image">
+<img src="UML.png" alt=""/>
+<div class="caption">
+Diagrama UML de classes</div></div>
+   <p><b>Figura 2</b> - Diagrama UML de classes da solução (código fonte da figura disponível <a href="imgsource/uml.yuml">aqui</a>, tendo a mesma sido gerada em <a href="https://yuml.me/">yUML</a>). Para simplificação do diagrama são apenas mostradas as relações de dependência mais importantes.</p>
+<h3>Design de classes</h3>
+<p><em>em construção</em></p>
+<h3>Estruturas de dados e algoritmos utilizados</h3>
+<p><em>em construção</em></p>
 <h2>Referências</h2>
-<p><em>em breve</em></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher–Yates shuffle - Wikipedia</a></li>
+<li><em>em construção</em></li>
+</ul>
 <h2>Metadados</h2>
 <ul>
 <li>Autor: <a href="https://github.com/fakenmc">Nuno Fachada</a></li>
