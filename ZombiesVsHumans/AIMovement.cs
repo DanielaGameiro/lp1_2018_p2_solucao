@@ -29,7 +29,7 @@ namespace ZombiesVsHumans
         /// <summary>
         /// Método construtor.
         /// </summary>
-        /// <param name="enemy">Agentes inimigos, a perseguir ou evitar-</param>
+        /// <param name="enemy">Agentes inimigos, a perseguir ou evitar.</param>
         /// <param name="runAway">
         /// Indica se os agentes inimigos devem ser evitados (<c>true</c>)
         /// ou perseguidos (<c>false</c>).</param>
