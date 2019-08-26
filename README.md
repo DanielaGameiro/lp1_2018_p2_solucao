@@ -102,7 +102,8 @@ projeto. A classe tem várias propriedades públicas que a definem,
 nomeadamente: a) propriedade `Kind`, do tipo [`AgentKind`], enumeração que
 define se o agente é zombie ou humano; b) propriedade `Movement`, do tipo
 [`AgentMovement`], enumeração que indica se o agente é controlado pela IA ou
-pelo jogador; e, c) propriedade `Pos`, do tipo [`Coord`], _struct_ que define a posição do agente no mundo de simulação. A classe [`Agent`] possui também a
+pelo jogador; e, c) propriedade `Pos`, do tipo [`Coord`], _struct_ que define a
+posição do agente no mundo de simulação. A classe [`Agent`] possui também a
 variável de instância privada `moveBehavior`, do tipo [`AbstractMovement`],
 responsável por realizar o movimento do agente. Sendo [`AbstractMovement`] um
 tipo abstrato, o movimento será realizado: a) pelo jogador, se a variável
@@ -117,10 +118,18 @@ uma situação clara de [polimorfismo]. É de realçar ainda que as instâncias 
 [`AgentKind`]), uma vez que, para tomar uma decisão, precisam de saber quem são
 os agentes inimigos.
 
-_em construção_
-
-<!-- World e IReadOnlyWorld e explicar porque o agente é o único que pode
-escrever no mundo -->
+A classe [`World`] representa o mundo de simulação, contendo uma referência a
+cada um dos agentes existentes no mesmo. Por sua vez, os agentes, bem como as
+classes [`Game`] e [`AbstractMovement`], também contêm uma referência ao mundo
+de simulação. No entanto estas duas últimas fazem-no indiretamente através da
+interface [`IReadOnlyWorld`], que a classe [`World`] implementa. Como o nome
+indica, a interface [`IReadOnlyWorld`] apenas define funcionalidade para
+leitura do mundo (por exemplo, para saber o que existe em dada célula do mundo),
+não permitindo alteração dos conteúdos do mesmo. Uma vez que tanto [`Game`]
+como [`AbstractMovement`] não precisam de alterar o mundo, o mesmo fica
+protegido de alterações indevidas quando visto como um [`IReadOnlyWorld`]. A
+classe [`Agent`] é a única que pode alterar o mundo, e dessa forma possui uma
+referência direta ao mesmo.
 
 ### Estruturas de dados e algoritmos utilizados
 
@@ -146,6 +155,7 @@ _em construção_
 * [Fisher–Yates shuffle - Wikipedia](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
 * [Polymorphism (C# Programming Guide) - Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism)
 * [Singleton Design Pattern in C# - Dot Net Tutorials](https://dotnettutorials.net/lesson/singleton-design-pattern/)
+* [The Strategy Design Pattern in C#](https://exceptionnotfound.net/strategy-the-daily-design-pattern/)
 * _em construção_
 
 ## Metadados
@@ -190,4 +200,5 @@ _em construção_
 [`AbstractMovement`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/AbstractMovement.cs
 [`PlayerMovement`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/PlayerMovement.cs
 [`AIMovement`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/AIMovement.cs
+[`World`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/World.cs
 [polimorfismo]:https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism
