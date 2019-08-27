@@ -133,22 +133,69 @@ referência direta ao mesmo.
 
 ### Estruturas de dados e algoritmos utilizados
 
+#### Classes vs *structs* vs enumerações
+
+A maioria dos tipos criados neste projeto são classes, com a exceção das
+*structs* [`Coord`] e [`Options`]. No caso da primeira, uma vez que se trata de
+um tipo muito simples e imutável (serve apenas para guardar uma coordenada *x*,
+*y*), optou-se por tornar este tipo uma *struct*.
+
+O caso de [`Options`] não é tão claro. Trata-se essencialmente de um tipo que
+serve como contentor de opções validadas, imutável após a sua instanciação, e
+nesse sentido encaixa bem como uma *struct*. No entanto contém 11 campos, o que
+torna mais pesada a sua cópia por valor. Uma vez que isto acontece numa única
+ocasião – quando a instância de `Options` é passada ao construtor de `Game` –
+optou-se por manter o tipo `Options` como uma *struct*. Seria perfeitamente
+válido ter usado uma classe neste caso.
+
+Os tipos [`AgentKind`], [`AgentMovement`] e [`Direction`] são naturalmente
+enumerações pois representam um número limitado de valores possíveis, por
+exemplo _Zombie_ ou _Humano_ no caso de [`AgentKind`].
+
+#### Tratamento de opções na linha de comandos
+
 _em construção_
 
 <!--
-* Porque Coord e Options sao structs
+* Opções e algoritmo para tratamento de opções
+-->
+
+#### Onde estão os agentes?
+
+_em construção_
+
+<!--
 * Além de colocar os agentes no mundo de simulação, a instância de [`Game`]
   mantém também uma referência interna aos mesmos num _array_, não sendo
   necessário uma lista uma vez que o número total de agentes nunca muda
   ao longo do jogo.
-* Fisher–Yates shuffle
-* Dicionário de stats
 * Array bi-dimensional
+* Fisher–Yates shuffle
+-->
+
+#### Fila de mensagens para o utilizador
+
+_em construção_
+
+<!--
 * Fila (para mensagens)
-* Opções e algoritmo para tratamento de opções
+-->
+
+#### Movimento automático dos agentes
+
+_em construção_
+
+<!--
 * Algoritmo de IA dos agentes
+-->
+
+#### Visualização do mundo de simulação usando uma *cache*
+
+<!--
 * Cache da visualização
 -->
+
+_em construção_
 
 ## Referências
 
@@ -156,6 +203,7 @@ _em construção_
 * [Polymorphism (C# Programming Guide) - Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism)
 * [Singleton Design Pattern in C# - Dot Net Tutorials](https://dotnettutorials.net/lesson/singleton-design-pattern/)
 * [The Strategy Design Pattern in C#](https://exceptionnotfound.net/strategy-the-daily-design-pattern/)
+* [When to use struct? - StackOverflow](https://stackoverflow.com/questions/521298/when-to-use-struct)
 * _em construção_
 
 ## Metadados
@@ -202,3 +250,4 @@ _em construção_
 [`AIMovement`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/AIMovement.cs
 [`World`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/World.cs
 [polimorfismo]:https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism
+[`Direction`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Direction.cs
