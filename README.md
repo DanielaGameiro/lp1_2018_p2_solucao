@@ -92,6 +92,8 @@ mais importantes.
 
 ### Design de classes
 
+#### Responsabilidades e relações entre as principais classes e tipos
+
 A classe [`Game`] é uma das mais importantes neste projeto. É durante a sua
 instanciação que é criado o mundo de simulação (instância de
 [`IReadOnlyWorld`]), bem como dos agentes que o compõem. Esta classe é também
@@ -131,8 +133,6 @@ protegido de alterações indevidas quando visto como um [`IReadOnlyWorld`]. A
 classe [`Agent`] é a única que pode alterar o mundo, e dessa forma possui uma
 referência direta ao mesmo.
 
-### Estruturas de dados e algoritmos utilizados
-
 #### Classes vs *structs* vs enumerações
 
 A maioria dos tipos criados neste projeto são classes, com a exceção das
@@ -152,25 +152,43 @@ Os tipos [`AgentKind`], [`AgentMovement`] e [`Direction`] são naturalmente
 enumerações pois representam um número limitado de valores possíveis, por
 exemplo _Zombie_ ou _Humano_ no caso de [`AgentKind`].
 
-#### Tratamento de opções na linha de comandos
-
-_em construção_
-
-<!--
-* Opções e algoritmo para tratamento de opções
--->
+### Estruturas de dados e algoritmos utilizados
 
 #### Onde estão os agentes?
 
+Os agentes, representados por instâncias da classe [`Agent`], encontram-se
+referenciados em duas estruturas de dados distintas:
+
+1. Num _array_ na classe [`Game`] (variável de instância `agents`).
+2. Num _array_ bidimensional na classe [`World`] (variável de instância
+   `world`).
+
+No primeiro caso, uma vez que o número total de agentes nunca muda ao longo do
+jogo, podemos usar um simples _array_ de tamanho fixo, em vez de uma lista por
+exemplo, obedecendo assim ao princípio [KISS]. É necessário que a classe
+[`Game`] contenha as referência dos agentes por duas razões: i) para podermos
+embaralhá-los antes de cada turno (para este efeito usamos o algoritmo de
+[Fisher–Yates][FY], implementado no método `Shuffle()`); e, ii) para podermos
+contar o número de cada género de agentes existentes no jogo (ação que é
+realizada no método `ReCountAgents()` usando parâmetros `out`).
+
+No segundo caso, simplifica bastante o projeto se a classe [`World`] conseguir
+rapidamente determinar se existem ou não agentes, bem como o seu género, em
+cada posição do mundo de simulação. Para este efeito usa-se um _array_
+bidimensional de agentes, do tamanho do mundo. Cada posição deste _array_ ou
+tem uma referência a um agente ou tem o valor `null`, sendo este último uma
+indicação de que a posição não contém nenhum agente.
+
+#### Mundo toroidal com vizinhança de Von Neumann
+
+_em construção_
+
+#### Movimento automático dos agentes
+
 _em construção_
 
 <!--
-* Além de colocar os agentes no mundo de simulação, a instância de [`Game`]
-  mantém também uma referência interna aos mesmos num _array_, não sendo
-  necessário uma lista uma vez que o número total de agentes nunca muda
-  ao longo do jogo.
-* Array bi-dimensional
-* Fisher–Yates shuffle
+* Algoritmo de IA dos agentes
 -->
 
 #### Fila de mensagens para o utilizador
@@ -181,28 +199,32 @@ _em construção_
 * Fila (para mensagens)
 -->
 
-#### Movimento automático dos agentes
+#### Visualização do mundo de simulação usando uma *cache*
 
 _em construção_
-
-<!--
-* Algoritmo de IA dos agentes
--->
-
-#### Visualização do mundo de simulação usando uma *cache*
 
 <!--
 * Cache da visualização
 -->
 
+#### Tratamento de opções na linha de comandos
+
+<!--
+* Opções e algoritmo para tratamento de opções
+-->
+_em construção_
+
+### Personalização da visualização e andamento do jogo
+
 _em construção_
 
 ## Referências
 
-* [Fisher–Yates shuffle - Wikipedia](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
+* [Fisher–Yates shuffle - Wikipedia][FY]
+* [KISS principle - Wikipedia][KISS]
 * [Polymorphism (C# Programming Guide) - Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism)
 * [Singleton Design Pattern in C# - Dot Net Tutorials](https://dotnettutorials.net/lesson/singleton-design-pattern/)
-* [The Strategy Design Pattern in C#](https://exceptionnotfound.net/strategy-the-daily-design-pattern/)
+* [The Strategy Design Pattern in C# - Exception Not Found](https://exceptionnotfound.net/strategy-the-daily-design-pattern/)
 * [When to use struct? - StackOverflow](https://stackoverflow.com/questions/521298/when-to-use-struct)
 * _em construção_
 
@@ -251,3 +273,5 @@ _em construção_
 [`World`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/World.cs
 [polimorfismo]:https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism
 [`Direction`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Direction.cs
+[KISS]:https://en.wikipedia.org/wiki/KISS_principle
+[FY]:https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
