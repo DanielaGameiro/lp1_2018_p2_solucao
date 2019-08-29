@@ -181,7 +181,30 @@ indicação de que a posição não contém nenhum agente.
 
 #### Mundo toroidal com vizinhança de Von Neumann
 
-_em construção_
+O mundo de simulação tem a particularidade de ser toroidal ("dá a volta") e ter
+uma vizinhança de Von Neumann. Uma vez que estas são características do mundo,
+faz sentido que as mesmas estejam programadas na classe [`World`]. Métodos
+desta classe que lidam com coordenadas, antes de mais tratam essas coordenadas
+com o método privado `Normalize()`. Se as coordenadas forem
+válidas, o método `Normalize()` não faz nada; por outro lado, se as coordenadas
+não corresponderem a uma posição no mundo (por exemplo, se já deviam ter "dado
+a volta"), o método `Normalize()` retifica as mesmas, fazendo-as "dar a volta"
+corretamente. Desta forma, todos os métodos da classe [`World`] garantem que
+estão a lidar com coordenadas válidas num mundo toroidal.
+
+O método `VectorBetween()` aceita duas coordenadas, normaliza-as, e devolve um
+vetor que parte da primeira coordenada e termina na segunda, garantido que esse
+vetor representa o caminho mais curto entre essas duas coordenadas num mundo
+toroidal.
+
+Os dois _overloads_ do método `GetNeighbor()` devolvem a coordenada do vizinho
+de uma dada célula, aceitando ou uma direção (enumeração [`Direction`]) ou um
+vetor (_struct_ [`Coord`]) que indica em que lado está o vizinho.
+
+Estes métodos simplificam bastante o restante código do projeto, que pode
+perfeitamente ignorar os detalhes de como implementar um mundo toroidal com
+vizinhança de Von Neumann, uma vez que tais detalhes estão encapsulados na
+classe [`World`].
 
 #### Movimento automático dos agentes
 
@@ -225,8 +248,8 @@ _em construção_
 * [Polymorphism (C# Programming Guide) - Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism)
 * [Singleton Design Pattern in C# - Dot Net Tutorials](https://dotnettutorials.net/lesson/singleton-design-pattern/)
 * [The Strategy Design Pattern in C# - Exception Not Found](https://exceptionnotfound.net/strategy-the-daily-design-pattern/)
+* [Von Neumann neighborhood - Wikipedia](https://en.wikipedia.org/wiki/Von_Neumann_neighborhood)
 * [When to use struct? - StackOverflow](https://stackoverflow.com/questions/521298/when-to-use-struct)
-* _em construção_
 
 ## Metadados
 
