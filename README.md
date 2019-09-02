@@ -179,12 +179,12 @@ bidimensional de agentes, do tamanho do mundo. Cada posição deste _array_ ou
 tem uma referência a um agente ou tem o valor `null`, sendo este último uma
 indicação de que a posição não contém nenhum agente.
 
-#### Mundo toroidal com vizinhança de Von Neumann
+#### Mundo toroidal com vizinhança de Moore
 
 O mundo de simulação tem a particularidade de ser toroidal ("dá a volta") e ter
-uma vizinhança de Von Neumann. Uma vez que estas são características do mundo,
+uma vizinhança de Moore. Uma vez que estas são características do mundo,
 faz sentido que as mesmas estejam programadas na classe [`World`]. Métodos
-desta classe que lidam com coordenadas, antes de mais tratam essas coordenadas
+desta classe que lidam com coordenadas antes de mais tratam essas coordenadas
 com o método privado `Normalize()`. Se as coordenadas forem
 válidas, o método `Normalize()` não faz nada; por outro lado, se as coordenadas
 não corresponderem a uma posição no mundo (por exemplo, se já deviam ter "dado
@@ -203,16 +203,39 @@ vetor (_struct_ [`Coord`]) que indica em que lado está o vizinho.
 
 Estes métodos simplificam bastante o restante código do projeto, que pode
 perfeitamente ignorar os detalhes de como implementar um mundo toroidal com
-vizinhança de Von Neumann, uma vez que tais detalhes estão encapsulados na
+vizinhança de Moore, uma vez que tais detalhes estão encapsulados na
 classe [`World`].
 
 #### Movimento automático dos agentes
 
-_em construção_
+O movimento automático dos agentes está implementado no método `WhereToMove()`
+da classe [`AIMovement`]. Basicamente trata-se de um triplo ciclo `for`, em que
+o ciclo externo percorre os raios de 1 até ao raio máximo (igual a metade da
+maior dimensão do mundo, _x_ ou _y_). Em cada iteração do ciclo externo o valor
+do raio é dado na variável `r`. O ciclo `for` intermédio percorre, de `-r` a
+`r`, a distância vertical `dy` entre o agente que se quer mover e as possíveis
+células destino. Por sua vez, o ciclo `for` interno percorre também essa
+distância, mas na horizontal (`dx`).
 
-<!--
-* Algoritmo de IA dos agentes
--->
+Dentro do ciclo interno, tendo a coordenada do agente, bem como as distâncias
+vertical e horizontal até à possível célula destino, obtemos a coordenada
+`x`, `y` da mesma da seguinte forma (pseudo-código):
+
+* `x = agent.X + dx`
+* `y = agent.Y + dy`
+
+Uma vez obtida essa coordenada, verificamos se a respetiva célula contém um
+agente e se esse agente é um inimigo do agente que se quer mover. Em caso
+afirmativo obtemos um vetor (ver secção anterior) entre a posição do agente que
+se quer mover e a posição do inimigo, colocando a variável `foundEnemy` a
+`true`, provocando o fim do triplo `for`. Caso contrário, continua a procura
+por um agente inimigo.
+
+Uma vez terminado o triplo ciclo `for`, e caso tenha sido encontrado um
+inimigo, o método `WhereToMove()` devolve a posição vizinha na direção desse
+inimigo, usando para tal o método `GetNeighbor()` da classe [`World`], tal como
+descrito na secção anterior. Caso contrário devolve a posição do agente que se
+quer mover, o que resulta num não-movimento por parte desse agente.
 
 #### Fila de mensagens para o utilizador
 
@@ -248,7 +271,7 @@ _em construção_
 * [Polymorphism (C# Programming Guide) - Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism)
 * [Singleton Design Pattern in C# - Dot Net Tutorials](https://dotnettutorials.net/lesson/singleton-design-pattern/)
 * [The Strategy Design Pattern in C# - Exception Not Found](https://exceptionnotfound.net/strategy-the-daily-design-pattern/)
-* [Von Neumann neighborhood - Wikipedia](https://en.wikipedia.org/wiki/Von_Neumann_neighborhood)
+* [Moore neighborhood - Wikipedia](https://en.wikipedia.org/wiki/Moore_neighborhood)
 * [When to use struct? - StackOverflow](https://stackoverflow.com/questions/521298/when-to-use-struct)
 
 ## Metadados
