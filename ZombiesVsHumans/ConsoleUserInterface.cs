@@ -309,6 +309,11 @@ namespace ZombiesVsHumans
         /// </summary>
         private bool worldYRenderFog;
 
+        // ////////////////////////////////////////////////////////////////// //
+        // Outras variáveis de instância necessárias para o funcionamento     //
+        // da classe.                                                         //
+        // ////////////////////////////////////////////////////////////////// //
+
         /// <summary>
         /// Fila de mensagens a mostrar.
         /// </summary>
@@ -324,6 +329,10 @@ namespace ZombiesVsHumans
         /// Booleano que indica que se o mundo já foi alguma vez renderizado.
         /// </summary>
         private bool worldRendered;
+
+        // /////////////////////// //
+        // Construtores e métodos. //
+        // /////////////////////// //
 
         /// <summary>
         /// Construtor, cria uma nova instância da UI em consola.

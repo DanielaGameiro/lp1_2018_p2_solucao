@@ -239,11 +239,32 @@ quer mover, o que resulta num não-movimento por parte desse agente.
 
 #### Fila de mensagens para o utilizador
 
-_em construção_
+A interface [`IUserInterface`] define o método `RenderMessage()`, pelo que as
+classes que a implementam são obrigadas a ter este método. Segundo a
+documentação da interface, este método "*apresenta uma mensagem ao utilizador*",
+no entanto a forma como tal é feito fica a cargo das classes concretas que
+implementam a interface. Neste caso, a classe [`ConsoleUserInterface`] é a
+única fazê-lo. A forma como esta classe lida com as mensagens é a seguinte.
+Em particular, quando o método `RenderMessage()` recebe uma mensagem, são
+realizadas as seguintes ações:
 
-<!--
-* Fila (para mensagens)
--->
+* A mensagem é tratada de modo a ter um tamanho fixo, adicionando espaços no
+  fim ou removendo carateres a mais, conforme o caso.
+* A mensagem tratada é colocada numa fila (variável de instância do tipo
+  [`Queue<string>`]). A fila tem um tamanho máximo, e se o número de mensagens
+  exceder esse máximo, a mensagem mais antiga é descartada.
+* É construída uma _string_ contendo todas as mensagens, exceto a última (cada
+  mensagem separada por uma nova linha, `\n`).
+* O cursor é posicionado no local onde é suposto serem impressas as mensagens,
+  e a _string_ contendo as mensagens (exceto a última) é impressa de uma só
+  vez, num único `Console.Write()`, com cores específicas de fundo e primeiro
+  plano.
+* É impressa a última mensagem, com uma cor diferente de fundo e primeiro
+  plano, diferenciando-se assim das restantes mensagens.
+
+Isto provoca um efeito de _scrolling_, semelhante aos _logs_ de vários jogos. É
+de realçar que outra classe que implemente [`IUserInterface`] pode ter a sua
+própria forma específica de mostrar as mensagens ao utilizador.
 
 #### Visualização do mundo de simulação usando uma *cache*
 
@@ -321,3 +342,4 @@ _em construção_
 [`Direction`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Direction.cs
 [KISS]:https://en.wikipedia.org/wiki/KISS_principle
 [FY]:https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+[`Queue<string>`]:https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.queue-1
