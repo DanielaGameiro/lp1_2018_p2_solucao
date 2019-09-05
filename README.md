@@ -268,11 +268,30 @@ própria forma específica de mostrar as mensagens ao utilizador.
 
 #### Visualização do mundo de simulação usando uma *cache*
 
-_em construção_
+A renderização do mundo é realizada pelo método `RenderWorld()` da classe
+[`ConsoleUserInterface`], também definido na interface [`IUserInterface`]. No
+entanto a impressão de carateres na consola, com diferentes cores, pode ser
+um pouco lenta. Para minimizar essa situação, entre cada nova renderização
+podemos reimprimir apenas as posições em que ocorreram alterações, deixando o
+resto da visualização tal como está.
 
-<!--
-* Cache da visualização
--->
+Existem várias formas de alcançar este objetivo. Neste projeto optou-se por
+usar uma *cache* de visualização que contém o estado anterior do mundo. Embora
+o termo *cache* esteja mais relacionado com pequenas memórias RAM muito rápidas,
+tipicamente associadas ao microprocessador, de um modo mais geral podemos
+considerar uma *cache* como qualquer memória intermédia que sirva o propósito
+de acelerar uma computação.
+
+Neste caso a *cache* de visualização é uma variável de instância da classe
+[`ConsoleUserInterface`], do tipo *array* bidimensional de *strings*, com
+dimensão igual à do mundo de simulação. Quando o mundo é desenhado no ecrã pela
+primeira vez no ecrã, é guardada em cada posição da *cache* uma *string*
+representativa do conteúdo de cada célula do mundo. Nas renderizações
+seguintes, o conteúdo de cada célula do mundo é comparado com a respetiva
+*string* na *cache*. Se o conteúdo não tiver sido alterado, nada é desenhado,
+ficando no ecrã o que já lá estava antes. Se o conteúdo for diferente, então a
+respetiva célula é redesenhada. Desta forma a visualização fica bastante mais
+fluida.
 
 #### Tratamento de opções na linha de comandos
 
