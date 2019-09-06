@@ -68,7 +68,7 @@ classe [`Program`]. O `Main()` começa por criar uma instância de
 disponibilizando-a globalmente numa propriedade estática chamada `UI` (em LP2
 discutiremos o [*Singleton design pattern*], que é geralmente mais apropriado
 para disponibilizar uma única instância globalmente). De seguida é invocado o
-método [`Options.ParseArgs`], que trata as opções da linha de comandos e
+método [`Options.ParseArgs()`], que trata as opções da linha de comandos e
 devolve uma instância de [`Options`] que disponibiliza as opções já tratadas e
 validadas sob a forma de propriedades. Se ocorrer um erro no tratamento das
 opções o programa termina por aqui, caso contrário é criada uma nova instância
@@ -295,10 +295,42 @@ fluida.
 
 #### Tratamento de opções na linha de comandos
 
-<!--
-* Opções e algoritmo para tratamento de opções
--->
-_em construção_
+Como já referido, o tratamento de opções da linha comando é da responsabilidade
+da classe [`Options`]. O método `Main()` invoca o método estático
+[`Options.ParseArgs()`], que recebe como argumentos as opções da linha de
+comandos, devolvendo uma instância de [`Options`] que disponibiliza as opções
+tratadas e validadas sob a forma de propriedades.
+
+O método [`Options.ParseArgs()`] verifica se o número de argumentos, é o
+correto, entrando num ciclo que processa os argumentos aos pares, de modo a
+analisar cada par *opção-valor* de uma só vez (por exemplo, `-z 10`). Em cada
+iteração, o ciclo faz o seguinte:
+
+1. Confirma se a opção é válida, verificando se a mesma existe numa lista
+   de opções válidas disponível na variável de classe `validOptions`. Senão
+   existir, é criada uma instância de [`Options`] com indicação desse erro,
+   terminando o ciclo.
+2. Confirma se a opção é repetida. As opções e os seus valores vão sendo
+   guardadas num dicionário (variável local `options`). Caso o dicionário já
+   contenha a opção em tratamento, é criada uma instância de [`Options`] com
+   indicação desse erro, terminando o ciclo.
+3. Verifica se o valor da opção é um número inteiro não negativo. Senão for,
+   é criada uma instância de [`Options`] com indicação desse erro, terminando o
+   ciclo.
+4. Guarda a opção e o seu valor no dicionário, voltando ao início.
+
+Após o fim do ciclo, e caso não exista uma instância de [`Options`] com
+indicação de erro, é criada uma nova instância de [`Options`] com as opções e
+valores guardados no dicionário, sendo depois invocado o método `Validate()`
+nesta mesma instância. Este método verifica se as opções são válidas ou fazem
+sentido, não permitindo por exemplo que o tamanho do mundo seja zero, que
+existam mais agentes controlados por jogadores do que o total de agentes, ou
+até que o número total de agentes exceda a capacidade do mundo. Se algum destes
+erros ocorrer, essa mesma indicação é gravada na instância de [`Options`].
+
+O método termina devolvendo a instância de [`Options`] criada. Se a mesma tiver
+indicação de algum erro, o programa termina, indicando o erro ou os erros em
+questão.
 
 ### Personalização da visualização e andamento do jogo
 
@@ -344,7 +376,7 @@ _em construção_
 [`Program`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Program.cs
 [`ConsoleUserInterface`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/ConsoleUserInterface.cs
 [*Singleton design pattern*]:https://dotnettutorials.net/lesson/singleton-design-pattern/
-[`Options.ParseArgs`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Options.cs#L175
+[`Options.ParseArgs()`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Options.cs#L175
 [`Options`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Options.cs
 [`Game`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/Game.cs
 [`IUserInterface`]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/IUserInterface.cs
