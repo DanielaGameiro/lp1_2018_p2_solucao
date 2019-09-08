@@ -334,7 +334,25 @@ questão.
 
 ### Personalização da visualização e andamento do jogo
 
-_em construção_
+As dimensões, cores e posicionamentos dos diferentes componentes do mundo de
+jogo podem ser facilmente personalizados modificando as variáveis de instância
+presentes entre as linhas
+[37](https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/ConsoleUserInterface.cs#L37)
+e
+[248](https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/ConsoleUserInterface.cs#L248)
+da classe [`ConsoleUserInterface`]. Idealmente os valores destas variáveis
+deveriam ser lidos de um ficheiro de texto, de modo a permitir a personalização
+do jogo sem necessidade de recompilar o mesmo. Contudo, e apesar de tal
+abordagem ser valorizada, não seria de todo necessária num projeto deste tipo.
+
+Entre as linhas
+[250](https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/ConsoleUserInterface.cs#L248)
+e
+[310](https://github.com/VideojogosLusofona/lp1_2018_p2_solucao/blob/master/ZombiesVsHumans/ConsoleUserInterface.cs#L310)
+da mesma classe existem algumas variáveis de instância adicionais relacionadas
+com a dimensão e posicionamento dos elementos do mundo. No entanto estas não
+devem ser modificadas, pois o seu valor é calculado automaticamente a partir
+das anteriores no método `Initialize()`.
 
 ## Referências
 
